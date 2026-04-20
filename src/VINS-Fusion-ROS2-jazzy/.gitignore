@@ -1,0 +1,9 @@
+# Dataset / bag files
+V1_02_medium.zip
+V1_02_medium/
+
+# Optional common large files
+*.db3
+*.mcap
+*.bag
+*.zip

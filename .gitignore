@@ -4,3 +4,6 @@ log/
 *.pyc
 __pycache__/
 .DS_Store
+
+# local backup of nested repo metadata
+src/VINS-Fusion-ROS2-jazzy/.git_backup/
