@@ -1,0 +1,23 @@
+kaist_player_node:
+  ros__parameters:
+    dataset_root: "/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban28-pankyo"
+
+    stereo_stamp_csv: "data/urban28-pankyo/sensor_data/stereo_stamp.csv"
+    imu_csv: "data/urban28-pankyo/sensor_data/xsens_imu.csv"
+    image_root: "img"
+
+    left_keywords: "left,stereo_left,cam0"
+    right_keywords: "right,stereo_right,cam1"
+
+    left_topic: "/stereo/left/image_raw"
+    right_topic: "/stereo/right/image_raw"
+    imu_topic: "/imu/data_raw"
+    clock_topic: "/clock"
+
+    left_frame_id: "cam0"
+    right_frame_id: "cam1"
+    imu_frame_id: "imu"
+
+    playback_rate: 1.0
+    loop: false
+    timer_period_sec: 0.002
