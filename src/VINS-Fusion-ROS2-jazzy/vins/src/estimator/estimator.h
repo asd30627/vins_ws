@@ -239,9 +239,9 @@ class Estimator
 
     std::string reliability_run_id = "run_001";
     std::string reliability_dataset_name = "kaist";
-    std::string reliability_sequence_name = "urban28-pankyo";
+    std::string reliability_sequence_name = "urban30-gangnam";
     std::string reliability_feature_csv_path =
-    "/home/ivlab3/vins_project/results/vins_eval_results/KAIST_urban28_pankyo/reliability_features_vins.csv";
+    "/home/ivlab3/vins_project/results/vins_eval_results/KAIST_urban30-gangnam/reliability_features_vins.csv";
 
     long long reliability_update_id = 0;
     double reliability_prev_image_time = -1.0;

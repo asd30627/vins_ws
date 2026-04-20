@@ -1249,7 +1249,6 @@ void Estimator::double2vector()
 
 bool Estimator::failureDetection()
 {
-    return false;
     if (f_manager.last_track_num < 2)
     {
         ROS_INFO(" little feature %d", f_manager.last_track_num);
