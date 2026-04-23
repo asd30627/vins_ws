@@ -1,3 +1,20 @@
+# vins_ws
+
+This repository contains a modified version of VINS-Fusion-ROS2-jazzy for research purposes.
+
+Upstream project:
+- cannnnxu / VINS-Fusion-ROS2-jazzy
+
+Original license:
+- GNU General Public License v3.0 (GPL-3.0)
+
+Modifications in this repository include:
+- visual admission / reliability related changes
+- logging and debugging extensions
+- experiment-specific output handling
+
+This repository redistributes source code under the GNU GPL v3.0.
+Please see the LICENSE file for the full license text.
 # VINS-Fusion
 
 ## ROS2 Jazzy version of VINS-Fusion Ubuntu 24.04

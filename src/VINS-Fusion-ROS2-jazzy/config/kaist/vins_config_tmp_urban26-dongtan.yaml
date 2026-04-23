@@ -6,8 +6,8 @@ num_of_cam: 2
 imu_topic: "/imu/data_raw"
 image0_topic: "/stereo/left/image_raw"
 image1_topic: "/stereo/right/image_raw"
-output_path: "/mnt/sata4t/ivlab3_data/vins_project/results/vins_eval_results/KAIST_urban29_pankyo"
-pose_graph_save_path: "/mnt/sata4t/ivlab3_data/vins_project/results/vins_eval_results/KAIST_urban29_pankyo/pose_graph/"
+output_path: "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/vins_raw/"
+pose_graph_save_path: "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/vins_raw/pose_graph/"
 
 cam0_calib: "cam0_kaist.yaml"
 cam1_calib: "cam1_kaist.yaml"

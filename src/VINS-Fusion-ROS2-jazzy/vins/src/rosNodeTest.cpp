@@ -263,7 +263,7 @@ int main(int argc, char **argv)
 
     readParameters(config_file);
     estimator.setParameter();
-    estimator.setVisualAdmissionConfig(true, Estimator::HARD_GATE, 0.5);
+    estimator.setVisualAdmissionConfig(false, Estimator::VISUAL_ALWAYS, 0.0);
 
 #ifdef EIGEN_DONT_PARALLELIZE
     ROS_DEBUG("EIGEN_DONT_PARALLELIZE");

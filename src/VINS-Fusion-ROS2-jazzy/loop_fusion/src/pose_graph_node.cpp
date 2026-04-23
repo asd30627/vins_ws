@@ -405,6 +405,7 @@ void command()
         if (c == 's')
         {
             m_process.lock();
+            fs::create_directories(POSE_GRAPH_SAVE_PATH);
             posegraph.savePoseGraph();
             m_process.unlock();
             printf("save pose graph finish\nyou can set 'load_previous_pose_graph' to 1 in the config file to reuse it next time\n");

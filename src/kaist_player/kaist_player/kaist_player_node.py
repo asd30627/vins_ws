@@ -200,7 +200,7 @@ class KaistPlayerNode(Node):
         self.declare_parameter('gt_frame_id', 'map')
         self.declare_parameter('gt_child_frame_id', 'base_link')
 
-        self.declare_parameter('playback_rate', 1.0)
+        self.declare_parameter('playback_rate', 4.0)
         self.declare_parameter('loop', False)
         self.declare_parameter('timer_period_sec', 0.002)
 

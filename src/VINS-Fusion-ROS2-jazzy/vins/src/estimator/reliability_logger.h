@@ -64,9 +64,21 @@ class ReliabilityCsvLogger
 public:
     ReliabilityCsvLogger() = default;
 
+    ~ReliabilityCsvLogger()
+    {
+        close();
+    }
+
     void open(const std::string &path)
     {
         std::lock_guard<std::mutex> lock(mtx_);
+
+        // 如果已經開著同一個檔案，就不要再重開、更不要 truncate
+        if (ofs_.is_open() && path_ == path)
+            return;
+
+        if (ofs_.is_open())
+            ofs_.close();
 
         path_ = path;
         std::filesystem::path p(path_);
@@ -77,12 +89,22 @@ public:
             (!std::filesystem::exists(path_)) ||
             (std::filesystem::exists(path_) && std::filesystem::file_size(path_) == 0);
 
-        ofs_.open(path_, std::ios::out | std::ios::trunc);
+        // 重點：改成 app，不要每次 open 都 trunc
+        ofs_.open(path_, std::ios::out | std::ios::app);
         if (!ofs_.is_open())
             throw std::runtime_error("Failed to open CSV file: " + path_);
 
-        // 每次程式啟動都重寫 header
-        writeHeader();
+        if (need_header)
+            writeHeader();
+
+        ofs_.flush();
+    }
+
+    void close()
+    {
+        std::lock_guard<std::mutex> lock(mtx_);
+        if (ofs_.is_open())
+            ofs_.close();
     }
 
     bool isOpen() const

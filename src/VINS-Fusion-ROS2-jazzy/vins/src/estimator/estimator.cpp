@@ -323,6 +323,20 @@ void Estimator::setParameter()
     g = G;
     cout << "set g " << g.transpose() << endl;
     featureTracker.readIntrinsicParameter(CAM_NAMES);
+
+    // ======================================================================
+    // 【修正版】：把 VINS_RESULT_PATH 後面的 "/vio.csv" 切掉，還原成純資料夾路徑
+    std::string folder_path = VINS_RESULT_PATH;
+    size_t last_slash = folder_path.find_last_of('/');
+    if (last_slash != std::string::npos) {
+        folder_path = folder_path.substr(0, last_slash);
+    }
+    
+    // 把純資料夾路徑，接上我們要的統計檔名
+    reliability_feature_csv_path = folder_path + "/reliability_features_vins.csv";
+    reliability_logger_ready = false; 
+    // ======================================================================
+
     setupReliabilityLogger();
 
     // 不在 setParameter 內重置 enable_visual_admission / mode / tau，
