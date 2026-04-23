@@ -8,7 +8,10 @@
  *
  * Author: Qin Tong (qintonguav@gmail.com)
  *******************************************************/
-
+// Modified in this fork by <lUCAS> on 2026-04-23.
+// Summary of changes: ROS 2 Jazzy compatibility, logging, and research-related extensions.
+// This file remains part of a GPL-3.0-licensed derivative work.
+// See the repository root LICENSE and THIRD_PARTY_NOTICES.md.
 #include <vector>
 #include <rclcpp/rclcpp.hpp>
 #include <nav_msgs/msg/odometry.hpp>

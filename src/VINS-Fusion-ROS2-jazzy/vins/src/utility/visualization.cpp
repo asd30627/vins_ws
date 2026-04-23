@@ -6,7 +6,10 @@
  * Licensed under the GNU General Public License v3.0;
  * you may not use this file except in compliance with the License.
  *******************************************************/
-
+// Modified in this fork by <lUCAS> on 2026-04-23.
+// Summary of changes: ROS 2 Jazzy compatibility, logging, and research-related extensions.
+// This file remains part of a GPL-3.0-licensed derivative work.
+// See the repository root LICENSE and THIRD_PARTY_NOTICES.md.
 #include "visualization.h"
 #include <tf2_ros/transform_broadcaster.h>
 #include <geometry_msgs/msg/transform_stamped.hpp>

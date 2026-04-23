@@ -1,20 +1,41 @@
-# vins_ws
+# VINS-Fusion-ROS2-jazzy (research fork)
 
-This repository contains a modified version of VINS-Fusion-ROS2-jazzy for research purposes.
+This directory contains a modified research fork of VINS-Fusion for ROS 2 Jazzy / Ubuntu 24.04.
 
-Upstream project:
+## License
+
+This directory redistributes code derived from GPL-3.0-licensed upstream projects.
+Accordingly, this fork is distributed under the GNU General Public License v3.0 (GPL-3.0).
+
+See the repository root `LICENSE` file for the full license text.
+
+## Upstream attribution
+
+This work is based on the following upstream projects:
+
+- HKUST-Aerial-Robotics / VINS-Fusion
+- zinuok / VINS-Fusion-ROS2
+- JanekDev / VINS-Fusion-ROS2-humble-arm
 - cannnnxu / VINS-Fusion-ROS2-jazzy
 
-Original license:
-- GNU General Public License v3.0 (GPL-3.0)
+## Local modifications in this fork
 
-Modifications in this repository include:
+This fork includes research-oriented modifications such as:
+
+- ROS 2 Jazzy / Ubuntu 24.04 build adjustments
 - visual admission / reliability related changes
 - logging and debugging extensions
 - experiment-specific output handling
 
-This repository redistributes source code under the GNU GPL v3.0.
-Please see the LICENSE file for the full license text.
+## Notice
+
+This repository is an unofficial research fork and is not affiliated with or endorsed by the original upstream authors.
+
+Original copyright and license notices in upstream-derived source files should be retained.
+
+---
+
+# VINS-Fusion
 # VINS-Fusion
 
 ## ROS2 Jazzy version of VINS-Fusion Ubuntu 24.04
