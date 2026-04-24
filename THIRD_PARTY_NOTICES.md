@@ -47,3 +47,13 @@ This fork includes research-oriented modifications such as:
 This repository is an unofficial research fork.
 All trademarks, project names, and author attributions remain the property of their respective owners.
 Original copyright and license notices in upstream-derived source files should be preserved.
+
+### LightGlue
+
+* Upstream: https://github.com/cvg/LightGlue
+* License: Apache License 2.0
+* Role in this repository: optional visual feature matching / reliability pipeline component.
+
+This repository vendors the LightGlue source code for reproducibility and ease of setup.
+
+The LightGlue code and LightGlue pretrained weights are released under the Apache License 2.0 by the upstream authors. However, some optional local feature extractors or pretrained weights referenced by LightGlue, such as SuperPoint, may follow different and more restrictive license terms. Users should check the corresponding upstream licenses before redistributing weights, pretrained models, or using them commercially.
