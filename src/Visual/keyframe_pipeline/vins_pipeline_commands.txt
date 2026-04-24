@@ -1,0 +1,18 @@
+1) 建 label：
+python build_vins_reliability_labels.py \
+  --feature_csv /home/ivlab3/vins_project/results/vins_eval_results/KAIST_urban28_pankyo/reliability_features_vins.csv \
+  --gt_path /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban28-pankyo/pose/urban28-pankyo/global_pose.tum \
+  --out_dir /home/ivlab3/vins_project/results/vins_eval_results/KAIST_urban28_pankyo/reliability_labels_vins
+
+2) 建 dataset：
+python build_vins_reliability_dataset.py \
+  --feature_csv /home/ivlab3/vins_project/results/vins_eval_results/KAIST_urban28_pankyo/reliability_features_vins.csv \
+  --label_csv /home/ivlab3/vins_project/results/vins_eval_results/KAIST_urban28_pankyo/reliability_labels_vins/reliability_labels_vins.csv \
+  --out_dir /home/ivlab3/vins_project/results/vins_eval_results/KAIST_urban28_pankyo/reliability_dataset_vins \
+  --seq_len 8
+
+3) 訓練（沿用原本 train_reliability_model.py）：
+python train_reliability_model.py \
+  --dataset_dir /home/ivlab3/vins_project/results/vins_eval_results/KAIST_urban28_pankyo/reliability_dataset_vins \
+  --model_type gru \
+  --epochs 80

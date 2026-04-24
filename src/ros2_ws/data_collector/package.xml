@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>data_collector</name>
+  <version>0.0.0</version>
+  <description>ROS2 dataset collector for image, imu, odom, camera_info, and clock.</description>
+
+  <maintainer email="asd30627@gmail.com">ivlab3</maintainer>
+  <license>Apache-2.0</license>
+
+  <depend>rclpy</depend>
+  <depend>sensor_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>rosgraph_msgs</depend>
+  <depend>cv_bridge</depend>
+  <depend>message_filters</depend>
+
+  <exec_depend>python3-opencv</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
