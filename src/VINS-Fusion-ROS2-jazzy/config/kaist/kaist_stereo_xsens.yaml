@@ -6,8 +6,8 @@ num_of_cam: 2
 imu_topic: "/imu/data_raw"
 image0_topic: "/stereo/left/image_raw"
 image1_topic: "/stereo/right/image_raw"
-output_path: "/mnt/sata4t/ivlab3_data/vins_project/results/vins_eval_results/KAIST_urban29_pankyo"
-pose_graph_save_path: "/mnt/sata4t/ivlab3_data/vins_project/results/vins_eval_results/KAIST_urban29_pankyo/pose_graph/"
+output_path: "/mnt/sata4t/ivlab3_data/vins_project/results/vins_eval_results/KAIST_urban38_pankyo"
+pose_graph_save_path: "/mnt/sata4t/ivlab3_data/vins_project/results/vins_eval_results/KAIST_urban38_pankyo/pose_graph/"
 
 cam0_calib: "cam0_kaist.yaml"
 cam1_calib: "cam1_kaist.yaml"
@@ -57,10 +57,11 @@ max_num_iterations: 8
 keyframe_parallax: 10.0
 
 acc_n: 0.1
-gyr_n: 0.01
 acc_w: 0.001
-gyr_w: 0.0001
+gyr_n: 0.001
+gyr_w: 0.00001
 g_norm: 9.81007
+imu_noise_mode: "xsens"
 
 estimate_td: 0
 td: 0.0

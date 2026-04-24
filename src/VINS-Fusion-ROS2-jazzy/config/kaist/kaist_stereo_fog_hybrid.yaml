@@ -1,0 +1,78 @@
+%YAML:1.0
+---
+
+imu: 1
+num_of_cam: 2
+
+imu_topic: "/imu/data_raw"
+image0_topic: "/stereo/left/image_raw"
+image1_topic: "/stereo/right/image_raw"
+
+output_path: "/mnt/sata4t/ivlab3_data/vins_project/results/vins_eval_results/KAIST_urban29_pankyo"
+pose_graph_save_path: "/mnt/sata4t/ivlab3_data/vins_project/results/vins_eval_results/KAIST_urban29_pankyo/pose_graph/"
+
+cam0_calib: "cam0_kaist.yaml"
+cam1_calib: "cam1_kaist.yaml"
+
+image_width: 1280
+image_height: 560
+
+# 先不要開 GPU，先把 baseline 修乾淨
+use_gpu : 0
+use_gpu_acc_flow: 0
+use_gpu_ceres : 0
+
+# 第一輪先固定 extrinsic
+estimate_extrinsic: 0
+
+# cam0
+body_T_cam0: !!opencv-matrix
+ rows: 4
+ cols: 4
+ dt: d
+ data: [ -0.00680499, -0.0153215, 0.99985, 1.71239,
+         -0.999977, 0.000334627, -0.00680066, 0.247401,
+         -0.000230383, -0.999883, -0.0153234, -0.11589,
+         0, 0, 0, 1 ]
+
+# cam1
+body_T_cam1: !!opencv-matrix
+ rows: 4
+ cols: 4
+ dt: d
+ data: [ -0.00680499, -0.0153215, 0.99985, 1.7091566,
+         -0.999977, 0.000334627, -0.00680066, -0.2277373,
+         -0.000230383, -0.999883, -0.0153234, -0.1159995,
+         0, 0, 0, 1 ]
+
+# 這份本來就是 0，維持
+multiple_thread: 0
+
+max_cnt: 150
+min_dist: 30
+freq: 10
+F_threshold: 1.0
+show_track: 1
+flow_back: 1
+
+max_solver_time: 0.04
+max_num_iterations: 8
+keyframe_parallax: 10.0
+
+# accel 先維持 XSens 等級
+acc_n: 0.1
+acc_w: 0.001
+
+# 第一輪只先調 gyro，因為 player 是 fog_xsens
+# 比原本保守地下調，不要一次降太多
+gyr_n: 0.002
+gyr_w: 0.00002
+
+g_norm: 9.81007
+
+# 離線實驗先開 td
+estimate_td: 1
+td: 0.0
+
+load_previous_pose_graph: 0
+save_image: 1

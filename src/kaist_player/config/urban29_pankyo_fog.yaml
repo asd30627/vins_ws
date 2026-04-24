@@ -1,6 +1,6 @@
 kaist_player_node:
   ros__parameters:
-    dataset_root: "/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban29-pankyo"
+    dataset_root: "/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban28-pankyo"
 
     stereo_stamp_csv: "data/urban29-pankyo/sensor_data/stereo_stamp.csv"
     imu_csv: "data/urban29-pankyo/sensor_data/xsens_imu.csv"

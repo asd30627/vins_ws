@@ -2,6 +2,8 @@ import csv
 import os
 import re
 import time
+import statistics
+import math
 from bisect import bisect_left
 from decimal import Decimal, InvalidOperation
 from dataclasses import dataclass
@@ -372,14 +374,113 @@ class KaistPlayerNode(Node):
             )
             return default
 
+    def _robust_axis_center(self, values: List[float]) -> float:
+        if not values:
+            return 0.0
+
+        med = statistics.median(values)
+        abs_dev = [abs(v - med) for v in values]
+        mad = statistics.median(abs_dev)
+
+        # 幾乎沒有分散時，直接回 median
+        if mad < 1e-12:
+            return med
+
+        sigma = 1.4826 * mad
+        keep = [v for v in values if abs(v - med) <= 3.5 * sigma]
+
+        if not keep:
+            return med
+
+        return sum(keep) / len(keep)
+
+
+    def _interp_fog_sample(
+        self,
+        fog_samples: List[FogGyroSample],
+        fog_ts: List[int],
+        target_ts_ns: int
+    ) -> Tuple[Optional[FogGyroSample], int]:
+        """
+        在 target_ts_ns 上對 FOG gyro 做線性插值。
+        回傳:
+        - FogGyroSample(ts=target_ts_ns, gx, gy, gz)
+        - 與最近端點的時間差 abs dt (for logging only)
+        """
+        if not fog_samples:
+            return None, 0
+
+        idx = bisect_left(fog_ts, target_ts_ns)
+
+        # target 在最前面
+        if idx <= 0:
+            fg = fog_samples[0]
+            return FogGyroSample(
+                ts_ns=target_ts_ns,
+                gx=fg.gx,
+                gy=fg.gy,
+                gz=fg.gz
+            ), abs(fg.ts_ns - target_ts_ns)
+
+        # target 在最後面
+        if idx >= len(fog_samples):
+            fg = fog_samples[-1]
+            return FogGyroSample(
+                ts_ns=target_ts_ns,
+                gx=fg.gx,
+                gy=fg.gy,
+                gz=fg.gz
+            ), abs(fg.ts_ns - target_ts_ns)
+
+        left = fog_samples[idx - 1]
+        right = fog_samples[idx]
+
+        dt_total = right.ts_ns - left.ts_ns
+        if dt_total <= 0:
+            # 防呆：退化時直接拿左邊
+            return FogGyroSample(
+                ts_ns=target_ts_ns,
+                gx=left.gx,
+                gy=left.gy,
+                gz=left.gz
+            ), min(abs(left.ts_ns - target_ts_ns), abs(right.ts_ns - target_ts_ns))
+
+        alpha = (target_ts_ns - left.ts_ns) / float(dt_total)
+        alpha = max(0.0, min(1.0, alpha))
+
+        gx = (1.0 - alpha) * left.gx + alpha * right.gx
+        gy = (1.0 - alpha) * left.gy + alpha * right.gy
+        gz = (1.0 - alpha) * left.gz + alpha * right.gz
+
+        dt_abs_ns = min(abs(left.ts_ns - target_ts_ns), abs(right.ts_ns - target_ts_ns))
+
+        return FogGyroSample(
+            ts_ns=target_ts_ns,
+            gx=gx,
+            gy=gy,
+            gz=gz
+        ), dt_abs_ns
+
+
     def _estimate_fog_bias_from_xsens(
         self,
         matched_pairs: List[Tuple[ImuSample, FogGyroSample, int]]
     ) -> Tuple[float, float, float]:
+        """
+        只用近似靜止樣本估計 FOG constant gyro bias。
+        這裡估的是 player 端要扣掉的常數偏置 bx/by/bz，
+        不是 VINS 裡的 bias random walk 參數。
+        """
         if not matched_pairs:
             return 0.0, 0.0, 0.0
 
         t0 = matched_pairs[0][0].ts_ns
+
+        # 可依資料再調
+        gyro_static_thresh = 0.03   # rad/s
+        acc_mag_thresh = 0.20       # m/s^2 around g
+        g_ref = 9.81007
+
         diffs_x = []
         diffs_y = []
         diffs_z = []
@@ -387,17 +488,89 @@ class KaistPlayerNode(Node):
         for xs, fg, _ in matched_pairs:
             if (xs.ts_ns - t0) * 1e-9 > self.fog_bias_estimation_duration_sec:
                 break
-            diffs_x.append(fg.gx - xs.gx)
-            diffs_y.append(fg.gy - xs.gy)
-            diffs_z.append(fg.gz - xs.gz)
+
+            gyro_norm = math.sqrt(xs.gx * xs.gx + xs.gy * xs.gy + xs.gz * xs.gz)
+            acc_norm = math.sqrt(xs.ax * xs.ax + xs.ay * xs.ay + xs.az * xs.az)
+
+            # 只在近似靜止時拿來估 bias
+            if gyro_norm < gyro_static_thresh and abs(acc_norm - g_ref) < acc_mag_thresh:
+                diffs_x.append(fg.gx - xs.gx)
+                diffs_y.append(fg.gy - xs.gy)
+                diffs_z.append(fg.gz - xs.gz)
 
         if not diffs_x:
+            self.get_logger().warning(
+                'No quasi-static samples found for fog bias estimation; use zero bias.'
+            )
             return 0.0, 0.0, 0.0
 
-        bx = sum(diffs_x) / len(diffs_x)
-        by = sum(diffs_y) / len(diffs_y)
-        bz = sum(diffs_z) / len(diffs_z)
+        bx = self._robust_axis_center(diffs_x)
+        by = self._robust_axis_center(diffs_y)
+        bz = self._robust_axis_center(diffs_z)
+
         return bx, by, bz
+
+
+    def _merge_fog_xsens(
+        self,
+        xsens_samples: List[ImuSample],
+        fog_samples: List[FogGyroSample]
+    ) -> List[Event]:
+        if not xsens_samples:
+            return []
+
+        if not fog_samples:
+            raise RuntimeError('imu_source=fog_xsens but no fog samples were loaded.')
+
+        fog_ts = [s.ts_ns for s in fog_samples]
+        matched_pairs: List[Tuple[ImuSample, FogGyroSample, int]] = []
+
+        for xs in xsens_samples:
+            fg_interp, dt_abs_ns = self._interp_fog_sample(fog_samples, fog_ts, xs.ts_ns)
+            if fg_interp is None:
+                continue
+            matched_pairs.append((xs, fg_interp, dt_abs_ns))
+
+        if not matched_pairs:
+            return []
+
+        bx, by, bz = 0.0, 0.0, 0.0
+        if self.fog_auto_bias:
+            bx, by, bz = self._estimate_fog_bias_from_xsens(matched_pairs)
+            self.get_logger().info(
+                f'fog auto bias estimated from first '
+                f'{self.fog_bias_estimation_duration_sec:.1f}s (quasi-static only): '
+                f'[{bx:.9f}, {by:.9f}, {bz:.9f}]'
+            )
+
+        dt_abs_ns_list: List[int] = []
+        events: List[Event] = []
+
+        for xs, fg, dt_abs_ns in matched_pairs:
+            dt_abs_ns_list.append(dt_abs_ns)
+
+            merged = ImuSample(
+                ts_ns=xs.ts_ns,
+                ax=xs.ax,
+                ay=xs.ay,
+                az=xs.az,
+                gx=fg.gx - bx,
+                gy=fg.gy - by,
+                gz=fg.gz - bz,
+            )
+
+            events.append(Event(ts_ns=merged.ts_ns, kind='imu', payload=merged))
+
+        self.get_logger().info(f'fog_xsens imu events built = {len(events)}')
+
+        if dt_abs_ns_list:
+            avg_dt_ms = sum(dt_abs_ns_list) / len(dt_abs_ns_list) / 1e6
+            max_dt_ms = max(dt_abs_ns_list) / 1e6
+            self.get_logger().info(
+                f'fog_xsens interp anchor dt: avg={avg_dt_ms:.3f} ms, max={max_dt_ms:.3f} ms'
+            )
+
+        return events
 
     def _resolve_path(self, path_str: str) -> str:
         if os.path.isabs(path_str):
@@ -683,75 +856,6 @@ class KaistPlayerNode(Node):
         )
 
         return samples
-
-    def _merge_fog_xsens(
-        self,
-        xsens_samples: List[ImuSample],
-        fog_samples: List[FogGyroSample]
-    ) -> List[Event]:
-        if not xsens_samples:
-            return []
-        if not fog_samples:
-            raise RuntimeError('imu_source=fog_xsens but no fog samples were loaded.')
-
-        fog_ts = [s.ts_ns for s in fog_samples]
-        matched_pairs: List[Tuple[ImuSample, FogGyroSample, int]] = []
-
-        for xs in xsens_samples:
-            idx = bisect_left(fog_ts, xs.ts_ns)
-
-            candidates = []
-            if idx < len(fog_samples):
-                candidates.append(fog_samples[idx])
-            if idx > 0:
-                candidates.append(fog_samples[idx - 1])
-
-            if not candidates:
-                continue
-
-            fog_best = min(candidates, key=lambda s: abs(s.ts_ns - xs.ts_ns))
-            dt_abs_ns = abs(fog_best.ts_ns - xs.ts_ns)
-            matched_pairs.append((xs, fog_best, dt_abs_ns))
-
-        if not matched_pairs:
-            return []
-
-        bx, by, bz = 0.0, 0.0, 0.0
-        if self.fog_auto_bias:
-            bx, by, bz = self._estimate_fog_bias_from_xsens(matched_pairs)
-            self.get_logger().info(
-                f'fog auto bias estimated from first '
-                f'{self.fog_bias_estimation_duration_sec:.1f}s: '
-                f'[{bx:.9f}, {by:.9f}, {bz:.9f}]'
-            )
-
-        dt_abs_ns_list: List[int] = []
-        events: List[Event] = []
-
-        for xs, fg, dt_abs_ns in matched_pairs:
-            dt_abs_ns_list.append(dt_abs_ns)
-
-            merged = ImuSample(
-                ts_ns=xs.ts_ns,
-                ax=xs.ax,
-                ay=xs.ay,
-                az=xs.az,
-                gx=fg.gx - bx,
-                gy=fg.gy - by,
-                gz=fg.gz - bz,
-            )
-            events.append(Event(ts_ns=merged.ts_ns, kind='imu', payload=merged))
-
-        self.get_logger().info(f'fog_xsens imu events built = {len(events)}')
-
-        if dt_abs_ns_list:
-            avg_dt_ms = sum(dt_abs_ns_list) / len(dt_abs_ns_list) / 1e6
-            max_dt_ms = max(dt_abs_ns_list) / 1e6
-            self.get_logger().info(
-                f'fog_xsens nearest-match dt: avg={avg_dt_ms:.3f} ms, max={max_dt_ms:.3f} ms'
-            )
-
-        return events
 
     def _load_gt_events(self, csv_path: str) -> List[Event]:
         samples = self._load_gt_samples(csv_path)
