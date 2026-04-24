@@ -24,6 +24,16 @@ This repository contains or derives from third-party open-source software.
 - License: GPL-3.0
 - Role in this repository: immediate upstream used for this research fork
 
+### 5. cvg / LightGlue
+
+* URL: https://github.com/cvg/LightGlue
+* License: Apache License 2.0
+* Role in this repository: optional visual feature matching / reliability pipeline dependency
+
+LightGlue code and LightGlue pretrained weights are released under the Apache License 2.0 by the upstream authors.
+
+Important note: Some optional feature extractors or pretrained weights referenced by LightGlue, such as SuperPoint, may follow different and more restrictive license terms. Users should check the corresponding upstream licenses before redistribution, publication, or commercial use.
+
 ## Local modifications in this fork
 
 This fork includes research-oriented modifications such as:
