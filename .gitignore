@@ -5,5 +5,42 @@ log/
 __pycache__/
 .DS_Store
 
+# datasets / generated results
+datasets/
+data/
+results/
+logs/
+*.bag
+*.db3
+*.mcap
+
+# model weights / checkpoints
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.engine
+*.weights
+*.tflite
+*.pb
+
+# common ML experiment folders
+weights/
+checkpoints/
+runs/
+wandb/
+mlruns/
+.cache/
+
+# LightGlue / visual model local weights
+src/Visual/LightGlue/lightglue/weights/
+src/Visual/LightGlue/weights/
+
+# local experiment outputs
+pose_graph/
+output/
+admission/features/
+admission/labels/
+
 # local backup of nested repo metadata
 src/VINS-Fusion-ROS2-jazzy/.git_backup/
