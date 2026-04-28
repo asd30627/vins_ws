@@ -49,6 +49,8 @@ int NUM_OF_CAM;
 int STEREO;
 int USE_IMU;
 int MULTIPLE_THREAD;
+int SAVE_RELIABILITY_FEATURES = 1;
+int RELIABILITY_LOG_EVERY_N = 1;
 map<int, Eigen::Vector3d> pts_gt;
 std::string IMAGE0_TOPIC, IMAGE1_TOPIC;
 std::string FISHEYE_MASK;
@@ -66,6 +68,7 @@ static bool loadSequenceSpecificExtrinsic(
     const std::string &output_folder,
     Eigen::Matrix4d &T_b_c0,
     Eigen::Matrix4d &T_b_c1);
+static Eigen::Matrix4d openVinsKaistT_LtoR();
 
 template <typename T>
 T readParam(rclcpp::Node::SharedPtr n, std::string name)
@@ -88,9 +91,9 @@ static void applyImuNoiseProfile(const std::string &mode, cv::FileStorage &fsSet
 {
     if (mode == "xsens")
     {
-        ACC_N = 0.1;
-        ACC_W = 0.001;
-        GYR_N = 0.01;
+        ACC_N = 0.01;
+        ACC_W = 0.0008;
+        GYR_N = 0.0005;
         GYR_W = 0.0001;
         ROS_WARN("Use built-in IMU noise profile: xsens");
     }
@@ -146,11 +149,28 @@ void readParameters(std::string config_file)
 
     MULTIPLE_THREAD = fsSettings["multiple_thread"];
 
+    // ===== reliability / research telemetry logging =====
+    // 預設開啟，舊 YAML 沒寫也不會爆
+    SAVE_RELIABILITY_FEATURES = 1;
+    RELIABILITY_LOG_EVERY_N = 1;
+
+    if (!fsSettings["save_reliability_features"].empty())
+        SAVE_RELIABILITY_FEATURES = (int)fsSettings["save_reliability_features"];
+
+    if (!fsSettings["reliability_log_every_n"].empty())
+        RELIABILITY_LOG_EVERY_N = (int)fsSettings["reliability_log_every_n"];
+
+    if (RELIABILITY_LOG_EVERY_N < 1)
+        RELIABILITY_LOG_EVERY_N = 1;
+
+    ROS_WARN("SAVE_RELIABILITY_FEATURES: %d", SAVE_RELIABILITY_FEATURES);
+    ROS_WARN("RELIABILITY_LOG_EVERY_N: %d", RELIABILITY_LOG_EVERY_N);
+
     USE_GPU = fsSettings["use_gpu"];
     USE_GPU_ACC_FLOW = fsSettings["use_gpu_acc_flow"];
     USE_GPU_CERES = fsSettings["use_gpu_ceres"];
-
     USE_IMU = fsSettings["imu"];
+
     printf("USE_IMU: %d\n", USE_IMU);
     if(USE_IMU)
     {
@@ -346,13 +366,25 @@ static bool parseVehicleTxtToT(const std::string &path, Eigen::Matrix4d &T)
 static bool parseRightYamlBaseline(const std::string &path, double &baseline)
 {
     cv::FileStorage fs(path, cv::FileStorage::READ);
-    if (!fs.isOpened()) return false;
+    if (!fs.isOpened())
+        return false;
+
     cv::Mat P;
     fs["projection_matrix"] >> P;
     fs.release();
-    if (P.rows != 3 || P.cols != 4) return false;
-    double fx = P.at<double>(0,0);
-    double tx = P.at<double>(0,3);
+
+    if (P.empty() || P.rows != 3 || P.cols != 4)
+        return false;
+
+    cv::Mat P64;
+    P.convertTo(P64, CV_64F);
+
+    const double fx = P64.at<double>(0, 0);
+    const double tx = P64.at<double>(0, 3);
+
+    if (std::abs(fx) < 1e-12)
+        return false;
+
     baseline = -tx / fx;
     return true;
 }
@@ -367,6 +399,30 @@ static bool inferSequenceFromOutputPath(const std::string &output_path, std::str
     return true;
 }
 
+static Eigen::Matrix4d openVinsKaistT_LtoR()
+{
+    // OpenVINS KAIST stereo left-to-right transform.
+    //
+    // Convention:
+    //   T_LtoR maps vehicle->left chain into vehicle->right chain in the
+    //   OpenVINS derivation:
+    //
+    //   T_LtoI = T_VtoI * inv(T_VtoL)
+    //   T_RtoI = T_VtoI * inv(T_LtoR * T_VtoL)
+    //
+    // Therefore:
+    //   T_RtoI = T_LtoI * inv(T_LtoR)
+    //
+    // This is NOT the same as only adding right.yaml projection baseline.
+    Eigen::Matrix4d T;
+    T <<  1.0000, -0.0021, -0.0036, -0.4751,
+          0.0021,  1.0000,  0.0046, -0.0011,
+          0.0036, -0.0046,  1.0000,  0.0020,
+          0.0000,  0.0000,  0.0000,  1.0000;
+
+    return T;
+}
+
 static bool loadSequenceSpecificExtrinsic(
     const std::string &output_folder,
     Eigen::Matrix4d &T_b_c0,
@@ -374,22 +430,80 @@ static bool loadSequenceSpecificExtrinsic(
 {
     std::string seq_name;
     if (!inferSequenceFromOutputPath(output_folder, seq_name))
+    {
+        ROS_WARN("[KAIST_EXTRINSIC] cannot infer sequence name from output_path: %s",
+                 output_folder.c_str());
         return false;
+    }
 
-    const std::string dataset_root = "/mnt/sata4t/datasets/kaist_complex_urban/extracted";
-    const std::string calib_dir = dataset_root + "/" + seq_name + "/calibration/" + seq_name + "/calibration";
+    const std::string dataset_root =
+        "/mnt/sata4t/datasets/kaist_complex_urban/extracted";
 
-    Eigen::Matrix4d T_v_i, T_v_s;
-    if (!parseVehicleTxtToT(calib_dir + "/Vehicle2IMU.txt", T_v_i)) return false;
-    if (!parseVehicleTxtToT(calib_dir + "/Vehicle2Stereo.txt", T_v_s)) return false;
+    const std::string calib_dir =
+        dataset_root + "/" + seq_name + "/calibration/" + seq_name + "/calibration";
 
-    double baseline = 0.0;
-    if (!parseRightYamlBaseline(calib_dir + "/right.yaml", baseline)) return false;
+    Eigen::Matrix4d T_v_i;
+    Eigen::Matrix4d T_v_s;
 
+    if (!parseVehicleTxtToT(calib_dir + "/Vehicle2IMU.txt", T_v_i))
+    {
+        ROS_WARN("[KAIST_EXTRINSIC] failed to parse Vehicle2IMU.txt: %s",
+                 (calib_dir + "/Vehicle2IMU.txt").c_str());
+        return false;
+    }
+
+    if (!parseVehicleTxtToT(calib_dir + "/Vehicle2Stereo.txt", T_v_s))
+    {
+        ROS_WARN("[KAIST_EXTRINSIC] failed to parse Vehicle2Stereo.txt: %s",
+                 (calib_dir + "/Vehicle2Stereo.txt").c_str());
+        return false;
+    }
+
+    // cam0:
+    // Keep your current sequence-specific cam0 derivation.
+    // This is the part you already confirmed works for mono extrinsic=0.
     T_b_c0 = T_v_i.inverse() * T_v_s;
 
-    Eigen::Matrix4d T_c0_c1 = Eigen::Matrix4d::Identity();
-    T_c0_c1(0,3) = baseline;
-    T_b_c1 = T_b_c0 * T_c0_c1;
+    // cam1:
+    // Old wrong / approximate method:
+    //   T_b_c1 = T_b_c0 * [baseline only]
+    //
+    // New method:
+    //   Use OpenVINS full KAIST stereo left-to-right transform.
+    //
+    // OpenVINS derivation:
+    //   T_LtoI = T_VtoI * inv(T_VtoL)
+    //   T_RtoI = T_VtoI * inv(T_LtoR * T_VtoL)
+    //
+    // Since T_b_c0 here is camera0-to-IMU/body,
+    //   T_b_c1 = T_b_c0 * inv(T_LtoR)
+    const Eigen::Matrix4d T_LtoR = openVinsKaistT_LtoR();
+    T_b_c1 = T_b_c0 * T_LtoR.inverse();
+
+    // Optional sanity print: right.yaml baseline is only used for comparison now.
+    double baseline_from_projection = 0.0;
+    const bool has_projection_baseline =
+        parseRightYamlBaseline(calib_dir + "/right.yaml", baseline_from_projection);
+
+    ROS_WARN("[KAIST_EXTRINSIC] sequence = %s", seq_name.c_str());
+    ROS_WARN("[KAIST_EXTRINSIC] method = sequence_cam0 + OpenVINS_full_T_LtoR_for_cam1");
+    ROS_WARN("[KAIST_EXTRINSIC] calib_dir = %s", calib_dir.c_str());
+
+    if (has_projection_baseline)
+    {
+        ROS_WARN("[KAIST_EXTRINSIC] right.yaml projection baseline = %.9f m, but cam1 uses full T_LtoR, not baseline-only.",
+                 baseline_from_projection);
+    }
+    else
+    {
+        ROS_WARN("[KAIST_EXTRINSIC] right.yaml projection baseline unavailable; continue with full T_LtoR.");
+    }
+
+    ROS_WARN("[KAIST_EXTRINSIC] cam0 T_b_c0:");
+    std::cout << T_b_c0 << std::endl;
+
+    ROS_WARN("[KAIST_EXTRINSIC] cam1 T_b_c1:");
+    std::cout << T_b_c1 << std::endl;
+
     return true;
 }

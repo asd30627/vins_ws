@@ -18,6 +18,10 @@ kaist_player_node:
     right_frame_id: "cam1"
     imu_frame_id: "imu"
 
-    playback_rate: 1.0
+    playback_rate: 3.0
     loop: false
     timer_period_sec: 0.002
+    
+    save_reliability_features: 1
+    # 實機測試可改 5 或 10
+    reliability_log_every_n: 1

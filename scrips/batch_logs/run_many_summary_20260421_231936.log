@@ -1,0 +1,19 @@
+============================================================
+[BATCH] 開始執行全部 KAIST 序列
+============================================================
+
+>>> [START] urban22-highway <<<
+>>> 正在執行: urban22-highway <<<
+[INFO] [1776784777.178671867] []: reset loop path file: 
+config_file: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/logs/vins_config_tmp.yaml
+vocabulary_file/home/ivlab3/vins_ws/install/loop_fusion/share/loop_fusion/../support_files/brief_k10L6.bin
+loop start load vocabulary
+BRIEF_PATTERN_FILE/home/ivlab3/vins_ws/install/loop_fusion/share/loop_fusion/../support_files/brief_pattern.yml
+cam calib path: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/logs/cam0_kaist.yaml
+[ERROR:0@0.175] global ./modules/core/src/persistence.cpp (505) open Can't open file: '/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/logs/cam0_kaist.yaml' in read mode
+VIO input, perfrom 4 DoF (x, y, z, yaw) pose graph optimization
+no previous pose graph
+[FAIL] urban22-highway 執行失敗
+
+>>> [START] urban23-highway <<<
+>>> 正在執行: urban23-highway <<<

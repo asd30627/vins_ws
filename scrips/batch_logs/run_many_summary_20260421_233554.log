@@ -1,0 +1,1058 @@
+============================================================
+[BATCH] 開始執行全部 KAIST 序列
+============================================================
+
+>>> [START] urban22-highway <<<
+>>> 正在執行: urban22-highway <<<
+[DEBUG] 啟動 loop_fusion_node...
+[DEBUG] 啟動 vins_node...
+[INFO] 等待 VINS 初始化 (5s)...
+[DEBUG] 啟動 kaist_player...
+[INFO] 系統正常運行中，開始監控播放進度...
+[INFO] 偵測到播放完成 (Playback finished)！
+[INFO] 播放完成，等待資料寫入 (20s)...
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/vins_raw/vio.tum
+Rows written: 1243
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/vins_raw/vio_loop.tum
+Rows written: 501
+[OK] labels -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/admission/labels/reliability_labels_vins.csv
+[OK] summary -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/admission/labels/reliability_labels_summary.json
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/admission/features/reliability_features_vins.csv",
+  "gt_path": "/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban22-highway/pose/urban22-highway/global_pose.tum",
+  "out_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/admission/labels/reliability_labels_vins.csv",
+  "num_rows": 1242,
+  "num_valid_labels": 1227,
+  "class_counts": {
+    "harmful": 156,
+    "neutral": 771,
+    "helpful": 300,
+    "invalid": 15
+  },
+  "horizon_rows": 10,
+  "max_match_dt_sec": 0.02,
+  "pos_scale": 2809.6299725461486,
+  "rot_scale": 138.3572074762084,
+  "outlier_scale": 0.15600960000000022,
+  "helpful_thr": 0.65,
+  "harmful_thr": 0.4,
+  "label_source": "future_gt_proxy_v2_aligned",
+  "note": "GT 先做時間 shift，再用第一個有效 matched pair rigid-align 到 VINS local frame。",
+  "feature_first_timestamp": 1544579181.399873,
+  "feature_last_timestamp": 1544579305.5012884,
+  "gt_first_timestamp_raw": 1544579182.9048762,
+  "gt_last_timestamp_raw": 1544579305.5602303,
+  "auto_shift_estimate_from_first_timestamps": -1.5050032138824463,
+  "applied_gt_time_shift_sec": -1.5050032138824463,
+  "reference_feature_idx": 0,
+  "reference_gt_idx": 0,
+  "reference_match_dt_sec": 0.0,
+  "matched_dt_mean_sec": 0.002554648857147789,
+  "matched_dt_median_sec": 0.0025773048400878906,
+  "R_align_quat_xyzw": [
+    -0.012561613301225122,
+    -0.057573903340160805,
+    -0.8201812900392723,
+    0.5690607199543503
+  ],
+  "p_align_xyz": [
+    -3706091.290588044,
+    1729624.063143832,
+    -357055.3518421969
+  ]
+}
+[OK] dataset -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/admission/datasets
+[OK] train -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/admission/datasets/train.npz
+[OK] val   -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/admission/datasets/val.npz
+[OK] test  -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/admission/datasets/test.npz
+[OK] stats -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/admission/datasets/dataset_stats.json
+[OK] feature_table_for_infer -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/admission/datasets/feature_table_vins.csv
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/admission/features/reliability_features_vins.csv",
+  "label_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/admission/labels/reliability_labels_vins.csv",
+  "feature_table_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/admission/datasets/feature_table_vins.csv",
+  "feature_names": [
+    "current_is_keyframe",
+    "feature_tracker_time_ms",
+    "tracked_feature_count_raw",
+    "tracked_feature_count_mgr",
+    "mean_track_vel_px",
+    "median_track_vel_px",
+    "coverage_4x4",
+    "img_dt_sec",
+    "imu_sample_count",
+    "acc_norm_mean",
+    "gyr_norm_mean",
+    "avg_track_length"
+  ],
+  "fill_values": {
+    "current_is_keyframe": 1.0,
+    "feature_tracker_time_ms": 9.426015853881836,
+    "tracked_feature_count_raw": 127.0,
+    "tracked_feature_count_mgr": 42.0,
+    "mean_track_vel_px": 0.04775550216436386,
+    "median_track_vel_px": 0.0,
+    "coverage_4x4": 0.8125,
+    "img_dt_sec": 0.09998799860477448,
+    "imu_sample_count": 11.0,
+    "acc_norm_mean": 9.885608673095703,
+    "gyr_norm_mean": 0.03656599670648575,
+    "avg_track_length": 1.6126534938812256
+  },
+  "mean": [
+    1.0,
+    9.301336288452148,
+    127.484375,
+    38.91015625,
+    0.04859171435236931,
+    0.0035494884941726923,
+    0.802978515625,
+    0.1000005230307579,
+    11.0,
+    9.8931884765625,
+    0.03921046108007431,
+    1.5944358110427856
+  ],
+  "std": [
+    1.0,
+    1.2993167638778687,
+    17.815338134765625,
+    11.336278915405273,
+    0.018271690234541893,
+    0.0062782722525298595,
+    0.0778370201587677,
+    0.0006204029195941985,
+    1.0,
+    0.38210776448249817,
+    0.014406271278858185,
+    0.19263271987438202
+  ],
+  "seq_len": 8,
+  "num_feature_rows_raw": 1242,
+  "num_rows_after_merge": 1227,
+  "num_dropped_invalid_labels": 15,
+  "num_train_rows": 512,
+  "num_val_rows": 203,
+  "num_test_rows": 512,
+  "num_train_seq": 505,
+  "num_val_seq": 196,
+  "num_test_seq": 505,
+  "num_train_blocks": 1,
+  "num_val_blocks": 1,
+  "num_test_blocks": 1,
+  "train_class_counts": [
+    25,
+    483,
+    4
+  ],
+  "val_class_counts": [
+    131,
+    72,
+    0
+  ],
+  "test_class_counts": [
+    0,
+    216,
+    296
+  ],
+  "class_map": {
+    "harmful": 0,
+    "neutral": 1,
+    "helpful": 2
+  },
+  "feature_source": "vins_native_features_v1",
+  "drop_invalid_labels": true,
+  "split_mode": "block_class_aware",
+  "block_size": 512,
+  "seed": 42,
+  "search_trials": 300
+}
+[SUCCESS] urban22-highway 完成
+[OK] urban22-highway 執行成功
+
+>>> [START] urban23-highway <<<
+>>> 正在執行: urban23-highway <<<
+[DEBUG] 啟動 loop_fusion_node...
+[DEBUG] 啟動 vins_node...
+[INFO] 等待 VINS 初始化 (5s)...
+[DEBUG] 啟動 kaist_player...
+[INFO] 系統正常運行中，開始監控播放進度...
+[INFO] 偵測到播放完成 (Playback finished)！
+[INFO] 播放完成，等待資料寫入 (20s)...
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban23-highway/vins_raw/vio.tum
+Rows written: 7
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban23-highway/vins_raw/vio_loop.tum
+Rows written: 28
+[OK] labels -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban23-highway/admission/labels/reliability_labels_vins.csv
+[OK] summary -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban23-highway/admission/labels/reliability_labels_summary.json
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban23-highway/admission/features/reliability_features_vins.csv",
+  "gt_path": "/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban23-highway/pose/urban23-highway/global_pose.tum",
+  "out_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban23-highway/admission/labels/reliability_labels_vins.csv",
+  "num_rows": 7,
+  "num_valid_labels": 7,
+  "class_counts": {
+    "harmful": 3,
+    "neutral": 4,
+    "helpful": 0,
+    "invalid": 0
+  },
+  "horizon_rows": 10,
+  "max_match_dt_sec": 0.02,
+  "pos_scale": 8.151086423188541,
+  "rot_scale": 14.357113909066374,
+  "outlier_scale": 0.09810930000000005,
+  "helpful_thr": 0.65,
+  "harmful_thr": 0.4,
+  "label_source": "future_gt_proxy_v2_aligned",
+  "note": "GT 先做時間 shift，再用第一個有效 matched pair rigid-align 到 VINS local frame。",
+  "feature_first_timestamp": 1544579343.101849,
+  "feature_last_timestamp": 1544579343.7016265,
+  "gt_first_timestamp_raw": 1544579343.905677,
+  "gt_last_timestamp_raw": 1544579469.5202305,
+  "auto_shift_estimate_from_first_timestamps": -0.8038280010223389,
+  "applied_gt_time_shift_sec": -0.8038280010223389,
+  "reference_feature_idx": 0,
+  "reference_gt_idx": 0,
+  "reference_match_dt_sec": 0.0,
+  "matched_dt_mean_sec": 0.002130542482648577,
+  "matched_dt_median_sec": 0.0022079944610595703,
+  "R_align_quat_xyzw": [
+    -0.2383133127026936,
+    0.229214746116398,
+    -0.7755627906029522,
+    0.5377450352942598
+  ],
+  "p_align_xyz": [
+    -2864987.458556023,
+    1613375.469964387,
+    2464266.687870075
+  ]
+}
+Traceback (most recent call last):
+  File "/home/ivlab3/Lucas_ws/Visual/keyframe_pipeline/build_vins_reliability_dataset.py", line 557, in <module>
+    main()
+  File "/home/ivlab3/Lucas_ws/Visual/keyframe_pipeline/build_vins_reliability_dataset.py", line 553, in main
+    builder.run()
+  File "/home/ivlab3/Lucas_ws/Visual/keyframe_pipeline/build_vins_reliability_dataset.py", line 455, in run
+    raise RuntimeError(f'有效列數太少，至少需要 {self.min_rows} 列，目前只有 {len(merged)} 列')
+RuntimeError: 有效列數太少，至少需要 32 列，目前只有 7 列
+[FAIL] urban23-highway 執行失敗
+
+>>> [START] urban24-highway <<<
+>>> 正在執行: urban24-highway <<<
+[DEBUG] 啟動 loop_fusion_node...
+[DEBUG] 啟動 vins_node...
+[INFO] 等待 VINS 初始化 (5s)...
+[DEBUG] 啟動 kaist_player...
+[INFO] 系統正常運行中，開始監控播放進度...
+[INFO] 偵測到播放完成 (Playback finished)！
+[INFO] 播放完成，等待資料寫入 (20s)...
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban24-highway/vins_raw/vio.tum
+Rows written: 21
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban24-highway/vins_raw/vio_loop.tum
+Rows written: 6
+[OK] labels -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban24-highway/admission/labels/reliability_labels_vins.csv
+[OK] summary -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban24-highway/admission/labels/reliability_labels_summary.json
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban24-highway/admission/features/reliability_features_vins.csv",
+  "gt_path": "/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban24-highway/pose/urban24-highway/global_pose.tum",
+  "out_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban24-highway/admission/labels/reliability_labels_vins.csv",
+  "num_rows": 21,
+  "num_valid_labels": 21,
+  "class_counts": {
+    "harmful": 10,
+    "neutral": 11,
+    "helpful": 0,
+    "invalid": 0
+  },
+  "horizon_rows": 10,
+  "max_match_dt_sec": 0.02,
+  "pos_scale": 34.34572968499837,
+  "rot_scale": 13.79588572123402,
+  "outlier_scale": 0.092308,
+  "helpful_thr": 0.65,
+  "harmful_thr": 0.4,
+  "label_source": "future_gt_proxy_v2_aligned",
+  "note": "GT 先做時間 shift，再用第一個有效 matched pair rigid-align 到 VINS local frame。",
+  "feature_first_timestamp": 1544579511.903285,
+  "feature_last_timestamp": 1544579513.903643,
+  "gt_first_timestamp_raw": 1544579512.906763,
+  "gt_last_timestamp_raw": 1544579630.0855591,
+  "auto_shift_estimate_from_first_timestamps": -1.0034780502319336,
+  "applied_gt_time_shift_sec": -1.0034780502319336,
+  "reference_feature_idx": 0,
+  "reference_gt_idx": 0,
+  "reference_match_dt_sec": 0.0,
+  "matched_dt_mean_sec": 0.0024635110582624164,
+  "matched_dt_median_sec": 0.002393007278442383,
+  "R_align_quat_xyzw": [
+    -0.164408479590515,
+    0.139094095180661,
+    -0.686705129673386,
+    0.6943045076944744
+  ],
+  "p_align_xyz": [
+    -3727920.95487432,
+    322864.67953675985,
+    1708195.7667596405
+  ]
+}
+Traceback (most recent call last):
+  File "/home/ivlab3/Lucas_ws/Visual/keyframe_pipeline/build_vins_reliability_dataset.py", line 557, in <module>
+    main()
+  File "/home/ivlab3/Lucas_ws/Visual/keyframe_pipeline/build_vins_reliability_dataset.py", line 553, in main
+    builder.run()
+  File "/home/ivlab3/Lucas_ws/Visual/keyframe_pipeline/build_vins_reliability_dataset.py", line 455, in run
+    raise RuntimeError(f'有效列數太少，至少需要 {self.min_rows} 列，目前只有 {len(merged)} 列')
+RuntimeError: 有效列數太少，至少需要 32 列，目前只有 21 列
+[FAIL] urban24-highway 執行失敗
+
+>>> [START] urban25-highway <<<
+>>> 正在執行: urban25-highway <<<
+[DEBUG] 啟動 loop_fusion_node...
+[DEBUG] 啟動 vins_node...
+[INFO] 等待 VINS 初始化 (5s)...
+[DEBUG] 啟動 kaist_player...
+[INFO] 系統正常運行中，開始監控播放進度...
+[INFO] 偵測到播放完成 (Playback finished)！
+[INFO] 播放完成，等待資料寫入 (20s)...
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban25-highway/vins_raw/vio.tum
+Rows written: 4
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban25-highway/vins_raw/vio_loop.tum
+Rows written: 0
+[OK] labels -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban25-highway/admission/labels/reliability_labels_vins.csv
+[OK] summary -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban25-highway/admission/labels/reliability_labels_summary.json
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban25-highway/admission/features/reliability_features_vins.csv",
+  "gt_path": "/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban25-highway/pose/urban25-highway/global_pose.tum",
+  "out_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban25-highway/admission/labels/reliability_labels_vins.csv",
+  "num_rows": 4,
+  "num_valid_labels": 4,
+  "class_counts": {
+    "harmful": 2,
+    "neutral": 2,
+    "helpful": 0,
+    "invalid": 0
+  },
+  "horizon_rows": 10,
+  "max_match_dt_sec": 0.02,
+  "pos_scale": 6.627789434163778,
+  "rot_scale": 12.754006716314745,
+  "outlier_scale": 0.13874190000000003,
+  "helpful_thr": 0.65,
+  "harmful_thr": 0.4,
+  "label_source": "future_gt_proxy_v2_aligned",
+  "note": "GT 先做時間 shift，再用第一個有效 matched pair rigid-align 到 VINS local frame。",
+  "feature_first_timestamp": 1544579934.4074006,
+  "feature_last_timestamp": 1544579934.7116103,
+  "gt_first_timestamp_raw": 1544579886.8895977,
+  "gt_last_timestamp_raw": 1544579985.625902,
+  "auto_shift_estimate_from_first_timestamps": 47.51780295372009,
+  "applied_gt_time_shift_sec": 47.51780295372009,
+  "reference_feature_idx": 0,
+  "reference_gt_idx": 0,
+  "reference_match_dt_sec": 0.0,
+  "matched_dt_mean_sec": 0.0019113421440124512,
+  "matched_dt_median_sec": 0.0018693208694458008,
+  "R_align_quat_xyzw": [
+    0.0686062687294863,
+    -0.029995790540989255,
+    -0.925469822046172,
+    0.37134760120763577
+  ],
+  "p_align_xyz": [
+    -2570716.6387343872,
+    3198408.970947602,
+    -402857.0504206294
+  ]
+}
+Traceback (most recent call last):
+  File "/home/ivlab3/Lucas_ws/Visual/keyframe_pipeline/build_vins_reliability_dataset.py", line 557, in <module>
+    main()
+  File "/home/ivlab3/Lucas_ws/Visual/keyframe_pipeline/build_vins_reliability_dataset.py", line 553, in main
+    builder.run()
+  File "/home/ivlab3/Lucas_ws/Visual/keyframe_pipeline/build_vins_reliability_dataset.py", line 455, in run
+    raise RuntimeError(f'有效列數太少，至少需要 {self.min_rows} 列，目前只有 {len(merged)} 列')
+RuntimeError: 有效列數太少，至少需要 32 列，目前只有 4 列
+[FAIL] urban25-highway 執行失敗
+
+>>> [START] urban26-dongtan <<<
+>>> 正在執行: urban26-dongtan <<<
+[DEBUG] 啟動 loop_fusion_node...
+[DEBUG] 啟動 vins_node...
+[INFO] 等待 VINS 初始化 (5s)...
+[DEBUG] 啟動 kaist_player...
+[INFO] 系統正常運行中，開始監控播放進度...
+[INFO] 偵測到播放完成 (Playback finished)！
+[INFO] 播放完成，等待資料寫入 (20s)...
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/vins_raw/vio.tum
+Rows written: 5775
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/vins_raw/vio_loop.tum
+Rows written: 767
+[OK] labels -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/admission/labels/reliability_labels_vins.csv
+[OK] summary -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/admission/labels/reliability_labels_summary.json
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/admission/features/reliability_features_vins.csv",
+  "gt_path": "/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban26-dongtan/pose/urban26-dongtan/global_pose.tum",
+  "out_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/admission/labels/reliability_labels_vins.csv",
+  "num_rows": 5774,
+  "num_valid_labels": 4184,
+  "class_counts": {
+    "harmful": 286,
+    "neutral": 3159,
+    "helpful": 739,
+    "invalid": 1590
+  },
+  "horizon_rows": 10,
+  "max_match_dt_sec": 0.02,
+  "pos_scale": 104.64194079311035,
+  "rot_scale": 21.189007890570647,
+  "outlier_scale": 0.05,
+  "helpful_thr": 0.65,
+  "harmful_thr": 0.4,
+  "label_source": "future_gt_proxy_v2_aligned",
+  "note": "GT 先做時間 shift，再用第一個有效 matched pair rigid-align 到 VINS local frame。",
+  "feature_first_timestamp": 1544580712.5152237,
+  "feature_last_timestamp": 1544581289.8215444,
+  "gt_first_timestamp_raw": 1544580719.8718421,
+  "gt_last_timestamp_raw": 1544581289.861629,
+  "auto_shift_estimate_from_first_timestamps": -7.356618404388428,
+  "applied_gt_time_shift_sec": -7.356618404388428,
+  "reference_feature_idx": 0,
+  "reference_gt_idx": 0,
+  "reference_match_dt_sec": 0.0,
+  "matched_dt_mean_sec": 0.0025661166050902403,
+  "matched_dt_median_sec": 0.002536296844482422,
+  "R_align_quat_xyzw": [
+    -0.016411597112162928,
+    -0.0021027449104048202,
+    -0.9998163475366181,
+    0.009670012544274093
+  ],
+  "p_align_xyz": [
+    249934.77663724025,
+    4123705.021948958,
+    -26872.625909277398
+  ]
+}
+[OK] dataset -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/admission/datasets
+[OK] train -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/admission/datasets/train.npz
+[OK] val   -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/admission/datasets/val.npz
+[OK] test  -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/admission/datasets/test.npz
+[OK] stats -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/admission/datasets/dataset_stats.json
+[OK] feature_table_for_infer -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/admission/datasets/feature_table_vins.csv
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/admission/features/reliability_features_vins.csv",
+  "label_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/admission/labels/reliability_labels_vins.csv",
+  "feature_table_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/admission/datasets/feature_table_vins.csv",
+  "feature_names": [
+    "current_is_keyframe",
+    "feature_tracker_time_ms",
+    "tracked_feature_count_raw",
+    "tracked_feature_count_mgr",
+    "mean_track_vel_px",
+    "median_track_vel_px",
+    "coverage_4x4",
+    "img_dt_sec",
+    "imu_sample_count",
+    "acc_norm_mean",
+    "gyr_norm_mean",
+    "avg_track_length"
+  ],
+  "fill_values": {
+    "current_is_keyframe": 0.0,
+    "feature_tracker_time_ms": 11.419139862060547,
+    "tracked_feature_count_raw": 150.0,
+    "tracked_feature_count_mgr": 120.0,
+    "mean_track_vel_px": 0.07694150507450104,
+    "median_track_vel_px": 0.027965500950813293,
+    "coverage_4x4": 0.875,
+    "img_dt_sec": 0.09999199956655502,
+    "imu_sample_count": 11.0,
+    "acc_norm_mean": 9.857962608337402,
+    "gyr_norm_mean": 0.026801500469446182,
+    "avg_track_length": 2.343273162841797
+  },
+  "mean": [
+    0.4962235689163208,
+    11.394730567932129,
+    150.0,
+    120.30664825439453,
+    0.07731568813323975,
+    0.036317937076091766,
+    0.8938349485397339,
+    0.10000047087669373,
+    11.000377655029297,
+    9.888729095458984,
+    0.04271848499774933,
+    2.6155855655670166
+  ],
+  "std": [
+    0.49998340010643005,
+    2.7782068252563477,
+    1.0,
+    19.198266983032227,
+    0.04480356350541115,
+    0.04069077596068382,
+    0.0807986855506897,
+    0.0006233062013052404,
+    0.1566733866930008,
+    0.37043890357017517,
+    0.055366139858961105,
+    1.1734166145324707
+  ],
+  "seq_len": 8,
+  "num_feature_rows_raw": 5774,
+  "num_rows_after_merge": 4184,
+  "num_dropped_invalid_labels": 1590,
+  "num_train_rows": 2648,
+  "num_val_rows": 512,
+  "num_test_rows": 1024,
+  "num_train_seq": 2606,
+  "num_val_seq": 505,
+  "num_test_seq": 1010,
+  "num_train_blocks": 6,
+  "num_val_blocks": 1,
+  "num_test_blocks": 2,
+  "train_class_counts": [
+    79,
+    2048,
+    521
+  ],
+  "val_class_counts": [
+    55,
+    265,
+    192
+  ],
+  "test_class_counts": [
+    152,
+    846,
+    26
+  ],
+  "class_map": {
+    "harmful": 0,
+    "neutral": 1,
+    "helpful": 2
+  },
+  "feature_source": "vins_native_features_v1",
+  "drop_invalid_labels": true,
+  "split_mode": "block_class_aware",
+  "block_size": 512,
+  "seed": 42,
+  "search_trials": 300
+}
+[SUCCESS] urban26-dongtan 完成
+[OK] urban26-dongtan 執行成功
+
+>>> [START] urban27-dongtan <<<
+>>> 正在執行: urban27-dongtan <<<
+[DEBUG] 啟動 loop_fusion_node...
+[DEBUG] 啟動 vins_node...
+[INFO] 等待 VINS 初始化 (5s)...
+[DEBUG] 啟動 kaist_player...
+[INFO] 系統正常運行中，開始監控播放進度...
+[INFO] 偵測到播放完成 (Playback finished)！
+[INFO] 播放完成，等待資料寫入 (20s)...
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban27-dongtan/vins_raw/vio.tum
+Rows written: 11591
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban27-dongtan/vins_raw/vio_loop.tum
+Rows written: 1678
+[OK] labels -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban27-dongtan/admission/labels/reliability_labels_vins.csv
+[OK] summary -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban27-dongtan/admission/labels/reliability_labels_summary.json
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban27-dongtan/admission/features/reliability_features_vins.csv",
+  "gt_path": "/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban27-dongtan/pose/urban27-dongtan/global_pose.tum",
+  "out_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban27-dongtan/admission/labels/reliability_labels_vins.csv",
+  "num_rows": 11590,
+  "num_valid_labels": 6585,
+  "class_counts": {
+    "harmful": 500,
+    "neutral": 5461,
+    "helpful": 624,
+    "invalid": 5005
+  },
+  "horizon_rows": 10,
+  "max_match_dt_sec": 0.02,
+  "pos_scale": 140.12433320997326,
+  "rot_scale": 10.0,
+  "outlier_scale": 0.05,
+  "helpful_thr": 0.65,
+  "harmful_thr": 0.4,
+  "label_source": "future_gt_proxy_v2_aligned",
+  "note": "GT 先做時間 shift，再用第一個有效 matched pair rigid-align 到 VINS local frame。",
+  "feature_first_timestamp": 1544582649.8357108,
+  "feature_last_timestamp": 1544583809.1474478,
+  "gt_first_timestamp_raw": 1544582651.8319263,
+  "gt_last_timestamp_raw": 1544583809.21687,
+  "auto_shift_estimate_from_first_timestamps": -1.996215581893921,
+  "applied_gt_time_shift_sec": -1.996215581893921,
+  "reference_feature_idx": 0,
+  "reference_gt_idx": 0,
+  "reference_match_dt_sec": 0.0,
+  "matched_dt_mean_sec": 0.002573032581118827,
+  "matched_dt_median_sec": 0.0025391578674316406,
+  "R_align_quat_xyzw": [
+    -0.0042398141632327985,
+    2.838477163037327e-05,
+    -0.844220198186777,
+    0.5359797385570139
+  ],
+  "p_align_xyz": [
+    -3587233.823128659,
+    2049585.5229655541,
+    16555.0652128478
+  ]
+}
+[OK] dataset -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban27-dongtan/admission/datasets
+[OK] train -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban27-dongtan/admission/datasets/train.npz
+[OK] val   -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban27-dongtan/admission/datasets/val.npz
+[OK] test  -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban27-dongtan/admission/datasets/test.npz
+[OK] stats -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban27-dongtan/admission/datasets/dataset_stats.json
+[OK] feature_table_for_infer -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban27-dongtan/admission/datasets/feature_table_vins.csv
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban27-dongtan/admission/features/reliability_features_vins.csv",
+  "label_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban27-dongtan/admission/labels/reliability_labels_vins.csv",
+  "feature_table_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban27-dongtan/admission/datasets/feature_table_vins.csv",
+  "feature_names": [
+    "current_is_keyframe",
+    "feature_tracker_time_ms",
+    "tracked_feature_count_raw",
+    "tracked_feature_count_mgr",
+    "mean_track_vel_px",
+    "median_track_vel_px",
+    "coverage_4x4",
+    "img_dt_sec",
+    "imu_sample_count",
+    "acc_norm_mean",
+    "gyr_norm_mean",
+    "avg_track_length"
+  ],
+  "fill_values": {
+    "current_is_keyframe": 0.0,
+    "feature_tracker_time_ms": 12.712167739868164,
+    "tracked_feature_count_raw": 150.0,
+    "tracked_feature_count_mgr": 123.0,
+    "mean_track_vel_px": 0.07907400280237198,
+    "median_track_vel_px": 0.032997000962495804,
+    "coverage_4x4": 0.875,
+    "img_dt_sec": 0.09999699890613556,
+    "imu_sample_count": 11.0,
+    "acc_norm_mean": 9.865425109863281,
+    "gyr_norm_mean": 0.02964399941265583,
+    "avg_track_length": 2.392580986022949
+  },
+  "mean": [
+    0.42450958490371704,
+    25.06816864013672,
+    150.0,
+    123.16067504882812,
+    0.08152696490287781,
+    0.04452329874038696,
+    0.8804826736450195,
+    0.10000128298997879,
+    11.00088119506836,
+    9.885503768920898,
+    0.04802926257252693,
+    2.4943137168884277
+  ],
+  "std": [
+    0.49427109956741333,
+    684.1250610351562,
+    1.0,
+    17.148807525634766,
+    0.039590977132320404,
+    0.04820290580391884,
+    0.08448874205350876,
+    0.0005898233503103256,
+    0.21204301714897156,
+    0.3104395866394043,
+    0.05961930751800537,
+    0.429614394903183
+  ],
+  "seq_len": 8,
+  "num_feature_rows_raw": 11590,
+  "num_rows_after_merge": 6585,
+  "num_dropped_invalid_labels": 5005,
+  "num_train_rows": 4537,
+  "num_val_rows": 1024,
+  "num_test_rows": 1024,
+  "num_train_seq": 4474,
+  "num_val_seq": 1010,
+  "num_test_seq": 1010,
+  "num_train_blocks": 9,
+  "num_val_blocks": 2,
+  "num_test_blocks": 2,
+  "train_class_counts": [
+    358,
+    4067,
+    112
+  ],
+  "val_class_counts": [
+    73,
+    439,
+    512
+  ],
+  "test_class_counts": [
+    69,
+    955,
+    0
+  ],
+  "class_map": {
+    "harmful": 0,
+    "neutral": 1,
+    "helpful": 2
+  },
+  "feature_source": "vins_native_features_v1",
+  "drop_invalid_labels": true,
+  "split_mode": "block_class_aware",
+  "block_size": 512,
+  "seed": 42,
+  "search_trials": 300
+}
+[SUCCESS] urban27-dongtan 完成
+[OK] urban27-dongtan 執行成功
+
+>>> [START] urban28-pankyo <<<
+>>> 正在執行: urban28-pankyo <<<
+[DEBUG] 啟動 loop_fusion_node...
+[DEBUG] 啟動 vins_node...
+[INFO] 等待 VINS 初始化 (5s)...
+[DEBUG] 啟動 kaist_player...
+[INFO] 系統正常運行中，開始監控播放進度...
+[INFO] 偵測到播放完成 (Playback finished)！
+[INFO] 播放完成，等待資料寫入 (20s)...
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban28-pankyo/vins_raw/vio.tum
+Rows written: 19720
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban28-pankyo/vins_raw/vio_loop.tum
+Rows written: 2308
+[OK] labels -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban28-pankyo/admission/labels/reliability_labels_vins.csv
+[OK] summary -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban28-pankyo/admission/labels/reliability_labels_summary.json
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban28-pankyo/admission/features/reliability_features_vins.csv",
+  "gt_path": "/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban28-pankyo/pose/urban28-pankyo/global_pose.tum",
+  "out_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban28-pankyo/admission/labels/reliability_labels_vins.csv",
+  "num_rows": 19719,
+  "num_valid_labels": 14170,
+  "class_counts": {
+    "harmful": 1272,
+    "neutral": 9116,
+    "helpful": 3782,
+    "invalid": 5549
+  },
+  "horizon_rows": 10,
+  "max_match_dt_sec": 0.02,
+  "pos_scale": 198.88816597844442,
+  "rot_scale": 43.72574063244683,
+  "outlier_scale": 0.05,
+  "helpful_thr": 0.65,
+  "harmful_thr": 0.4,
+  "label_source": "future_gt_proxy_v2_aligned",
+  "note": "GT 先做時間 shift，再用第一個有效 matched pair rigid-align 到 VINS local frame。",
+  "feature_first_timestamp": 1544590799.799874,
+  "feature_last_timestamp": 1544592773.1301432,
+  "gt_first_timestamp_raw": 1544590814.5035336,
+  "gt_last_timestamp_raw": 1544592773.1618855,
+  "auto_shift_estimate_from_first_timestamps": -14.703659534454346,
+  "applied_gt_time_shift_sec": -14.703659534454346,
+  "reference_feature_idx": 0,
+  "reference_gt_idx": 0,
+  "reference_match_dt_sec": 0.0,
+  "matched_dt_mean_sec": 0.002573406186615911,
+  "matched_dt_median_sec": 0.002562284469604492,
+  "R_align_quat_xyzw": [
+    -0.0015063550423906793,
+    0.0021287264358050206,
+    -0.7050598515977845,
+    0.7091430074978938
+  ],
+  "p_align_xyz": [
+    -4142413.117486498,
+    308534.71101149713,
+    21554.91775306154
+  ]
+}
+[OK] dataset -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban28-pankyo/admission/datasets
+[OK] train -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban28-pankyo/admission/datasets/train.npz
+[OK] val   -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban28-pankyo/admission/datasets/val.npz
+[OK] test  -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban28-pankyo/admission/datasets/test.npz
+[OK] stats -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban28-pankyo/admission/datasets/dataset_stats.json
+[OK] feature_table_for_infer -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban28-pankyo/admission/datasets/feature_table_vins.csv
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban28-pankyo/admission/features/reliability_features_vins.csv",
+  "label_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban28-pankyo/admission/labels/reliability_labels_vins.csv",
+  "feature_table_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban28-pankyo/admission/datasets/feature_table_vins.csv",
+  "feature_names": [
+    "current_is_keyframe",
+    "feature_tracker_time_ms",
+    "tracked_feature_count_raw",
+    "tracked_feature_count_mgr",
+    "mean_track_vel_px",
+    "median_track_vel_px",
+    "coverage_4x4",
+    "img_dt_sec",
+    "imu_sample_count",
+    "acc_norm_mean",
+    "gyr_norm_mean",
+    "avg_track_length"
+  ],
+  "fill_values": {
+    "current_is_keyframe": 0.0,
+    "feature_tracker_time_ms": 12.461878776550293,
+    "tracked_feature_count_raw": 150.0,
+    "tracked_feature_count_mgr": 121.0,
+    "mean_track_vel_px": 0.07628650218248367,
+    "median_track_vel_px": 0.03431449830532074,
+    "coverage_4x4": 0.875,
+    "img_dt_sec": 0.09999699890613556,
+    "imu_sample_count": 11.0,
+    "acc_norm_mean": 9.861344337463379,
+    "gyr_norm_mean": 0.034653499722480774,
+    "avg_track_length": 2.371680974960327
+  },
+  "mean": [
+    0.47429025173187256,
+    12.827798843383789,
+    149.9920654296875,
+    122.69873046875,
+    0.07944489270448685,
+    0.05000156909227371,
+    0.884002149105072,
+    0.10000146180391312,
+    11.000198364257812,
+    9.908912658691406,
+    0.058365385979413986,
+    2.6058497428894043
+  ],
+  "std": [
+    0.4993303120136261,
+    4.097959041595459,
+    0.3200175166130066,
+    19.38332176208496,
+    0.05041026696562767,
+    0.06041191518306732,
+    0.08668200671672821,
+    0.0006738468655385077,
+    0.1562664955854416,
+    0.398352712392807,
+    0.07254110276699066,
+    0.8053886294364929
+  ],
+  "seq_len": 8,
+  "num_feature_rows_raw": 19719,
+  "num_rows_after_merge": 14170,
+  "num_dropped_invalid_labels": 5549,
+  "num_train_rows": 10074,
+  "num_val_rows": 2048,
+  "num_test_rows": 2048,
+  "num_train_seq": 9934,
+  "num_val_seq": 2020,
+  "num_test_seq": 2020,
+  "num_train_blocks": 20,
+  "num_val_blocks": 4,
+  "num_test_blocks": 4,
+  "train_class_counts": [
+    1071,
+    6945,
+    2058
+  ],
+  "val_class_counts": [
+    135,
+    1435,
+    478
+  ],
+  "test_class_counts": [
+    66,
+    736,
+    1246
+  ],
+  "class_map": {
+    "harmful": 0,
+    "neutral": 1,
+    "helpful": 2
+  },
+  "feature_source": "vins_native_features_v1",
+  "drop_invalid_labels": true,
+  "split_mode": "block_class_aware",
+  "block_size": 512,
+  "seed": 42,
+  "search_trials": 300
+}
+[SUCCESS] urban28-pankyo 完成
+[OK] urban28-pankyo 執行成功
+
+>>> [START] urban29-pankyo <<<
+>>> 正在執行: urban29-pankyo <<<
+[DEBUG] 啟動 loop_fusion_node...
+[DEBUG] 啟動 vins_node...
+[INFO] 等待 VINS 初始化 (5s)...
+[DEBUG] 啟動 kaist_player...
+[INFO] 系統正常運行中，開始監控播放進度...
+[INFO] 偵測到播放完成 (Playback finished)！
+[INFO] 播放完成，等待資料寫入 (20s)...
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban29-pankyo/vins_raw/vio.tum
+Rows written: 4426
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban29-pankyo/vins_raw/vio_loop.tum
+Rows written: 56
+[OK] labels -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban29-pankyo/admission/labels/reliability_labels_vins.csv
+[OK] summary -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban29-pankyo/admission/labels/reliability_labels_summary.json
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban29-pankyo/admission/features/reliability_features_vins.csv",
+  "gt_path": "/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban29-pankyo/pose/urban29-pankyo/global_pose.tum",
+  "out_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban29-pankyo/admission/labels/reliability_labels_vins.csv",
+  "num_rows": 4425,
+  "num_valid_labels": 3322,
+  "class_counts": {
+    "harmful": 70,
+    "neutral": 1968,
+    "helpful": 1284,
+    "invalid": 1103
+  },
+  "horizon_rows": 10,
+  "max_match_dt_sec": 0.02,
+  "pos_scale": 136.09582904858652,
+  "rot_scale": 10.0,
+  "outlier_scale": 0.05,
+  "helpful_thr": 0.65,
+  "harmful_thr": 0.4,
+  "label_source": "future_gt_proxy_v2_aligned",
+  "note": "GT 先做時間 shift，再用第一個有效 matched pair rigid-align 到 VINS local frame。",
+  "feature_first_timestamp": 1544594826.960058,
+  "feature_last_timestamp": 1544595269.3663454,
+  "gt_first_timestamp_raw": 1544594828.4385338,
+  "gt_last_timestamp_raw": 1544595268.9925144,
+  "auto_shift_estimate_from_first_timestamps": -1.47847580909729,
+  "applied_gt_time_shift_sec": -1.47847580909729,
+  "reference_feature_idx": 0,
+  "reference_gt_idx": 0,
+  "reference_match_dt_sec": 0.0,
+  "matched_dt_mean_sec": 0.002577667344866881,
+  "matched_dt_median_sec": 0.0025641918182373047,
+  "R_align_quat_xyzw": [
+    0.0013472100213658157,
+    0.022956769591942167,
+    -0.9995615132065707,
+    0.018653500241281498
+  ],
+  "p_align_xyz": [
+    177820.88941361808,
+    4141265.862364463,
+    190774.85859998967
+  ]
+}
+[OK] dataset -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban29-pankyo/admission/datasets
+[OK] train -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban29-pankyo/admission/datasets/train.npz
+[OK] val   -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban29-pankyo/admission/datasets/val.npz
+[OK] test  -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban29-pankyo/admission/datasets/test.npz
+[OK] stats -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban29-pankyo/admission/datasets/dataset_stats.json
+[OK] feature_table_for_infer -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban29-pankyo/admission/datasets/feature_table_vins.csv
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban29-pankyo/admission/features/reliability_features_vins.csv",
+  "label_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban29-pankyo/admission/labels/reliability_labels_vins.csv",
+  "feature_table_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban29-pankyo/admission/datasets/feature_table_vins.csv",
+  "feature_names": [
+    "current_is_keyframe",
+    "feature_tracker_time_ms",
+    "tracked_feature_count_raw",
+    "tracked_feature_count_mgr",
+    "mean_track_vel_px",
+    "median_track_vel_px",
+    "coverage_4x4",
+    "img_dt_sec",
+    "imu_sample_count",
+    "acc_norm_mean",
+    "gyr_norm_mean",
+    "avg_track_length"
+  ],
+  "fill_values": {
+    "current_is_keyframe": 1.0,
+    "feature_tracker_time_ms": 12.248189926147461,
+    "tracked_feature_count_raw": 150.0,
+    "tracked_feature_count_mgr": 120.0,
+    "mean_track_vel_px": 0.07584500312805176,
+    "median_track_vel_px": 0.030068499967455864,
+    "coverage_4x4": 0.875,
+    "img_dt_sec": 0.09999699890613556,
+    "imu_sample_count": 11.0,
+    "acc_norm_mean": 9.895910263061523,
+    "gyr_norm_mean": 0.03091999888420105,
+    "avg_track_length": 2.3621816635131836
+  },
+  "mean": [
+    0.5187119245529175,
+    88.40223693847656,
+    149.8864288330078,
+    120.53437805175781,
+    0.07738210260868073,
+    0.04003724828362465,
+    0.8776381611824036,
+    0.10000263154506683,
+    11.0,
+    9.918304443359375,
+    0.045164529234170914,
+    2.4731128215789795
+  ],
+  "std": [
+    0.49964776635169983,
+    3630.3408203125,
+    1.0882316827774048,
+    15.861030578613281,
+    0.03676987066864967,
+    0.04339888319373131,
+    0.08341074734926224,
+    0.0005797353223897517,
+    0.05109761282801628,
+    0.32515421509742737,
+    0.049918487668037415,
+    0.41986343264579773
+  ],
+  "seq_len": 8,
+  "num_feature_rows_raw": 4425,
+  "num_rows_after_merge": 3322,
+  "num_dropped_invalid_labels": 1103,
+  "num_train_rows": 2298,
+  "num_val_rows": 512,
+  "num_test_rows": 512,
+  "num_train_seq": 2263,
+  "num_val_seq": 505,
+  "num_test_seq": 505,
+  "num_train_blocks": 5,
+  "num_val_blocks": 1,
+  "num_test_blocks": 1,
+  "train_class_counts": [
+    70,
+    1717,
+    511
+  ],
+  "val_class_counts": [
+    0,
+    20,
+    492
+  ],
+  "test_class_counts": [
+    0,
+    231,
+    281
+  ],
+  "class_map": {
+    "harmful": 0,
+    "neutral": 1,
+    "helpful": 2
+  },
+  "feature_source": "vins_native_features_v1",
+  "drop_invalid_labels": true,
+  "split_mode": "block_class_aware",
+  "block_size": 512,
+  "seed": 42,
+  "search_trials": 300
+}
+[SUCCESS] urban29-pankyo 完成
+[OK] urban29-pankyo 執行成功
+
+>>> [START] urban30-gangnam <<<
+>>> 正在執行: urban30-gangnam <<<
+[DEBUG] 啟動 loop_fusion_node...
+[DEBUG] 啟動 vins_node...
+[INFO] 等待 VINS 初始化 (5s)...
+[DEBUG] 啟動 kaist_player...
+[INFO] 系統正常運行中，開始監控播放進度...

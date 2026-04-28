@@ -1,0 +1,45 @@
+============================================================
+[BATCH] 開始執行全部 KAIST 序列
+============================================================
+
+>>> [START] urban22-highway <<<
+------------------------------------------------------------
+>>> [RUNNING] urban22-highway <<<
+------------------------------------------------------------
+[INFO] VINS 核心已啟動，等待 5 秒進行系統初始化...
+[INFO] 偵測到播放完成。
+[INFO] 播放結束，等待 VINS 完成最後優化並寫入檔案 (30s)...
+[ERROR] urban22-highway 的 vio.csv 依然是空的！
+請檢查日誌： /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/logs/vins.log
+[CLEANUP] 正在關閉所有背景程序...
+[FAIL] urban22-highway 執行失敗
+
+>>> [START] urban23-highway <<<
+rm: cannot remove '/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban23-highway/vins_raw/vio.csv': Is a directory
+[FAIL] urban23-highway 執行失敗
+
+>>> [START] urban24-highway <<<
+------------------------------------------------------------
+>>> [RUNNING] urban24-highway <<<
+------------------------------------------------------------
+[INFO] VINS 核心已啟動，等待 5 秒進行系統初始化...
+[INFO] 偵測到播放完成。
+[INFO] 播放結束，等待 VINS 完成最後優化並寫入檔案 (30s)...
+[FAIL] urban24-highway 執行失敗
+
+>>> [START] urban25-highway <<<
+------------------------------------------------------------
+>>> [RUNNING] urban25-highway <<<
+------------------------------------------------------------
+[FAIL] urban25-highway 執行失敗
+
+>>> [START] urban26-dongtan <<<
+------------------------------------------------------------
+>>> [RUNNING] urban26-dongtan <<<
+------------------------------------------------------------
+[FAIL] urban26-dongtan 執行失敗
+
+>>> [START] urban27-dongtan <<<
+------------------------------------------------------------
+>>> [RUNNING] urban27-dongtan <<<
+------------------------------------------------------------

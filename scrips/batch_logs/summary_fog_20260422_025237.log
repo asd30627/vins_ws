@@ -1,0 +1,456 @@
+============================================================
+[BATCH START] 模式: FOG
+============================================================
+
+>>> [START] urban22-highway (fog) <<<
+------------------------------------------------------------
+>>> [FOG] 執行序列: urban22-highway <<<
+------------------------------------------------------------
+[INFO] 播放完成，正在儲存資料...
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/vins_raw/vio.tum
+Rows written: 1243
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/vins_raw/vio_loop.tum
+Rows written: 1233
+--------------------------------------------------------------------------------
+Loaded 12026 stamps and poses from: /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban22-highway/pose/urban22-highway/global_pose.tum
+Loaded 1243 stamps and poses from: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/vins_raw/vio.tum
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1227 of max. 1243 possible matching timestamps between...
+	/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban22-highway/pose/urban22-highway/global_pose.tum
+and:	/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/vins_raw/vio.tum
+..with max. time diff.: 0.05 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.26711796  0.95423487  0.13447605]
+ [-0.96169936  0.25505933  0.10039459]
+ [ 0.06150065 -0.15614273  0.98581799]]
+Translation of alignment:
+[3.37244787e+05 4.09281464e+06 2.24924570e+01]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 1227 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	1652.050931
+      mean	844.075685
+    median	868.485608
+       min	9.969111
+      rmse	969.747741
+       sse	1153883906.614525
+       std	477.437869
+
+--------------------------------------------------------------------------------
+Loaded 12026 stamps and poses from: /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban22-highway/pose/urban22-highway/global_pose.tum
+Loaded 1243 stamps and poses from: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/vins_raw/vio.tum
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1227 of max. 1243 possible matching timestamps between...
+	/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban22-highway/pose/urban22-highway/global_pose.tum
+and:	/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/vins_raw/vio.tum
+..with max. time diff.: 0.05 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.26711796  0.95423487  0.13447605]
+ [-0.96169936  0.25505933  0.10039459]
+ [ 0.06150065 -0.15614273  0.98581799]]
+Translation of alignment:
+[3.37244787e+05 4.09281464e+06 2.24924570e+01]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Found 40 pairs with delta 10.0 (m) among 1227 poses using consecutive pairs.
+Compared 40 relative pose pairs, delta = 10.0 (m) with consecutive pairs.
+Calculating RPE for translation part pose relation...
+--------------------------------------------------------------------------------
+RPE w.r.t. translation part (m)
+for delta = 10.0 (m) using consecutive pairs
+(with SE(3) Umeyama alignment)
+
+       max	228.353753
+      mean	76.202987
+    median	71.553463
+       min	7.802029
+      rmse	93.650113
+       sse	350813.743213
+       std	54.437564
+
+--------------------------------------------------------------------------------
+Loaded 12026 stamps and poses from: /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban22-highway/pose/urban22-highway/global_pose.tum
+Loaded 1233 stamps and poses from: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/vins_raw/vio_loop.tum
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1226 of max. 1233 possible matching timestamps between...
+	/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban22-highway/pose/urban22-highway/global_pose.tum
+and:	/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/vins_raw/vio_loop.tum
+..with max. time diff.: 0.05 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.26710725  0.95416615  0.13498396]
+ [-0.96168657  0.25495527  0.10078067]
+ [ 0.06174663 -0.15673151  0.98570918]]
+Translation of alignment:
+[3.37245487e+05 4.09281350e+06 2.25359730e+01]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 1226 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	1650.902196
+      mean	843.398138
+    median	867.718277
+       min	9.979362
+      rmse	968.985322
+       sse	1151131310.739464
+       std	477.087136
+
+--------------------------------------------------------------------------------
+Loaded 12026 stamps and poses from: /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban22-highway/pose/urban22-highway/global_pose.tum
+Loaded 1233 stamps and poses from: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/vins_raw/vio_loop.tum
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1226 of max. 1233 possible matching timestamps between...
+	/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban22-highway/pose/urban22-highway/global_pose.tum
+and:	/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/vins_raw/vio_loop.tum
+..with max. time diff.: 0.05 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.26710725  0.95416615  0.13498396]
+ [-0.96168657  0.25495527  0.10078067]
+ [ 0.06174663 -0.15673151  0.98570918]]
+Translation of alignment:
+[3.37245487e+05 4.09281350e+06 2.25359730e+01]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Found 39 pairs with delta 10.0 (m) among 1226 poses using consecutive pairs.
+Compared 39 relative pose pairs, delta = 10.0 (m) with consecutive pairs.
+Calculating RPE for translation part pose relation...
+--------------------------------------------------------------------------------
+RPE w.r.t. translation part (m)
+for delta = 10.0 (m) using consecutive pairs
+(with SE(3) Umeyama alignment)
+
+       max	215.631521
+      mean	76.764842
+    median	69.556075
+       min	7.327385
+      rmse	92.945106
+       sse	336912.918342
+       std	52.401830
+
+[OK] labels -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/admission/labels/reliability_labels_vins.csv
+[OK] summary -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/admission/labels/reliability_labels_summary.json
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/admission/features/reliability_features_vins.csv",
+  "gt_path": "/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban22-highway/pose/urban22-highway/global_pose.tum",
+  "out_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/admission/labels/reliability_labels_vins.csv",
+  "num_rows": 1242,
+  "num_valid_labels": 1227,
+  "class_counts": {
+    "harmful": 156,
+    "neutral": 771,
+    "helpful": 300,
+    "invalid": 15
+  },
+  "horizon_rows": 10,
+  "max_match_dt_sec": 0.02,
+  "pos_scale": 2809.6299725461486,
+  "rot_scale": 138.3572074762084,
+  "outlier_scale": 0.15600960000000022,
+  "helpful_thr": 0.65,
+  "harmful_thr": 0.4,
+  "label_source": "future_gt_proxy_v2_aligned",
+  "note": "GT 先做時間 shift，再用第一個有效 matched pair rigid-align 到 VINS local frame。",
+  "feature_first_timestamp": 1544579181.399873,
+  "feature_last_timestamp": 1544579305.5012884,
+  "gt_first_timestamp_raw": 1544579182.9048762,
+  "gt_last_timestamp_raw": 1544579305.5602303,
+  "auto_shift_estimate_from_first_timestamps": -1.5050032138824463,
+  "applied_gt_time_shift_sec": -1.5050032138824463,
+  "reference_feature_idx": 0,
+  "reference_gt_idx": 0,
+  "reference_match_dt_sec": 0.0,
+  "matched_dt_mean_sec": 0.002554648857147789,
+  "matched_dt_median_sec": 0.0025773048400878906,
+  "R_align_quat_xyzw": [
+    -0.012561613301225122,
+    -0.057573903340160805,
+    -0.8201812900392723,
+    0.5690607199543503
+  ],
+  "p_align_xyz": [
+    -3706091.290588044,
+    1729624.063143832,
+    -357055.3518421969
+  ]
+}
+[OK] dataset -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/admission/datasets
+[OK] train -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/admission/datasets/train.npz
+[OK] val   -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/admission/datasets/val.npz
+[OK] test  -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/admission/datasets/test.npz
+[OK] stats -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/admission/datasets/dataset_stats.json
+[OK] feature_table_for_infer -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/admission/datasets/feature_table_vins.csv
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/admission/features/reliability_features_vins.csv",
+  "label_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/admission/labels/reliability_labels_vins.csv",
+  "feature_table_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban22-highway/admission/datasets/feature_table_vins.csv",
+  "feature_names": [
+    "current_is_keyframe",
+    "feature_tracker_time_ms",
+    "tracked_feature_count_raw",
+    "tracked_feature_count_mgr",
+    "mean_track_vel_px",
+    "median_track_vel_px",
+    "coverage_4x4",
+    "img_dt_sec",
+    "imu_sample_count",
+    "acc_norm_mean",
+    "gyr_norm_mean",
+    "avg_track_length"
+  ],
+  "fill_values": {
+    "current_is_keyframe": 1.0,
+    "feature_tracker_time_ms": 9.470895767211914,
+    "tracked_feature_count_raw": 127.0,
+    "tracked_feature_count_mgr": 42.0,
+    "mean_track_vel_px": 0.04775550216436386,
+    "median_track_vel_px": 0.0,
+    "coverage_4x4": 0.8125,
+    "img_dt_sec": 0.09998799860477448,
+    "imu_sample_count": 11.0,
+    "acc_norm_mean": 9.885608673095703,
+    "gyr_norm_mean": 0.03656599670648575,
+    "avg_track_length": 1.6126534938812256
+  },
+  "mean": [
+    1.0,
+    9.184460639953613,
+    127.484375,
+    38.91015625,
+    0.04859171435236931,
+    0.0035494884941726923,
+    0.802978515625,
+    0.1000005230307579,
+    11.0,
+    9.8931884765625,
+    0.03921046108007431,
+    1.5944358110427856
+  ],
+  "std": [
+    1.0,
+    1.109762191772461,
+    17.815338134765625,
+    11.336278915405273,
+    0.018271690234541893,
+    0.0062782722525298595,
+    0.0778370201587677,
+    0.0006204029195941985,
+    1.0,
+    0.38210776448249817,
+    0.014406271278858185,
+    0.19263271987438202
+  ],
+  "seq_len": 8,
+  "num_feature_rows_raw": 1242,
+  "num_rows_after_merge": 1227,
+  "num_dropped_invalid_labels": 15,
+  "num_train_rows": 512,
+  "num_val_rows": 203,
+  "num_test_rows": 512,
+  "num_train_seq": 505,
+  "num_val_seq": 196,
+  "num_test_seq": 505,
+  "num_train_blocks": 1,
+  "num_val_blocks": 1,
+  "num_test_blocks": 1,
+  "train_class_counts": [
+    25,
+    483,
+    4
+  ],
+  "val_class_counts": [
+    131,
+    72,
+    0
+  ],
+  "test_class_counts": [
+    0,
+    216,
+    296
+  ],
+  "class_map": {
+    "harmful": 0,
+    "neutral": 1,
+    "helpful": 2
+  },
+  "feature_source": "vins_native_features_v1",
+  "drop_invalid_labels": true,
+  "split_mode": "block_class_aware",
+  "block_size": 512,
+  "seed": 42,
+  "search_trials": 300
+}
+[SUCCESS] urban22-highway (fog) 完成
+[OK] urban22-highway 執行成功
+[SYS] 釋放系統記憶體...
+
+>>> [START] urban23-highway (fog) <<<
+------------------------------------------------------------
+>>> [FOG] 執行序列: urban23-highway <<<
+------------------------------------------------------------
+[INFO] 播放完成，正在儲存資料...
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban23-highway/vins_raw/vio.tum
+Rows written: 7
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban23-highway/vins_raw/vio_loop.tum
+Rows written: 97
+--------------------------------------------------------------------------------
+Loaded 12316 stamps and poses from: /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban23-highway/pose/urban23-highway/global_pose.tum
+Loaded 7 stamps and poses from: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban23-highway/vins_raw/vio.tum
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+[ERROR] found no matching timestamps between /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban23-highway/pose/urban23-highway/global_pose.tum and /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban23-highway/vins_raw/vio.tum with max. time diff 0.05 (s) and time offset 0.0 (s)
+--------------------------------------------------------------------------------
+Loaded 12316 stamps and poses from: /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban23-highway/pose/urban23-highway/global_pose.tum
+Loaded 7 stamps and poses from: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban23-highway/vins_raw/vio.tum
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+[ERROR] found no matching timestamps between /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban23-highway/pose/urban23-highway/global_pose.tum and /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban23-highway/vins_raw/vio.tum with max. time diff 0.05 (s) and time offset 0.0 (s)
+--------------------------------------------------------------------------------
+Loaded 12316 stamps and poses from: /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban23-highway/pose/urban23-highway/global_pose.tum
+Loaded 97 stamps and poses from: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban23-highway/vins_raw/vio_loop.tum
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 88 of max. 97 possible matching timestamps between...
+	/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban23-highway/pose/urban23-highway/global_pose.tum
+and:	/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban23-highway/vins_raw/vio_loop.tum
+..with max. time diff.: 0.05 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.92329723 -0.13368276 -0.36007102]
+ [ 0.30435689 -0.82648841 -0.4735861 ]
+ [-0.23428423 -0.54685083  0.80378173]]
+Translation of alignment:
+[ 3.37162400e+05  4.09191612e+06 -8.53218967e+02]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 88 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	522.848801
+      mean	266.101577
+    median	259.997074
+       min	55.381091
+      rmse	300.914361
+       sse	7968351.836308
+       std	140.496988
+
+--------------------------------------------------------------------------------
+Loaded 12316 stamps and poses from: /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban23-highway/pose/urban23-highway/global_pose.tum
+Loaded 97 stamps and poses from: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban23-highway/vins_raw/vio_loop.tum
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 88 of max. 97 possible matching timestamps between...
+	/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban23-highway/pose/urban23-highway/global_pose.tum
+and:	/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban23-highway/vins_raw/vio_loop.tum
+..with max. time diff.: 0.05 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.92329723 -0.13368276 -0.36007102]
+ [ 0.30435689 -0.82648841 -0.4735861 ]
+ [-0.23428423 -0.54685083  0.80378173]]
+Translation of alignment:
+[ 3.37162400e+05  4.09191612e+06 -8.53218967e+02]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Found 86 pairs with delta 10.0 (m) among 88 poses using consecutive pairs.
+Compared 86 relative pose pairs, delta = 10.0 (m) with consecutive pairs.
+Calculating RPE for translation part pose relation...
+--------------------------------------------------------------------------------
+RPE w.r.t. translation part (m)
+for delta = 10.0 (m) using consecutive pairs
+(with SE(3) Umeyama alignment)
+
+       max	21.764037
+      mean	17.633135
+    median	17.518504
+       min	16.632209
+      rmse	17.653301
+       sse	26800.957352
+       std	0.843559
+
+[OK] labels -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban23-highway/admission/labels/reliability_labels_vins.csv
+[OK] summary -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban23-highway/admission/labels/reliability_labels_summary.json
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban23-highway/admission/features/reliability_features_vins.csv",
+  "gt_path": "/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban23-highway/pose/urban23-highway/global_pose.tum",
+  "out_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban23-highway/admission/labels/reliability_labels_vins.csv",
+  "num_rows": 7,
+  "num_valid_labels": 7,
+  "class_counts": {
+    "harmful": 3,
+    "neutral": 4,
+    "helpful": 0,
+    "invalid": 0
+  },
+  "horizon_rows": 10,
+  "max_match_dt_sec": 0.02,
+  "pos_scale": 8.151086423188541,
+  "rot_scale": 14.357113909066374,
+  "outlier_scale": 0.09810930000000005,
+  "helpful_thr": 0.65,
+  "harmful_thr": 0.4,
+  "label_source": "future_gt_proxy_v2_aligned",
+  "note": "GT 先做時間 shift，再用第一個有效 matched pair rigid-align 到 VINS local frame。",
+  "feature_first_timestamp": 1544579343.101849,
+  "feature_last_timestamp": 1544579343.7016265,
+  "gt_first_timestamp_raw": 1544579343.905677,
+  "gt_last_timestamp_raw": 1544579469.5202305,
+  "auto_shift_estimate_from_first_timestamps": -0.8038280010223389,
+  "applied_gt_time_shift_sec": -0.8038280010223389,
+  "reference_feature_idx": 0,
+  "reference_gt_idx": 0,
+  "reference_match_dt_sec": 0.0,
+  "matched_dt_mean_sec": 0.002130542482648577,
+  "matched_dt_median_sec": 0.0022079944610595703,
+  "R_align_quat_xyzw": [
+    -0.2383133127026936,
+    0.229214746116398,
+    -0.7755627906029522,
+    0.5377450352942598
+  ],
+  "p_align_xyz": [
+    -2864987.458556023,
+    1613375.469964387,
+    2464266.687870075
+  ]
+}
+Traceback (most recent call last):
+  File "/home/ivlab3/Lucas_ws/Visual/keyframe_pipeline/build_vins_reliability_dataset.py", line 557, in <module>
+    main()
+  File "/home/ivlab3/Lucas_ws/Visual/keyframe_pipeline/build_vins_reliability_dataset.py", line 553, in main
+    builder.run()
+  File "/home/ivlab3/Lucas_ws/Visual/keyframe_pipeline/build_vins_reliability_dataset.py", line 455, in run
+    raise RuntimeError(f'有效列數太少，至少需要 {self.min_rows} 列，目前只有 {len(merged)} 列')
+RuntimeError: 有效列數太少，至少需要 32 列，目前只有 7 列
+[FAIL] urban23-highway 執行失敗
+[SYS] 釋放系統記憶體...
+
+>>> [START] urban24-highway (fog) <<<
+------------------------------------------------------------
+>>> [FOG] 執行序列: urban24-highway <<<
+------------------------------------------------------------
+[INFO] 播放完成，正在儲存資料...

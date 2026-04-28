@@ -1,0 +1,48 @@
+============================================================
+[BATCH START]
+MODE                : fog
+PLAYER_TEMPLATE     : /home/ivlab3/vins_ws/src/kaist_player/config/urban28_pankyo_fog.yaml
+VINS_IMU_NOISE_MODE : fog_xsens
+============================================================
+
+>>> [START] urban18-highway
+    MODE                : fog
+    VINS_IMU_NOISE_MODE : fog_xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban18-highway
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban18-highway/pose/urban18-highway/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = fog
+[INFO] PLAYER_IMU_SOURCE        = fog_xsens
+[INFO] VINS_IMU_NOISE_MODE      = fog_xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban18-highway/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_fog_fog_xsens_urban18-highway.yaml
+------------------------------------------------------------
+>>> 執行序列: urban18-highway
+    CONFIG_MODE         : fog
+    PLAYER_IMU_SOURCE   : fog_xsens
+    VINS_IMU_NOISE_MODE : fog_xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban18-highway
+------------------------------------------------------------
+[FAIL] urban18-highway 執行失敗 (fog, fog_xsens)
+
+>>> [START] urban19-highway
+    MODE                : fog
+    VINS_IMU_NOISE_MODE : fog_xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban19-highway
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban19-highway/pose/urban19-highway/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = fog
+[INFO] PLAYER_IMU_SOURCE        = fog_xsens
+[INFO] VINS_IMU_NOISE_MODE      = fog_xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban19-highway/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_fog_fog_xsens_urban19-highway.yaml
+------------------------------------------------------------
+>>> 執行序列: urban19-highway
+    CONFIG_MODE         : fog
+    PLAYER_IMU_SOURCE   : fog_xsens
+    VINS_IMU_NOISE_MODE : fog_xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban19-highway
+------------------------------------------------------------
+[FAIL] urban19-highway 執行失敗 (fog, fog_xsens)

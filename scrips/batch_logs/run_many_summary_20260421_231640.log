@@ -1,0 +1,39 @@
+============================================================
+[BATCH] 開始執行全部 KAIST 序列
+============================================================
+
+>>> [START] urban22-highway <<<
+[WARN] 找不到 /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban22-highway/pose/urban22-highway/global_pose.tum，正在嘗試從 CSV 自動轉換...
+[INFO] 已拷貝轉檔腳本至 /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban22-highway/pose/urban22-highway
+[INFO] 開始執行轉檔...
+Saved: global_pose.tum
+------------------------------------------------------------
+[INFO] SEQ: urban22-highway
+[INFO] OUT: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway
+------------------------------------------------------------
+[INFO] Playback finished. Cooling down (15s)...
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/vins_raw/vio.tum
+Rows written: 0
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/vins_raw/vio_loop.tum
+Rows written: 0
+[METRIC] Running EVO...
+[INFO] Processing ML Pipeline...
+Traceback (most recent call last):
+  File "/home/ivlab3/Lucas_ws/Visual/keyframe_pipeline/build_vins_reliability_labels.py", line 503, in <module>
+    main()
+  File "/home/ivlab3/Lucas_ws/Visual/keyframe_pipeline/build_vins_reliability_labels.py", line 499, in main
+    builder.run()
+  File "/home/ivlab3/Lucas_ws/Visual/keyframe_pipeline/build_vins_reliability_labels.py", line 277, in run
+    raise RuntimeError(f'feature_csv 沒有有效資料: {self.feature_csv}')
+RuntimeError: feature_csv 沒有有效資料: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/admission/features/reliability_features_vins.csv
+[FAIL] urban22-highway 執行失敗
+
+>>> [START] urban23-highway <<<
+[WARN] 找不到 /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban23-highway/pose/urban23-highway/global_pose.tum，正在嘗試從 CSV 自動轉換...
+[INFO] 已拷貝轉檔腳本至 /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban23-highway/pose/urban23-highway
+[INFO] 開始執行轉檔...
+Saved: global_pose.tum
+------------------------------------------------------------
+[INFO] SEQ: urban23-highway
+[INFO] OUT: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban23-highway
+------------------------------------------------------------

@@ -1,0 +1,886 @@
+============================================================
+[BATCH START]
+MODE                : imu
+PLAYER_TEMPLATE     : /home/ivlab3/vins_ws/src/kaist_player/config/urban28_pankyo.yaml
+VINS_IMU_NOISE_MODE : xsens
+============================================================
+
+>>> [START] urban18-highway
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban18-highway
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban18-highway/pose/urban18-highway/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban18-highway/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban18-highway.yaml
+------------------------------------------------------------
+>>> 執行序列: urban18-highway
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban18-highway
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-07-59-26-794489-ivlab3-680632
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [680637]
+[kaist_player_node-1] [ERROR] [1777334367.258273847] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban18-highway/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 680637, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban18-highway/logs/kaist_player_config.yaml --params-file /tmp/launch_params_o0il969k'].
+[INFO] cleanup...
+[FAIL] urban18-highway 執行失敗 (imu, xsens)
+
+>>> [START] urban19-highway
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban19-highway
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban19-highway/pose/urban19-highway/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban19-highway/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban19-highway.yaml
+------------------------------------------------------------
+>>> 執行序列: urban19-highway
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban19-highway
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-07-59-51-676439-ivlab3-681121
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [681126]
+[kaist_player_node-1] [ERROR] [1777334392.132212954] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban19-highway/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 681126, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban19-highway/logs/kaist_player_config.yaml --params-file /tmp/launch_params_v88feuco'].
+[INFO] cleanup...
+[FAIL] urban19-highway 執行失敗 (imu, xsens)
+
+>>> [START] urban20-highway
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban20-highway
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban20-highway/pose/urban20-highway/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban20-highway/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban20-highway.yaml
+------------------------------------------------------------
+>>> 執行序列: urban20-highway
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban20-highway
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-00-16-593437-ivlab3-681622
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [681627]
+[kaist_player_node-1] [ERROR] [1777334417.049167297] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban20-highway/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 681627, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban20-highway/logs/kaist_player_config.yaml --params-file /tmp/launch_params_uvag29qp'].
+[INFO] cleanup...
+[FAIL] urban20-highway 執行失敗 (imu, xsens)
+
+>>> [START] urban21-highway
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban21-highway
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban21-highway/pose/urban21-highway/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban21-highway/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban21-highway.yaml
+------------------------------------------------------------
+>>> 執行序列: urban21-highway
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban21-highway
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-00-41-383757-ivlab3-682113
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [682118]
+[kaist_player_node-1] [ERROR] [1777334441.833657979] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban21-highway/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 682118, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban21-highway/logs/kaist_player_config.yaml --params-file /tmp/launch_params_rrov0ac5'].
+[INFO] cleanup...
+[FAIL] urban21-highway 執行失敗 (imu, xsens)
+
+>>> [START] urban22-highway
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban22-highway
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban22-highway/pose/urban22-highway/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban22-highway/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban22-highway.yaml
+------------------------------------------------------------
+>>> 執行序列: urban22-highway
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban22-highway
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-01-06-234761-ivlab3-682611
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [682616]
+[kaist_player_node-1] [ERROR] [1777334466.695313083] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban22-highway/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 682616, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban22-highway/logs/kaist_player_config.yaml --params-file /tmp/launch_params_nwnqhdde'].
+[INFO] cleanup...
+[FAIL] urban22-highway 執行失敗 (imu, xsens)
+
+>>> [START] urban23-highway
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban23-highway
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban23-highway/pose/urban23-highway/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban23-highway/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban23-highway.yaml
+------------------------------------------------------------
+>>> 執行序列: urban23-highway
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban23-highway
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-01-31-155359-ivlab3-683101
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [683114]
+[kaist_player_node-1] [ERROR] [1777334491.604339591] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban23-highway/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 683114, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban23-highway/logs/kaist_player_config.yaml --params-file /tmp/launch_params_9qmwmx74'].
+[INFO] cleanup...
+[FAIL] urban23-highway 執行失敗 (imu, xsens)
+
+>>> [START] urban24-highway
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban24-highway
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban24-highway/pose/urban24-highway/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban24-highway/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban24-highway.yaml
+------------------------------------------------------------
+>>> 執行序列: urban24-highway
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban24-highway
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-01-55-998026-ivlab3-683587
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [683607]
+[kaist_player_node-1] [ERROR] [1777334516.461089126] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban24-highway/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 683607, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban24-highway/logs/kaist_player_config.yaml --params-file /tmp/launch_params_on1l5atg'].
+[INFO] cleanup...
+[FAIL] urban24-highway 執行失敗 (imu, xsens)
+
+>>> [START] urban25-highway
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban25-highway
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban25-highway/pose/urban25-highway/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban25-highway/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban25-highway.yaml
+------------------------------------------------------------
+>>> 執行序列: urban25-highway
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban25-highway
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-02-20-875729-ivlab3-684086
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [684092]
+[kaist_player_node-1] [ERROR] [1777334541.333728375] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban25-highway/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 684092, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban25-highway/logs/kaist_player_config.yaml --params-file /tmp/launch_params_smqpgq41'].
+[INFO] cleanup...
+[FAIL] urban25-highway 執行失敗 (imu, xsens)
+
+>>> [START] urban26-dongtan
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban26-dongtan
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban26-dongtan/pose/urban26-dongtan/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban26-dongtan/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban26-dongtan.yaml
+------------------------------------------------------------
+>>> 執行序列: urban26-dongtan
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban26-dongtan
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-02-45-777298-ivlab3-684582
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [684588]
+[kaist_player_node-1] [ERROR] [1777334566.236810328] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban26-dongtan/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 684588, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban26-dongtan/logs/kaist_player_config.yaml --params-file /tmp/launch_params_ff5bt5c9'].
+[INFO] cleanup...
+[FAIL] urban26-dongtan 執行失敗 (imu, xsens)
+
+>>> [START] urban27-dongtan
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban27-dongtan
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban27-dongtan/pose/urban27-dongtan/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban27-dongtan/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban27-dongtan.yaml
+------------------------------------------------------------
+>>> 執行序列: urban27-dongtan
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban27-dongtan
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-03-10-702653-ivlab3-685084
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [685089]
+[kaist_player_node-1] [ERROR] [1777334591.161630631] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban27-dongtan/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 685089, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban27-dongtan/logs/kaist_player_config.yaml --params-file /tmp/launch_params_481zami4'].
+[INFO] cleanup...
+[FAIL] urban27-dongtan 執行失敗 (imu, xsens)
+
+>>> [START] urban28-pankyo
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban28-pankyo
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban28-pankyo/pose/urban28-pankyo/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban28-pankyo/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban28-pankyo.yaml
+------------------------------------------------------------
+>>> 執行序列: urban28-pankyo
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban28-pankyo
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-03-35-606936-ivlab3-685571
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [685576]
+[kaist_player_node-1] [ERROR] [1777334616.057548479] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban28-pankyo/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 685576, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban28-pankyo/logs/kaist_player_config.yaml --params-file /tmp/launch_params_cgfa4u1a'].
+[INFO] cleanup...
+[FAIL] urban28-pankyo 執行失敗 (imu, xsens)
+
+>>> [START] urban29-pankyo
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban29-pankyo
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban29-pankyo/pose/urban29-pankyo/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban29-pankyo/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban29-pankyo.yaml
+------------------------------------------------------------
+>>> 執行序列: urban29-pankyo
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban29-pankyo
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-04-00-533604-ivlab3-686055
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [686061]
+[kaist_player_node-1] [ERROR] [1777334640.992265086] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban29-pankyo/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 686061, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban29-pankyo/logs/kaist_player_config.yaml --params-file /tmp/launch_params_70iahgz5'].
+[INFO] cleanup...
+[FAIL] urban29-pankyo 執行失敗 (imu, xsens)
+
+>>> [START] urban30-gangnam
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban30-gangnam
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban30-gangnam/pose/urban30-gangnam/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban30-gangnam/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban30-gangnam.yaml
+------------------------------------------------------------
+>>> 執行序列: urban30-gangnam
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban30-gangnam
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-04-25-451702-ivlab3-686555
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [686560]
+[kaist_player_node-1] [ERROR] [1777334665.906817483] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban30-gangnam/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 686560, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban30-gangnam/logs/kaist_player_config.yaml --params-file /tmp/launch_params_0g2udug9'].
+[INFO] cleanup...
+[FAIL] urban30-gangnam 執行失敗 (imu, xsens)
+
+>>> [START] urban31-gangnam
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban31-gangnam
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban31-gangnam/pose/urban31-gangnam/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban31-gangnam/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban31-gangnam.yaml
+------------------------------------------------------------
+>>> 執行序列: urban31-gangnam
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban31-gangnam
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-04-50-390556-ivlab3-687045
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [687050]
+[kaist_player_node-1] [ERROR] [1777334690.856783032] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban31-gangnam/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 687050, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban31-gangnam/logs/kaist_player_config.yaml --params-file /tmp/launch_params_lsvsftvx'].
+[INFO] cleanup...
+[FAIL] urban31-gangnam 執行失敗 (imu, xsens)
+
+>>> [START] urban32-yeouido
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban32-yeouido
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban32-yeouido/pose/urban32-yeouido/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban32-yeouido/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban32-yeouido.yaml
+------------------------------------------------------------
+>>> 執行序列: urban32-yeouido
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban32-yeouido
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-05-15-270816-ivlab3-687545
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [687550]
+[kaist_player_node-1] [ERROR] [1777334715.725705529] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban32-yeouido/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 687550, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban32-yeouido/logs/kaist_player_config.yaml --params-file /tmp/launch_params_wss6qlqv'].
+[INFO] cleanup...
+[FAIL] urban32-yeouido 執行失敗 (imu, xsens)
+
+>>> [START] urban33-yeouido
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban33-yeouido
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban33-yeouido/pose/urban33-yeouido/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban33-yeouido/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban33-yeouido.yaml
+------------------------------------------------------------
+>>> 執行序列: urban33-yeouido
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban33-yeouido
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-05-40-208033-ivlab3-688042
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [688047]
+[kaist_player_node-1] [ERROR] [1777334740.667359147] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban33-yeouido/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 688047, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban33-yeouido/logs/kaist_player_config.yaml --params-file /tmp/launch_params_6dqqk_kr'].
+[INFO] cleanup...
+[FAIL] urban33-yeouido 執行失敗 (imu, xsens)
+
+>>> [START] urban34-yeouido
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban34-yeouido
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban34-yeouido/pose/urban34-yeouido/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban34-yeouido/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban34-yeouido.yaml
+------------------------------------------------------------
+>>> 執行序列: urban34-yeouido
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban34-yeouido
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-06-05-102719-ivlab3-688518
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [688531]
+[kaist_player_node-1] [ERROR] [1777334765.563590584] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban34-yeouido/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 688531, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban34-yeouido/logs/kaist_player_config.yaml --params-file /tmp/launch_params_vsvy83ti'].
+[INFO] cleanup...
+[FAIL] urban34-yeouido 執行失敗 (imu, xsens)
+
+>>> [START] urban35-seoul
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban35-seoul
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban35-seoul/pose/urban35-seoul/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban35-seoul/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban35-seoul.yaml
+------------------------------------------------------------
+>>> 執行序列: urban35-seoul
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban35-seoul
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-06-29-966111-ivlab3-689010
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [689028]
+[kaist_player_node-1] [ERROR] [1777334790.422735905] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban35-seoul/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 689028, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban35-seoul/logs/kaist_player_config.yaml --params-file /tmp/launch_params_576z2dzh'].
+[INFO] cleanup...
+[FAIL] urban35-seoul 執行失敗 (imu, xsens)
+
+>>> [START] urban36-seoul
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban36-seoul
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban36-seoul/pose/urban36-seoul/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban36-seoul/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban36-seoul.yaml
+------------------------------------------------------------
+>>> 執行序列: urban36-seoul
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban36-seoul
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-06-54-787292-ivlab3-689499
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [689504]
+[kaist_player_node-1] [ERROR] [1777334815.251415894] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban36-seoul/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 689504, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban36-seoul/logs/kaist_player_config.yaml --params-file /tmp/launch_params_wz26gn3k'].
+[INFO] cleanup...
+[FAIL] urban36-seoul 執行失敗 (imu, xsens)
+
+>>> [START] urban37-seoul
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban37-seoul
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban37-seoul/pose/urban37-seoul/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban37-seoul/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban37-seoul.yaml
+------------------------------------------------------------
+>>> 執行序列: urban37-seoul
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban37-seoul
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-07-19-933345-ivlab3-690018
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [690023]
+[kaist_player_node-1] [ERROR] [1777334840.403985448] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban37-seoul/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 690023, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban37-seoul/logs/kaist_player_config.yaml --params-file /tmp/launch_params_qro5xbs4'].
+[INFO] cleanup...
+[FAIL] urban37-seoul 執行失敗 (imu, xsens)
+
+>>> [START] urban38-pankyo
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban38-pankyo
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban38-pankyo/pose/urban38-pankyo/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban38-pankyo/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban38-pankyo.yaml
+------------------------------------------------------------
+>>> 執行序列: urban38-pankyo
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban38-pankyo
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-07-44-920376-ivlab3-690519
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [690524]
+[kaist_player_node-1] [ERROR] [1777334865.384280354] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban38-pankyo/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 690524, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban38-pankyo/logs/kaist_player_config.yaml --params-file /tmp/launch_params_1z8kqk8o'].
+[INFO] cleanup...
+[FAIL] urban38-pankyo 執行失敗 (imu, xsens)
+
+>>> [START] urban39-pankyo
+    MODE                : imu
+    VINS_IMU_NOISE_MODE : xsens
+    SEQ_ROOT            : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban39-pankyo
+    GT_TUM              : /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban39-pankyo/pose/urban39-pankyo/global_pose.tum
+<<<
+[INFO] Generated configs
+[INFO] CONFIG_MODE              = imu
+[INFO] PLAYER_IMU_SOURCE        = xsens
+[INFO] VINS_IMU_NOISE_MODE      = xsens
+[INFO] TMP_PLAYER_CONFIG        = /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban39-pankyo/logs/kaist_player_config.yaml
+[INFO] TMP_VINS_CONFIG          = /home/ivlab3/vins_ws/src/VINS-Fusion-ROS2-jazzy/config/kaist/vins_config_tmp_imu_xsens_urban39-pankyo.yaml
+------------------------------------------------------------
+>>> 執行序列: urban39-pankyo
+    CONFIG_MODE         : imu
+    PLAYER_IMU_SOURCE   : xsens
+    VINS_IMU_NOISE_MODE : xsens
+    RESULT_ROOT         : /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban39-pankyo
+------------------------------------------------------------
+[ERROR] kaist_player died unexpectedly
+[INFO] [launch]: All log files can be found below /home/ivlab3/.ros/log/2026-04-28-08-08-09-875852-ivlab3-691008
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [kaist_player_node-1]: process started with pid [691013]
+[kaist_player_node-1] [ERROR] [1777334890.336551706] [rcl]: Failed to parse global arguments
+[kaist_player_node-1] Traceback (most recent call last):
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node", line 33, in <module>
+[kaist_player_node-1]     sys.exit(load_entry_point('kaist-player', 'console_scripts', 'kaist_player_node')())
+[kaist_player_node-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[kaist_player_node-1]   File "/home/ivlab3/vins_ws/build/kaist_player/kaist_player/kaist_player_node.py", line 1238, in main
+[kaist_player_node-1]     rclpy.init(args=args)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 88, in init
+[kaist_player_node-1]     context.init(args, domain_id=domain_id)
+[kaist_player_node-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 99, in init
+[kaist_player_node-1]     self.__context = _rclpy.Context(
+[kaist_player_node-1]                      ^^^^^^^^^^^^^^^
+[kaist_player_node-1] rclpy._rclpy_pybind11.RCLError: failed to initialize rcl: Couldn't parse params file: '--params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban39-pankyo/logs/kaist_player_config.yaml'. Error: Cannot have a value before ros__parameters at line 28, at ./src/parse.c:800, at ./src/rcl/arguments.c:415
+[ERROR] [kaist_player_node-1]: process has died [pid 691013, exit code 1, cmd '/home/ivlab3/vins_ws/install/kaist_player/lib/kaist_player/kaist_player_node --ros-args -r __node:=kaist_player_node --params-file /mnt/sata4t/ivlab3_data/vins_project/results/kaist/imu/urban39-pankyo/logs/kaist_player_config.yaml --params-file /tmp/launch_params_za24slal'].
+[INFO] cleanup...
+[FAIL] urban39-pankyo 執行失敗 (imu, xsens)

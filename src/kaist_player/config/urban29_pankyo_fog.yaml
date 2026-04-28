@@ -31,3 +31,4 @@ kaist_player_node:
     playback_rate: 1.0
     loop: false
     timer_period_sec: 0.002
+    

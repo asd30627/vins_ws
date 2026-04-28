@@ -61,6 +61,8 @@ extern int NUM_OF_CAM;
 extern int STEREO;
 extern int USE_IMU;
 extern int MULTIPLE_THREAD;
+extern int SAVE_RELIABILITY_FEATURES;
+extern int RELIABILITY_LOG_EVERY_N;
 // pts_gt for debug purpose;
 extern map<int, Eigen::Vector3d> pts_gt;
 

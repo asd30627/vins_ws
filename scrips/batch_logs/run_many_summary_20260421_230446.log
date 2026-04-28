@@ -1,0 +1,30 @@
+============================================================
+[BATCH] 開始執行全部 KAIST 序列
+============================================================
+
+>>> [START] urban22-highway <<<
+[INFO] Running Sequence: urban22-highway
+[INFO] Playback finished. Flushing data...
+Input file not found: /home/ivlab3/vins_project/results/vins_eval_results/KAIST_urban22-highway/vio.csv
+[FAIL] urban22-highway 執行失敗
+
+>>> [START] urban23-highway <<<
+[INFO] Running Sequence: urban23-highway
+[INFO] Playback finished. Flushing data...
+Input file not found: /home/ivlab3/vins_project/results/vins_eval_results/KAIST_urban23-highway/vio.csv
+[FAIL] urban23-highway 執行失敗
+
+>>> [START] urban24-highway <<<
+[INFO] Running Sequence: urban24-highway
+[INFO] Playback finished. Flushing data...
+Input file not found: /home/ivlab3/vins_project/results/vins_eval_results/KAIST_urban24-highway/vio.csv
+[FAIL] urban24-highway 執行失敗
+
+>>> [START] urban25-highway <<<
+[INFO] Running Sequence: urban25-highway
+[INFO] Playback finished. Flushing data...
+Input file not found: /home/ivlab3/vins_project/results/vins_eval_results/KAIST_urban25-highway/vio.csv
+[FAIL] urban25-highway 執行失敗
+
+>>> [START] urban26-dongtan <<<
+[INFO] Running Sequence: urban26-dongtan

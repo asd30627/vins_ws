@@ -1,0 +1,14 @@
+============================================================
+[BATCH] 開始執行全部 KAIST 序列
+============================================================
+
+>>> [START] urban22-highway <<<
+>>> 正在執行: urban22-highway <<<
+[INFO] 等待 VINS 初始化 (5s)...
+[INFO] 播放完成，等待資料寫入 (20s)...
+[ERROR] urban22-highway 產生的 vio.csv 依然有問題！請檢查 /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/logs/vins.log
+[FAIL] urban22-highway 執行失敗
+
+>>> [START] urban23-highway <<<
+>>> 正在執行: urban23-highway <<<
+[INFO] 等待 VINS 初始化 (5s)...

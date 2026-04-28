@@ -1,0 +1,165 @@
+============================================================
+[BATCH] 開始執行全部 KAIST 序列
+============================================================
+
+>>> [START] urban22-highway <<<
+>>> 正在執行: urban22-highway <<<
+[DEBUG] 啟動 loop_fusion_node...
+[DEBUG] 啟動 vins_node...
+[INFO] 等待 VINS 初始化 (5s)...
+[DEBUG] 啟動 kaist_player...
+[INFO] 系統正常運行中，開始監控播放進度...
+[ERROR] 🚨 vins_node 播放中途崩潰！
+============== vins.log 錯誤摘要 ==============
+   -0.999977  0.000334627  -0.00680066
+-0.000230383    -0.999883   -0.0153234
+ 1.71239 0.247401 -0.11589
+ exitrinsic cam 1
+ -0.00680499   -0.0153215      0.99985
+   -0.999977  0.000334627  -0.00680066
+-0.000230383    -0.999883   -0.0153234
+  1.70916 -0.227737    -0.116
+set g       0       0 9.81007
+[INFO] [1776785618.961357079] []: reading paramerter of camera /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/logs/cam0_kaist.yaml
+[ERROR:0@0.015] global ./modules/core/src/persistence.cpp (505) open Can't open file: '/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/logs/cam0_kaist.yaml' in read mode
+[INFO] [1776785618.961370053] []: reading paramerter of camera /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/logs/cam1_kaist.yaml
+[ERROR:0@0.015] global ./modules/core/src/persistence.cpp (505) open Can't open file: '/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/logs/cam1_kaist.yaml' in read mode
+[INFO] [1776785618.961401418] []: reliability CSV logger ready: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/admission/features/reliability_features_vins.csv
+[INFO] [1776785618.961402831] []: run_id=run_20260421_233337 dataset=kaist sequence=urban22-highway
+[WARN] [1776785618.961404261] []: waiting for image and imu...
+[INFO] [1776785618.965199139] []: reset VINS result file: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban22-highway/vins_raw//vio.csv
+MULTIPLE_THREAD is 0
+n_pts size: 150
+[ros2run]: Segmentation fault
+===============================================
+[FAIL] urban22-highway 執行失敗
+
+>>> [START] urban23-highway <<<
+>>> 正在執行: urban23-highway <<<
+[DEBUG] 啟動 loop_fusion_node...
+[DEBUG] 啟動 vins_node...
+[INFO] 等待 VINS 初始化 (5s)...
+[ERROR] 🚨 VINS 啟動失敗或瞬間崩潰！
+============== vins.log 錯誤摘要 ==============
+   -0.999977  0.000334627  -0.00680066
+-0.000230383    -0.999883   -0.0153234
+ 1.71239 0.247401 -0.11589
+ exitrinsic cam 1
+ -0.00680499   -0.0153215      0.99985
+   -0.999977  0.000334627  -0.00680066
+-0.000230383    -0.999883   -0.0153234
+  1.70916 -0.227737    -0.116
+set g       0       0 9.81007
+[INFO] [1776785628.181569530] []: reading paramerter of camera /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban23-highway/logs/cam0_kaist.yaml
+[ERROR:0@0.014] global ./modules/core/src/persistence.cpp (505) open Can't open file: '/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban23-highway/logs/cam0_kaist.yaml' in read mode
+[INFO] [1776785628.181585454] []: reading paramerter of camera /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban23-highway/logs/cam1_kaist.yaml
+[ERROR:0@0.014] global ./modules/core/src/persistence.cpp (505) open Can't open file: '/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban23-highway/logs/cam1_kaist.yaml' in read mode
+[INFO] [1776785628.181619437] []: reliability CSV logger ready: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban23-highway/admission/features/reliability_features_vins.csv
+[INFO] [1776785628.181620848] []: run_id=run_20260421_233346 dataset=kaist sequence=urban23-highway
+[WARN] [1776785628.181622292] []: waiting for image and imu...
+[INFO] [1776785628.185226675] []: reset VINS result file: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban23-highway/vins_raw//vio.csv
+MULTIPLE_THREAD is 0
+n_pts size: 104
+[ros2run]: Segmentation fault
+===============================================
+[FAIL] urban23-highway 執行失敗
+
+>>> [START] urban24-highway <<<
+>>> 正在執行: urban24-highway <<<
+[DEBUG] 啟動 loop_fusion_node...
+[DEBUG] 啟動 vins_node...
+[INFO] 等待 VINS 初始化 (5s)...
+[DEBUG] 啟動 kaist_player...
+[INFO] 系統正常運行中，開始監控播放進度...
+[ERROR] 🚨 vins_node 播放中途崩潰！
+============== vins.log 錯誤摘要 ==============
+   -0.999977  0.000334627  -0.00680066
+-0.000230383    -0.999883   -0.0153234
+ 1.71239 0.247401 -0.11589
+ exitrinsic cam 1
+ -0.00680499   -0.0153215      0.99985
+   -0.999977  0.000334627  -0.00680066
+-0.000230383    -0.999883   -0.0153234
+  1.70916 -0.227737    -0.116
+set g       0       0 9.81007
+[INFO] [1776785634.403092866] []: reading paramerter of camera /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban24-highway/logs/cam0_kaist.yaml
+[ERROR:0@0.013] global ./modules/core/src/persistence.cpp (505) open Can't open file: '/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban24-highway/logs/cam0_kaist.yaml' in read mode
+[INFO] [1776785634.403106375] []: reading paramerter of camera /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban24-highway/logs/cam1_kaist.yaml
+[ERROR:0@0.013] global ./modules/core/src/persistence.cpp (505) open Can't open file: '/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban24-highway/logs/cam1_kaist.yaml' in read mode
+[INFO] [1776785634.403136240] []: reliability CSV logger ready: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban24-highway/admission/features/reliability_features_vins.csv
+[INFO] [1776785634.403137566] []: run_id=run_20260421_233353 dataset=kaist sequence=urban24-highway
+[WARN] [1776785634.403139052] []: waiting for image and imu...
+[INFO] [1776785634.406647209] []: reset VINS result file: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban24-highway/vins_raw//vio.csv
+MULTIPLE_THREAD is 0
+n_pts size: 149
+[ros2run]: Segmentation fault
+===============================================
+[FAIL] urban24-highway 執行失敗
+
+>>> [START] urban25-highway <<<
+>>> 正在執行: urban25-highway <<<
+[DEBUG] 啟動 loop_fusion_node...
+[DEBUG] 啟動 vins_node...
+[INFO] 等待 VINS 初始化 (5s)...
+[ERROR] 🚨 VINS 啟動失敗或瞬間崩潰！
+============== vins.log 錯誤摘要 ==============
+   -0.999977  0.000334627  -0.00680066
+-0.000230383    -0.999883   -0.0153234
+ 1.71239 0.247401 -0.11589
+ exitrinsic cam 1
+ -0.00680499   -0.0153215      0.99985
+   -0.999977  0.000334627  -0.00680066
+-0.000230383    -0.999883   -0.0153234
+  1.70916 -0.227737    -0.116
+set g       0       0 9.81007
+[INFO] [1776785643.620062868] []: reading paramerter of camera /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban25-highway/logs/cam0_kaist.yaml
+[ERROR:0@0.014] global ./modules/core/src/persistence.cpp (505) open Can't open file: '/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban25-highway/logs/cam0_kaist.yaml' in read mode
+[INFO] [1776785643.620077032] []: reading paramerter of camera /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban25-highway/logs/cam1_kaist.yaml
+[ERROR:0@0.015] global ./modules/core/src/persistence.cpp (505) open Can't open file: '/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban25-highway/logs/cam1_kaist.yaml' in read mode
+[INFO] [1776785643.620112423] []: reliability CSV logger ready: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban25-highway/admission/features/reliability_features_vins.csv
+[INFO] [1776785643.620113864] []: run_id=run_20260421_233402 dataset=kaist sequence=urban25-highway
+[WARN] [1776785643.620115318] []: waiting for image and imu...
+[INFO] [1776785643.623731700] []: reset VINS result file: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban25-highway/vins_raw//vio.csv
+MULTIPLE_THREAD is 0
+n_pts size: 150
+[ros2run]: Segmentation fault
+===============================================
+[FAIL] urban25-highway 執行失敗
+
+>>> [START] urban26-dongtan <<<
+>>> 正在執行: urban26-dongtan <<<
+[DEBUG] 啟動 loop_fusion_node...
+[DEBUG] 啟動 vins_node...
+[INFO] 等待 VINS 初始化 (5s)...
+[DEBUG] 啟動 kaist_player...
+[INFO] 系統正常運行中，開始監控播放進度...
+[ERROR] 🚨 vins_node 播放中途崩潰！
+============== vins.log 錯誤摘要 ==============
+   -0.999977  0.000334627  -0.00680066
+-0.000230383    -0.999883   -0.0153234
+ 1.71239 0.247401 -0.11589
+ exitrinsic cam 1
+ -0.00680499   -0.0153215      0.99985
+   -0.999977  0.000334627  -0.00680066
+-0.000230383    -0.999883   -0.0153234
+  1.70916 -0.227737    -0.116
+set g       0       0 9.81007
+[INFO] [1776785649.848034499] []: reading paramerter of camera /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/logs/cam0_kaist.yaml
+[ERROR:0@0.014] global ./modules/core/src/persistence.cpp (505) open Can't open file: '/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/logs/cam0_kaist.yaml' in read mode
+[INFO] [1776785649.848051630] []: reading paramerter of camera /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/logs/cam1_kaist.yaml
+[ERROR:0@0.014] global ./modules/core/src/persistence.cpp (505) open Can't open file: '/mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/logs/cam1_kaist.yaml' in read mode
+[INFO] [1776785649.848086676] []: reliability CSV logger ready: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/admission/features/reliability_features_vins.csv
+[INFO] [1776785649.848088087] []: run_id=run_20260421_233408 dataset=kaist sequence=urban26-dongtan
+[WARN] [1776785649.848089626] []: waiting for image and imu...
+[INFO] [1776785649.851687714] []: reset VINS result file: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/urban26-dongtan/vins_raw//vio.csv
+MULTIPLE_THREAD is 0
+n_pts size: 150
+[ros2run]: Segmentation fault
+===============================================
+[FAIL] urban26-dongtan 執行失敗
+
+>>> [START] urban27-dongtan <<<
+>>> 正在執行: urban27-dongtan <<<
+[DEBUG] 啟動 loop_fusion_node...
+[DEBUG] 啟動 vins_node...
+[INFO] 等待 VINS 初始化 (5s)...

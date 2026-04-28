@@ -1,0 +1,306 @@
+============================================================
+[BATCH START] 模式: FOG
+============================================================
+>>> [START] urban28-pankyo (fog) <<<
+------------------------------------------------------------
+>>> [FOG] 執行序列: urban28-pankyo <<<
+------------------------------------------------------------
+[INFO] 播放完成，正在儲存資料...
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/vins_raw/vio.tum
+Rows written: 2157
+Saved: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/vins_raw/vio_loop.tum
+Rows written: 612
+--------------------------------------------------------------------------------
+Loaded 136903 stamps and poses from: /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban28-pankyo/pose/urban28-pankyo/global_pose.tum
+Loaded 2157 stamps and poses from: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/vins_raw/vio.tum
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1515 of max. 2157 possible matching timestamps between...
+	/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban28-pankyo/pose/urban28-pankyo/global_pose.tum
+and:	/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/vins_raw/vio.tum
+..with max. time diff.: 0.05 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.02695621 -0.99888782  0.03868443]
+ [ 0.99956563 -0.02647291  0.01295165]
+ [-0.01191315  0.03901675  0.99916754]]
+Translation of alignment:
+[3.32539686e+05 4.14073354e+06 1.08425632e+01]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 1515 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	399.664750
+      mean	104.375877
+    median	103.773415
+       min	42.093431
+      rmse	111.315922
+       sse	18772720.417363
+       std	38.689932
+
+--------------------------------------------------------------------------------
+Loaded 136903 stamps and poses from: /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban28-pankyo/pose/urban28-pankyo/global_pose.tum
+Loaded 2157 stamps and poses from: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/vins_raw/vio.tum
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1515 of max. 2157 possible matching timestamps between...
+	/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban28-pankyo/pose/urban28-pankyo/global_pose.tum
+and:	/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/vins_raw/vio.tum
+..with max. time diff.: 0.05 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.02695621 -0.99888782  0.03868443]
+ [ 0.99956563 -0.02647291  0.01295165]
+ [-0.01191315  0.03901675  0.99916754]]
+Translation of alignment:
+[3.32539686e+05 4.14073354e+06 1.08425632e+01]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Found 193 pairs with delta 10.0 (m) among 1515 poses using consecutive pairs.
+Compared 193 relative pose pairs, delta = 10.0 (m) with consecutive pairs.
+Calculating RPE for translation part pose relation...
+--------------------------------------------------------------------------------
+RPE w.r.t. translation part (m)
+for delta = 10.0 (m) using consecutive pairs
+(with SE(3) Umeyama alignment)
+
+       max	422.101967
+      mean	7.158889
+    median	3.294500
+       min	0.568111
+      rmse	31.530389
+       sse	191873.933527
+       std	30.706934
+
+--------------------------------------------------------------------------------
+Loaded 136903 stamps and poses from: /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban28-pankyo/pose/urban28-pankyo/global_pose.tum
+Loaded 612 stamps and poses from: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/vins_raw/vio_loop.tum
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 557 of max. 612 possible matching timestamps between...
+	/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban28-pankyo/pose/urban28-pankyo/global_pose.tum
+and:	/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/vins_raw/vio_loop.tum
+..with max. time diff.: 0.05 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.02480351 -0.99891995  0.0392901 ]
+ [ 0.99962832 -0.02433794  0.01228396]
+ [-0.01131445  0.03958018  0.99915234]]
+Translation of alignment:
+[3.32537967e+05 4.14073379e+06 1.04407812e+01]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 557 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	387.025459
+      mean	103.850506
+    median	103.626959
+       min	42.748653
+      rmse	112.137698
+       sse	7004198.896052
+       std	42.307631
+
+--------------------------------------------------------------------------------
+Loaded 136903 stamps and poses from: /mnt/sata4t/datasets/kaist_complex_urban/extracted/urban28-pankyo/pose/urban28-pankyo/global_pose.tum
+Loaded 612 stamps and poses from: /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/vins_raw/vio_loop.tum
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 557 of max. 612 possible matching timestamps between...
+	/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban28-pankyo/pose/urban28-pankyo/global_pose.tum
+and:	/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/vins_raw/vio_loop.tum
+..with max. time diff.: 0.05 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.02480351 -0.99891995  0.0392901 ]
+ [ 0.99962832 -0.02433794  0.01228396]
+ [-0.01131445  0.03958018  0.99915234]]
+Translation of alignment:
+[3.32537967e+05 4.14073379e+06 1.04407812e+01]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Found 162 pairs with delta 10.0 (m) among 557 poses using consecutive pairs.
+Compared 162 relative pose pairs, delta = 10.0 (m) with consecutive pairs.
+Calculating RPE for translation part pose relation...
+--------------------------------------------------------------------------------
+RPE w.r.t. translation part (m)
+for delta = 10.0 (m) using consecutive pairs
+(with SE(3) Umeyama alignment)
+
+       max	418.423809
+      mean	7.676867
+    median	3.801982
+       min	0.862847
+      rmse	33.852049
+       sse	185645.714753
+       std	32.970091
+
+[OK] labels -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/admission/labels/reliability_labels_vins.csv
+[OK] summary -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/admission/labels/reliability_labels_summary.json
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/admission/features/reliability_features_vins.csv",
+  "gt_path": "/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban28-pankyo/pose/urban28-pankyo/global_pose.tum",
+  "out_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/admission/labels/reliability_labels_vins.csv",
+  "num_rows": 2157,
+  "num_valid_labels": 1583,
+  "class_counts": {
+    "harmful": 182,
+    "neutral": 912,
+    "helpful": 489,
+    "invalid": 574
+  },
+  "horizon_rows": 10,
+  "max_match_dt_sec": 0.02,
+  "pos_scale": 252.69564108392646,
+  "rot_scale": 39.5604506657658,
+  "outlier_scale": 0.05,
+  "helpful_thr": 0.65,
+  "harmful_thr": 0.4,
+  "label_source": "future_gt_proxy_v2_aligned",
+  "note": "GT 先做時間 shift，再用第一個有效 matched pair rigid-align 到 VINS local frame。",
+  "feature_first_timestamp": 1544590800.999828,
+  "feature_last_timestamp": 1544591232.2071614,
+  "gt_first_timestamp_raw": 1544590814.5035336,
+  "gt_last_timestamp_raw": 1544592773.1618855,
+  "auto_shift_estimate_from_first_timestamps": -13.503705501556396,
+  "applied_gt_time_shift_sec": -13.503705501556396,
+  "reference_feature_idx": 0,
+  "reference_gt_idx": 0,
+  "reference_match_dt_sec": 0.0,
+  "matched_dt_mean_sec": 0.002582812872458631,
+  "matched_dt_median_sec": 0.0025714635848999023,
+  "R_align_quat_xyzw": [
+    -0.0015144951483692273,
+    0.0020066664420178033,
+    -0.7049902033440195,
+    0.7092125864528873
+  ],
+  "p_align_xyz": [
+    -4142477.337013515,
+    307721.2946567011,
+    20828.550101926117
+  ]
+}
+[OK] dataset -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/admission/datasets
+[OK] train -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/admission/datasets/train.npz
+[OK] val   -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/admission/datasets/val.npz
+[OK] test  -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/admission/datasets/test.npz
+[OK] stats -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/admission/datasets/dataset_stats.json
+[OK] feature_table_for_infer -> /mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/admission/datasets/feature_table_vins.csv
+{
+  "feature_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/admission/features/reliability_features_vins.csv",
+  "label_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/admission/labels/reliability_labels_vins.csv",
+  "feature_table_csv": "/mnt/sata4t/ivlab3_data/vins_project/results/kaist/fog/urban28-pankyo/admission/datasets/feature_table_vins.csv",
+  "feature_names": [
+    "current_is_keyframe",
+    "feature_tracker_time_ms",
+    "tracked_feature_count_raw",
+    "tracked_feature_count_mgr",
+    "mean_track_vel_px",
+    "median_track_vel_px",
+    "coverage_4x4",
+    "img_dt_sec",
+    "imu_sample_count",
+    "acc_norm_mean",
+    "gyr_norm_mean",
+    "avg_track_length"
+  ],
+  "fill_values": {
+    "current_is_keyframe": 1.0,
+    "feature_tracker_time_ms": 9.755666732788086,
+    "tracked_feature_count_raw": 150.0,
+    "tracked_feature_count_mgr": 96.0,
+    "mean_track_vel_px": 0.07068850100040436,
+    "median_track_vel_px": 0.029078999534249306,
+    "coverage_4x4": 0.9375,
+    "img_dt_sec": 0.0,
+    "imu_sample_count": 21.0,
+    "acc_norm_mean": 9.842632293701172,
+    "gyr_norm_mean": 0.0318555012345314,
+    "avg_track_length": 2.494457483291626
+  },
+  "mean": [
+    0.5234375,
+    9.096982955932617,
+    150.0,
+    97.783203125,
+    0.07290085405111313,
+    0.04307180270552635,
+    0.91162109375,
+    0.0031358611304312944,
+    21.001953125,
+    9.896038055419922,
+    0.04556378722190857,
+    3.0384609699249268
+  ],
+  "std": [
+    0.4994503855705261,
+    2.456083297729492,
+    1.0,
+    23.650936126708984,
+    0.06185736507177353,
+    0.06166358292102814,
+    0.0669906958937645,
+    0.024890391156077385,
+    0.20251372456550598,
+    0.31706926226615906,
+    0.059620704501867294,
+    1.9503051042556763
+  ],
+  "seq_len": 8,
+  "num_feature_rows_raw": 2157,
+  "num_rows_after_merge": 1583,
+  "num_dropped_invalid_labels": 574,
+  "num_train_rows": 512,
+  "num_val_rows": 512,
+  "num_test_rows": 559,
+  "num_train_seq": 505,
+  "num_val_seq": 505,
+  "num_test_seq": 545,
+  "num_train_blocks": 1,
+  "num_val_blocks": 1,
+  "num_test_blocks": 2,
+  "train_class_counts": [
+    81,
+    169,
+    262
+  ],
+  "val_class_counts": [
+    66,
+    233,
+    213
+  ],
+  "test_class_counts": [
+    35,
+    510,
+    14
+  ],
+  "class_map": {
+    "harmful": 0,
+    "neutral": 1,
+    "helpful": 2
+  },
+  "feature_source": "vins_native_features_v1",
+  "drop_invalid_labels": true,
+  "split_mode": "block_class_aware",
+  "block_size": 512,
+  "seed": 42,
+  "search_trials": 300
+}
+[SUCCESS] urban28-pankyo (fog) 完成
+[OK] urban28-pankyo 執行成功
+>>> [START] urban38-pankyo (fog) <<<
+------------------------------------------------------------
+>>> [FOG] 執行序列: urban38-pankyo <<<
+------------------------------------------------------------

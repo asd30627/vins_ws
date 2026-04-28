@@ -130,16 +130,26 @@ class Estimator
     void initFirstIMUPose(vector<pair<double, Eigen::Vector3d>> &accVector);
     
     // ===== reliability CSV logger helpers =====
+
     void setupReliabilityLogger();
+
     void computePendingFeatureStats(
         const map<int, vector<pair<int, Eigen::Matrix<double, 7, 1>>>> &featureFrame,
         double feature_tracker_time_ms,
+        double image_timestamp,
         int image_width,
         int image_height);
+
     void computePendingImuStats(
         const vector<pair<double, Eigen::Vector3d>> &accVector,
         const vector<pair<double, Eigen::Vector3d>> &gyrVector);
+
     double computeAverageTrackLength() const;
+
+    void computeManagerFeatureStats();
+
+    std::string inferFailureReasonProxy(bool failure_flag) const;
+
     void writeReliabilityFeatureRow(double header);
 
     enum SolverFlag
@@ -237,25 +247,66 @@ class Estimator
     bool initFirstPoseFlag;
     bool initThreadFlag;
     // ===== reliability CSV logger state =====
+
     ReliabilityCsvLogger reliability_feature_logger;
+
     bool reliability_logger_ready = false;
 
     std::string reliability_run_id = "run_001";
     std::string reliability_dataset_name = "kaist";
-    std::string reliability_sequence_name = "urban30-gangnam";
+    std::string reliability_sequence_name = "unknown_sequence";
+
     std::string reliability_feature_csv_path =
-    "/mnt/sata4t/datasets/kaist_complex_urban/extracted/urban29-pankyo/pose/urban29-pankyo/reliability_features_vins.csv";
+        "/tmp/reliability_features_vins.csv";
 
     long long reliability_update_id = 0;
+
     double reliability_prev_image_time = -1.0;
 
     double pending_feature_tracker_time_ms = 0.0;
+
     double pending_img_dt_sec = 0.0;
+
     double pending_mean_track_vel_px = 0.0;
     double pending_median_track_vel_px = 0.0;
+    double pending_min_track_vel_px = 0.0;
+    double pending_max_track_vel_px = 0.0;
+    double pending_std_track_vel_px = 0.0;
+    double pending_p90_track_vel_px = 0.0;
+
     double pending_coverage_4x4 = 0.0;
+    double pending_coverage_8x8 = 0.0;
+    int pending_occupied_cells_4x4 = 0;
+    int pending_occupied_cells_8x8 = 0;
+    double pending_entropy_4x4 = 0.0;
+    double pending_entropy_8x8 = 0.0;
 
     int pending_imu_sample_count = 0;
     double pending_acc_norm_mean = 0.0;
+    double pending_acc_norm_std = 0.0;
+    double pending_acc_norm_max = 0.0;
     double pending_gyr_norm_mean = 0.0;
+    double pending_gyr_norm_std = 0.0;
+    double pending_gyr_norm_max = 0.0;
+
+    double pending_track_len_min = 0.0;
+    double pending_track_len_max = 0.0;
+    double pending_track_len_std = 0.0;
+    double pending_track_len_p90 = 0.0;
+
+    int pending_good_depth_count = 0;
+    int pending_bad_depth_count = 0;
+    double pending_depth_mean = 0.0;
+    double pending_depth_min = 0.0;
+    double pending_depth_max = 0.0;
+    double pending_depth_std = 0.0;
+
+    bool reliability_has_prev_logged_pose = false;
+    Eigen::Vector3d reliability_prev_logged_P = Eigen::Vector3d::Zero();
+    Eigen::Quaterniond reliability_prev_logged_Q = Eigen::Quaterniond::Identity();
+
+    bool reliability_initial_extrinsic_ready = false;
+    Eigen::Matrix3d reliability_initial_ric[2];
+    Eigen::Vector3d reliability_initial_tic[2];
+    double reliability_initial_td = 0.0;
 };

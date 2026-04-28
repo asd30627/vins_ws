@@ -13,6 +13,7 @@
 #include "estimator.h"
 #include "../utility/visualization.h"
 
+#include <opencv2/imgproc.hpp>
 #include <algorithm>
 #include <cmath>
 #include <numeric>
@@ -21,58 +22,166 @@
 
 namespace
 {
-double medianOf(std::vector<double> v)
+
+double meanOf(const std::vector<double> &v)
 {
     if (v.empty())
         return 0.0;
 
-    std::sort(v.begin(), v.end());
-    const size_t n = v.size();
-    if (n % 2 == 1)
-        return v[n / 2];
-    return 0.5 * (v[n / 2 - 1] + v[n / 2]);
+    return std::accumulate(v.begin(), v.end(), 0.0) / static_cast<double>(v.size());
 }
 
-double computeCoverage4x4(
-    const map<int, vector<pair<int, Eigen::Matrix<double, 7, 1>>>> &featureFrame,
-    int image_width,
-    int image_height)
+double stdOf(const std::vector<double> &v)
 {
-    if (featureFrame.empty() || image_width <= 0 || image_height <= 0)
+    if (v.size() <= 1)
         return 0.0;
 
-    bool occupied[4][4] = {
-        {false, false, false, false},
-        {false, false, false, false},
-        {false, false, false, false},
-        {false, false, false, false}
-    };
+    const double m = meanOf(v);
+    double acc = 0.0;
+
+    for (double x : v)
+    {
+        const double d = x - m;
+        acc += d * d;
+    }
+
+    return std::sqrt(acc / static_cast<double>(v.size()));
+}
+
+double maxOf(const std::vector<double> &v)
+{
+    if (v.empty())
+        return 0.0;
+
+    return *std::max_element(v.begin(), v.end());
+}
+
+double percentileOf(std::vector<double> v, double p)
+{
+    if (v.empty())
+        return 0.0;
+
+    if (p < 0.0)
+        p = 0.0;
+    if (p > 1.0)
+        p = 1.0;
+
+    std::sort(v.begin(), v.end());
+
+    const double idx = p * static_cast<double>(v.size() - 1);
+    const size_t i0 = static_cast<size_t>(std::floor(idx));
+    const size_t i1 = static_cast<size_t>(std::ceil(idx));
+
+    if (i0 == i1)
+        return v[i0];
+
+    const double w = idx - static_cast<double>(i0);
+    return v[i0] * (1.0 - w) + v[i1] * w;
+}
+
+double medianOf(std::vector<double> v)
+{
+    return percentileOf(std::move(v), 0.5);
+}
+
+double rotationDistanceDeg(const Eigen::Matrix3d &Ra, const Eigen::Matrix3d &Rb)
+{
+    Eigen::Matrix3d dR = Ra.transpose() * Rb;
+    double c = (dR.trace() - 1.0) * 0.5;
+
+    if (c > 1.0)
+        c = 1.0;
+    if (c < -1.0)
+        c = -1.0;
+
+    return std::acos(c) * 180.0 / M_PI;
+}
+
+double quatDistanceDeg(const Eigen::Quaterniond &qa, const Eigen::Quaterniond &qb)
+{
+    Eigen::Quaterniond dq = qa.conjugate() * qb;
+    dq.normalize();
+
+    double w = std::abs(dq.w());
+
+    if (w > 1.0)
+        w = 1.0;
+    if (w < -1.0)
+        w = -1.0;
+
+    return 2.0 * std::acos(w) * 180.0 / M_PI;
+}
+
+struct GridStats
+{
+    double coverage = 0.0;
+    int occupied_cells = 0;
+    double entropy = 0.0;
+};
+
+GridStats computeGridStats(
+    const map<int, vector<pair<int, Eigen::Matrix<double, 7, 1>>>> &featureFrame,
+    int image_width,
+    int image_height,
+    int grid_size)
+{
+    GridStats stats;
+
+    if (featureFrame.empty() || image_width <= 0 || image_height <= 0 || grid_size <= 0)
+        return stats;
+
+    std::vector<int> counts(grid_size * grid_size, 0);
+    int total_obs = 0;
 
     for (const auto &kv : featureFrame)
     {
         for (const auto &obs_pair : kv.second)
         {
             const auto &obs = obs_pair.second;
-            const double p_u = obs(3);
-            const double p_v = obs(4);
 
-            int c = static_cast<int>((p_u / std::max(1, image_width)) * 4.0);
-            int r = static_cast<int>((p_v / std::max(1, image_height)) * 4.0);
+            const double u = obs(3);
+            const double v = obs(4);
 
-            c = std::max(0, std::min(3, c));
-            r = std::max(0, std::min(3, r));
-            occupied[r][c] = true;
+            int c = static_cast<int>((u / std::max(1, image_width)) * grid_size);
+            int r = static_cast<int>((v / std::max(1, image_height)) * grid_size);
+
+            c = std::max(0, std::min(grid_size - 1, c));
+            r = std::max(0, std::min(grid_size - 1, r));
+
+            counts[r * grid_size + c]++;
+            total_obs++;
         }
     }
 
-    int count = 0;
-    for (int r = 0; r < 4; ++r)
-        for (int c = 0; c < 4; ++c)
-            if (occupied[r][c])
-                ++count;
+    for (int n : counts)
+    {
+        if (n > 0)
+            stats.occupied_cells++;
+    }
 
-    return static_cast<double>(count) / 16.0;
+    const int total_cells = grid_size * grid_size;
+    stats.coverage = static_cast<double>(stats.occupied_cells) / static_cast<double>(total_cells);
+
+    if (total_obs > 0 && total_cells > 1)
+    {
+        double entropy = 0.0;
+
+        for (int n : counts)
+        {
+            if (n <= 0)
+                continue;
+
+            const double p = static_cast<double>(n) / static_cast<double>(total_obs);
+            entropy -= p * std::log(p);
+        }
+
+        entropy /= std::log(static_cast<double>(total_cells));
+        stats.entropy = entropy;
+    }
+
+    return stats;
 }
+
 } // namespace
 
 Estimator::Estimator(): f_manager{Rs}
@@ -171,15 +280,45 @@ void Estimator::clearState()
     resetVisualAdmissionState();
     pending_feature_tracker_time_ms = 0.0;
     pending_img_dt_sec = 0.0;
+
     pending_mean_track_vel_px = 0.0;
     pending_median_track_vel_px = 0.0;
+    pending_min_track_vel_px = 0.0;
+    pending_max_track_vel_px = 0.0;
+    pending_std_track_vel_px = 0.0;
+    pending_p90_track_vel_px = 0.0;
+
     pending_coverage_4x4 = 0.0;
+    pending_coverage_8x8 = 0.0;
+    pending_occupied_cells_4x4 = 0;
+    pending_occupied_cells_8x8 = 0;
+    pending_entropy_4x4 = 0.0;
+    pending_entropy_8x8 = 0.0;
 
     pending_imu_sample_count = 0;
     pending_acc_norm_mean = 0.0;
+    pending_acc_norm_std = 0.0;
+    pending_acc_norm_max = 0.0;
     pending_gyr_norm_mean = 0.0;
+    pending_gyr_norm_std = 0.0;
+    pending_gyr_norm_max = 0.0;
+
+    pending_track_len_min = 0.0;
+    pending_track_len_max = 0.0;
+    pending_track_len_std = 0.0;
+    pending_track_len_p90 = 0.0;
+
+    pending_good_depth_count = 0;
+    pending_bad_depth_count = 0;
+    pending_depth_mean = 0.0;
+    pending_depth_min = 0.0;
+    pending_depth_max = 0.0;
+    pending_depth_std = 0.0;
 
     reliability_prev_image_time = -1.0;
+    reliability_has_prev_logged_pose = false;
+    reliability_prev_logged_P.setZero();
+    reliability_prev_logged_Q = Eigen::Quaterniond::Identity();
 
     mProcess.unlock();
 }
@@ -318,6 +457,27 @@ void Estimator::setParameter()
         ric[i] = RIC[i];
         cout << " exitrinsic cam " << i << endl  << ric[i] << endl << tic[i].transpose() << endl;
     }
+    // ===== record initial extrinsic for this run =====
+    // 後面 CSV 會記錄「目前外參」相對「起始外參」漂了多少
+    if (!reliability_initial_extrinsic_ready)
+    {
+        for (int i = 0; i < 2; ++i)
+        {
+            reliability_initial_ric[i].setIdentity();
+            reliability_initial_tic[i].setZero();
+        }
+
+        for (int i = 0; i < NUM_OF_CAM && i < 2; ++i)
+        {
+            reliability_initial_ric[i] = ric[i];
+            reliability_initial_tic[i] = tic[i];
+        }
+
+        reliability_initial_td = td;
+        reliability_initial_extrinsic_ready = true;
+
+        ROS_WARN("[reliability] initial extrinsic snapshot saved.");
+    }
     f_manager.setRic(ric);
     ProjectionTwoFrameOneCamFactor::sqrt_info = FOCAL_LENGTH / 1.5 * Matrix2d::Identity();
     ProjectionTwoFrameTwoCamFactor::sqrt_info = FOCAL_LENGTH / 1.5 * Matrix2d::Identity();
@@ -405,7 +565,10 @@ void Estimator::inputImage(double t, const cv::Mat &_img, const cv::Mat &_img1)
         featureFrame = featureTracker.trackImage(t, _img, _img1);
 
     double tracker_ms = featureTrackerTime.toc();
-    computePendingFeatureStats(featureFrame, tracker_ms, _img.cols, _img.rows);
+    if (SAVE_RELIABILITY_FEATURES)
+    {
+        computePendingFeatureStats(featureFrame, tracker_ms, t, _img.cols, _img.rows);
+    }
     //printf("featureTracker time: %f\n", featureTrackerTime.toc());
 
     if (SHOW_TRACK)
@@ -545,11 +708,13 @@ void Estimator::processMeasurements()
             if(USE_IMU)
             {
                 getIMUInterval(prevTime, curTime, accVector, gyrVector);
-                computePendingImuStats(accVector, gyrVector);
+                if (SAVE_RELIABILITY_FEATURES)
+                    computePendingImuStats(accVector, gyrVector);
             }
             else
             {
-                computePendingImuStats(accVector, gyrVector);
+                if (SAVE_RELIABILITY_FEATURES)
+                    computePendingImuStats(accVector, gyrVector);
             }
 
             featureBuf.pop();
@@ -848,7 +1013,12 @@ void Estimator::processImage(const map<int, vector<pair<int, Eigen::Matrix<doubl
 
         // visual admission debug: post-optimization
         updateVisualDebugPost(removeIndex, failure_flag, solver_ms);
-        writeReliabilityFeatureRow(header);
+
+        if (SAVE_RELIABILITY_FEATURES)
+        {
+            computeManagerFeatureStats();
+            writeReliabilityFeatureRow(header);
+        }
         ROS_INFO("[admission-debug] raw=%d mgr=%d key=%d outlier=%d inlier=%d ratio=%.4f w=%.3f gate=%d alpha=%.3f fail=%d",
                  tracked_feature_count_raw,
                  tracked_feature_count_mgr,
@@ -1271,7 +1441,7 @@ bool Estimator::failureDetection()
         ROS_INFO(" little feature %d", f_manager.last_track_num);
         //return true;
     }
-    if (Bas[WINDOW_SIZE].norm() > 2.5)
+    if (Bas[WINDOW_SIZE].norm() > 3.5)
     {
         ROS_INFO(" big IMU acc bias estimation %f", Bas[WINDOW_SIZE].norm());
         return true;
@@ -1898,14 +2068,33 @@ void Estimator::outliersRejection(set<int> &removeIndex)
 
 void Estimator::setupReliabilityLogger()
 {
+    if (!SAVE_RELIABILITY_FEATURES)
+    {
+        reliability_logger_ready = false;
+        ROS_WARN("[reliability] save_reliability_features=0, CSV logging disabled.");
+        return;
+    }
+
     if (reliability_logger_ready)
         return;
 
     // ===== runtime env override =====
-    const char* env_run_id      = std::getenv("REL_RUN_ID");
-    const char* env_dataset     = std::getenv("REL_DATASET_NAME");
-    const char* env_sequence    = std::getenv("REL_SEQUENCE_NAME");
+    const char* env_run_id = std::getenv("REL_RUN_ID");
+    const char* env_dataset = std::getenv("REL_DATASET_NAME");
+    const char* env_sequence = std::getenv("REL_SEQUENCE_NAME");
     const char* env_feature_csv = std::getenv("REL_FEATURE_CSV_PATH");
+    const char* env_save_features = std::getenv("REL_SAVE_FEATURES");
+
+    if (env_save_features && std::string(env_save_features).size() > 0)
+    {
+        std::string v(env_save_features);
+        if (v == "0" || v == "false" || v == "False" || v == "OFF" || v == "off")
+        {
+            reliability_logger_ready = false;
+            ROS_WARN("[reliability] REL_SAVE_FEATURES=0, CSV logging disabled.");
+            return;
+        }
+    }
 
     if (env_run_id && std::string(env_run_id).size() > 0)
         reliability_run_id = std::string(env_run_id);
@@ -1923,6 +2112,7 @@ void Estimator::setupReliabilityLogger()
     {
         reliability_feature_logger.open(reliability_feature_csv_path);
         reliability_logger_ready = true;
+
         ROS_INFO("reliability CSV logger ready: %s", reliability_feature_csv_path.c_str());
         ROS_INFO("run_id=%s dataset=%s sequence=%s",
                  reliability_run_id.c_str(),
@@ -1939,6 +2129,7 @@ void Estimator::setupReliabilityLogger()
 void Estimator::computePendingFeatureStats(
     const map<int, vector<pair<int, Eigen::Matrix<double, 7, 1>>>> &featureFrame,
     double feature_tracker_time_ms,
+    double image_timestamp,
     int image_width,
     int image_height)
 {
@@ -1947,9 +2138,9 @@ void Estimator::computePendingFeatureStats(
     if (reliability_prev_image_time < 0.0)
         pending_img_dt_sec = 0.0;
     else
-        pending_img_dt_sec = std::max(0.0, curTime - reliability_prev_image_time);
+        pending_img_dt_sec = std::max(0.0, image_timestamp - reliability_prev_image_time);
 
-    reliability_prev_image_time = curTime;
+    reliability_prev_image_time = image_timestamp;
 
     std::vector<double> speeds;
     speeds.reserve(featureFrame.size());
@@ -1959,26 +2150,43 @@ void Estimator::computePendingFeatureStats(
         for (const auto &obs_pair : kv.second)
         {
             const auto &obs = obs_pair.second;
+
+            // obs(5), obs(6): feature tracker velocity x/y
             const double vx = obs(5);
             const double vy = obs(6);
             const double speed = std::sqrt(vx * vx + vy * vy);
-            speeds.push_back(speed);
+
+            if (std::isfinite(speed))
+                speeds.push_back(speed);
         }
     }
 
-    if (speeds.empty())
+    pending_mean_track_vel_px = meanOf(speeds);
+    pending_median_track_vel_px = medianOf(speeds);
+    pending_min_track_vel_px = 0.0;
+    pending_max_track_vel_px = 0.0;
+
+    if (!speeds.empty())
     {
-        pending_mean_track_vel_px = 0.0;
-        pending_median_track_vel_px = 0.0;
-    }
-    else
-    {
-        const double sum = std::accumulate(speeds.begin(), speeds.end(), 0.0);
-        pending_mean_track_vel_px = sum / static_cast<double>(speeds.size());
-        pending_median_track_vel_px = medianOf(speeds);
+        auto minmax_v = std::minmax_element(speeds.begin(), speeds.end());
+        pending_min_track_vel_px = *minmax_v.first;
+        pending_max_track_vel_px = *minmax_v.second;
     }
 
-    pending_coverage_4x4 = computeCoverage4x4(featureFrame, image_width, image_height);
+    pending_std_track_vel_px = stdOf(speeds);
+    pending_p90_track_vel_px = percentileOf(speeds, 0.90);
+
+    GridStats grid4 = computeGridStats(featureFrame, image_width, image_height, 4);
+    GridStats grid8 = computeGridStats(featureFrame, image_width, image_height, 8);
+
+    pending_coverage_4x4 = grid4.coverage;
+    pending_coverage_8x8 = grid8.coverage;
+
+    pending_occupied_cells_4x4 = grid4.occupied_cells;
+    pending_occupied_cells_8x8 = grid8.occupied_cells;
+
+    pending_entropy_4x4 = grid4.entropy;
+    pending_entropy_8x8 = grid8.entropy;
 }
 
 void Estimator::computePendingImuStats(
@@ -1987,24 +2195,33 @@ void Estimator::computePendingImuStats(
 {
     pending_imu_sample_count = static_cast<int>(std::min(accVector.size(), gyrVector.size()));
 
-    if (pending_imu_sample_count <= 0)
+    std::vector<double> acc_norms;
+    std::vector<double> gyr_norms;
+
+    acc_norms.reserve(accVector.size());
+    gyr_norms.reserve(gyrVector.size());
+
+    for (const auto &a : accVector)
     {
-        pending_acc_norm_mean = 0.0;
-        pending_gyr_norm_mean = 0.0;
-        return;
+        const double n = a.second.norm();
+        if (std::isfinite(n))
+            acc_norms.push_back(n);
     }
 
-    double acc_sum = 0.0;
-    double gyr_sum = 0.0;
-
-    for (int i = 0; i < pending_imu_sample_count; ++i)
+    for (const auto &g : gyrVector)
     {
-        acc_sum += accVector[i].second.norm();
-        gyr_sum += gyrVector[i].second.norm();
+        const double n = g.second.norm();
+        if (std::isfinite(n))
+            gyr_norms.push_back(n);
     }
 
-    pending_acc_norm_mean = acc_sum / static_cast<double>(pending_imu_sample_count);
-    pending_gyr_norm_mean = gyr_sum / static_cast<double>(pending_imu_sample_count);
+    pending_acc_norm_mean = meanOf(acc_norms);
+    pending_acc_norm_std = stdOf(acc_norms);
+    pending_acc_norm_max = maxOf(acc_norms);
+
+    pending_gyr_norm_mean = meanOf(gyr_norms);
+    pending_gyr_norm_std = stdOf(gyr_norms);
+    pending_gyr_norm_max = maxOf(gyr_norms);
 }
 
 double Estimator::computeAverageTrackLength() const
@@ -2027,32 +2244,156 @@ double Estimator::computeAverageTrackLength() const
     return sum_len / static_cast<double>(count);
 }
 
+void Estimator::computeManagerFeatureStats()
+{
+    std::vector<double> track_lengths;
+    std::vector<double> depths;
+
+    int good_depth_count = 0;
+    int bad_depth_count = 0;
+
+    for (const auto &it_per_id : f_manager.feature)
+    {
+        const double track_len = static_cast<double>(it_per_id.feature_per_frame.size());
+        track_lengths.push_back(track_len);
+
+        if (std::isfinite(it_per_id.estimated_depth) && it_per_id.estimated_depth > 0.0)
+        {
+            depths.push_back(it_per_id.estimated_depth);
+            good_depth_count++;
+        }
+        else
+        {
+            bad_depth_count++;
+        }
+    }
+
+    pending_track_len_min = 0.0;
+    pending_track_len_max = 0.0;
+
+    if (!track_lengths.empty())
+    {
+        auto minmax_track = std::minmax_element(track_lengths.begin(), track_lengths.end());
+        pending_track_len_min = *minmax_track.first;
+        pending_track_len_max = *minmax_track.second;
+    }
+
+    pending_track_len_std = stdOf(track_lengths);
+    pending_track_len_p90 = percentileOf(track_lengths, 0.90);
+
+    pending_good_depth_count = good_depth_count;
+    pending_bad_depth_count = bad_depth_count;
+
+    pending_depth_mean = meanOf(depths);
+    pending_depth_min = 0.0;
+    pending_depth_max = 0.0;
+
+    if (!depths.empty())
+    {
+        auto minmax_depth = std::minmax_element(depths.begin(), depths.end());
+        pending_depth_min = *minmax_depth.first;
+        pending_depth_max = *minmax_depth.second;
+    }
+
+    pending_depth_std = stdOf(depths);
+}
+
+std::string Estimator::inferFailureReasonProxy(bool failure_flag) const
+{
+    if (failure_flag)
+    {
+        if (tracked_feature_count_mgr < 20)
+            return "failure_detection_low_feature";
+
+        if (outlier_ratio_last > 0.60)
+            return "failure_detection_high_outlier";
+
+        if (solver_time_ms_last > SOLVER_TIME * 1000.0 * 2.0)
+            return "failure_detection_solver_slow";
+
+        if (Bas[WINDOW_SIZE].norm() > 5.0)
+            return "failure_detection_acc_bias_large";
+
+        if (Bgs[WINDOW_SIZE].norm() > 1.0)
+            return "failure_detection_gyr_bias_large";
+
+        return "failure_detection";
+    }
+
+    if (tracked_feature_count_raw > 0 && tracked_feature_count_raw < 20)
+        return "warning_low_raw_feature";
+
+    if (tracked_feature_count_mgr > 0 && tracked_feature_count_mgr < 20)
+        return "warning_low_manager_feature";
+
+    if (outlier_ratio_last > 0.60)
+        return "warning_high_outlier_ratio";
+
+    if (solver_time_ms_last > SOLVER_TIME * 1000.0 * 2.0)
+        return "warning_solver_slow";
+
+    return "none";
+}
+
 void Estimator::writeReliabilityFeatureRow(double header)
 {
+    if (!SAVE_RELIABILITY_FEATURES)
+        return;
+
+    const long long this_update_id = reliability_update_id++;
+
+    if (RELIABILITY_LOG_EVERY_N > 1 &&
+        (this_update_id % RELIABILITY_LOG_EVERY_N) != 0)
+    {
+        return;
+    }
+
+    if (!reliability_logger_ready)
+        setupReliabilityLogger();
+
     if (!reliability_logger_ready)
         return;
 
     ReliabilityCsvRow row;
+
+    row.schema_version = 2;
+
     row.run_id = reliability_run_id;
     row.dataset_name = reliability_dataset_name;
     row.sequence_name = reliability_sequence_name;
 
-    row.update_id = reliability_update_id++;
+    row.update_id = this_update_id;
     row.frame_count = frame_count;
     row.timestamp = header;
 
     row.solver_flag = (solver_flag == NON_LINEAR) ? "NON_LINEAR" : "INITIAL";
+
     row.use_imu = USE_IMU ? 1 : 0;
     row.stereo = STEREO ? 1 : 0;
     row.current_is_keyframe = current_is_keyframe ? 1 : 0;
+    row.estimate_extrinsic = ESTIMATE_EXTRINSIC;
+    row.estimate_td = ESTIMATE_TD;
+    row.td_current = td;
 
     row.feature_tracker_time_ms = pending_feature_tracker_time_ms;
+
     row.tracked_feature_count_raw = tracked_feature_count_raw;
     row.tracked_feature_count_mgr = tracked_feature_count_mgr;
 
     row.mean_track_vel_px = pending_mean_track_vel_px;
     row.median_track_vel_px = pending_median_track_vel_px;
+    row.min_track_vel_px = pending_min_track_vel_px;
+    row.max_track_vel_px = pending_max_track_vel_px;
+    row.std_track_vel_px = pending_std_track_vel_px;
+    row.p90_track_vel_px = pending_p90_track_vel_px;
+
     row.coverage_4x4 = pending_coverage_4x4;
+    row.coverage_8x8 = pending_coverage_8x8;
+    row.occupied_cells_4x4 = pending_occupied_cells_4x4;
+    row.occupied_cells_8x8 = pending_occupied_cells_8x8;
+    row.feature_entropy_4x4 = pending_entropy_4x4;
+    row.feature_entropy_8x8 = pending_entropy_8x8;
+
     row.img_dt_sec = pending_img_dt_sec;
 
     row.solver_time_ms_last = solver_time_ms_last;
@@ -2060,6 +2401,7 @@ void Estimator::writeReliabilityFeatureRow(double header)
     row.inlier_count_last = inlier_count_last;
     row.outlier_ratio_last = outlier_ratio_last;
     row.failure_detected_last = failure_detected_last ? 1 : 0;
+    row.failure_reason_proxy = inferFailureReasonProxy(failure_detected_last);
 
     Eigen::Quaterniond q(Rs[WINDOW_SIZE]);
     q.normalize();
@@ -2073,16 +2415,105 @@ void Estimator::writeReliabilityFeatureRow(double header)
     row.est_q_z = q.z();
     row.est_q_w = q.w();
 
+    row.vel_norm = Vs[WINDOW_SIZE].norm();
+    row.ba_norm = Bas[WINDOW_SIZE].norm();
+    row.bg_norm = Bgs[WINDOW_SIZE].norm();
+
+    row.delta_p_norm = 0.0;
+    row.delta_q_deg = 0.0;
+
+    if (reliability_has_prev_logged_pose)
+    {
+        row.delta_p_norm = (Ps[WINDOW_SIZE] - reliability_prev_logged_P).norm();
+        row.delta_q_deg = quatDistanceDeg(reliability_prev_logged_Q, q);
+    }
+
+    reliability_prev_logged_P = Ps[WINDOW_SIZE];
+    reliability_prev_logged_Q = q;
+    reliability_has_prev_logged_pose = true;
+
     row.visual_w_pred = visual_w_pred;
     row.visual_gate_pass = visual_gate_pass ? 1 : 0;
     row.visual_alpha = visual_alpha;
     row.visual_has_prediction = visual_has_prediction ? 1 : 0;
+    row.visual_soft_target_proxy = visual_soft_target_proxy;
 
     row.imu_sample_count = pending_imu_sample_count;
+
     row.acc_norm_mean = pending_acc_norm_mean;
+    row.acc_norm_std = pending_acc_norm_std;
+    row.acc_norm_max = pending_acc_norm_max;
+
     row.gyr_norm_mean = pending_gyr_norm_mean;
+    row.gyr_norm_std = pending_gyr_norm_std;
+    row.gyr_norm_max = pending_gyr_norm_max;
 
     row.avg_track_length = computeAverageTrackLength();
+
+    row.track_len_min = pending_track_len_min;
+    row.track_len_max = pending_track_len_max;
+    row.track_len_std = pending_track_len_std;
+    row.track_len_p90 = pending_track_len_p90;
+
+    row.good_depth_count = pending_good_depth_count;
+    row.bad_depth_count = pending_bad_depth_count;
+    row.depth_mean = pending_depth_mean;
+    row.depth_min = pending_depth_min;
+    row.depth_max = pending_depth_max;
+    row.depth_std = pending_depth_std;
+
+    // ===== extrinsic telemetry: cam0 =====
+    {
+        const int cam = 0;
+
+        Eigen::Quaterniond q_cam(ric[cam]);
+        q_cam.normalize();
+
+        row.cam0_tic_x = tic[cam].x();
+        row.cam0_tic_y = tic[cam].y();
+        row.cam0_tic_z = tic[cam].z();
+
+        row.cam0_q_x = q_cam.x();
+        row.cam0_q_y = q_cam.y();
+        row.cam0_q_z = q_cam.z();
+        row.cam0_q_w = q_cam.w();
+
+        if (reliability_initial_extrinsic_ready)
+        {
+            row.cam0_init_delta_t_norm =
+                (tic[cam] - reliability_initial_tic[cam]).norm();
+
+            row.cam0_init_delta_r_deg =
+                rotationDistanceDeg(reliability_initial_ric[cam], ric[cam]);
+        }
+    }
+
+    // ===== extrinsic telemetry: cam1 =====
+    if (NUM_OF_CAM > 1)
+    {
+        const int cam = 1;
+
+        Eigen::Quaterniond q_cam(ric[cam]);
+        q_cam.normalize();
+
+        row.cam1_tic_x = tic[cam].x();
+        row.cam1_tic_y = tic[cam].y();
+        row.cam1_tic_z = tic[cam].z();
+
+        row.cam1_q_x = q_cam.x();
+        row.cam1_q_y = q_cam.y();
+        row.cam1_q_z = q_cam.z();
+        row.cam1_q_w = q_cam.w();
+
+        if (reliability_initial_extrinsic_ready)
+        {
+            row.cam1_init_delta_t_norm =
+                (tic[cam] - reliability_initial_tic[cam]).norm();
+
+            row.cam1_init_delta_r_deg =
+                rotationDistanceDeg(reliability_initial_ric[cam], ric[cam]);
+        }
+    }
 
     reliability_feature_logger.append(row);
 }
