@@ -40,6 +40,7 @@
 #include "../featureTracker/feature_tracker.h"
 #include "reliability_logger.h"
 #include <string>
+#include <functional>
 
 #define ROS_INFO RCUTILS_LOG_INFO
 #define ROS_WARN RCUTILS_LOG_WARN
@@ -130,7 +131,7 @@ class Estimator
     void initFirstIMUPose(vector<pair<double, Eigen::Vector3d>> &accVector);
     
     // ===== reliability CSV logger helpers =====
-
+    
     void setupReliabilityLogger();
 
     void computePendingFeatureStats(
@@ -151,6 +152,13 @@ class Estimator
     std::string inferFailureReasonProxy(bool failure_flag) const;
 
     void writeReliabilityFeatureRow(double header);
+    
+    // ===== realtime reliability inference topic bridge =====
+    // 讓 rosNodeTest.cpp 設定一個 callback，Estimator 每次產生 feature 後可以把 JSON 丟出去
+    void setReliabilityFeatureJsonCallback(std::function<void(const std::string &)> cb);
+
+    // 把目前 estimator 內部的 reliability feature 組成 JSON string
+    std::string buildReliabilityFeatureJson(double header) const;
 
     enum SolverFlag
     {
@@ -259,6 +267,8 @@ class Estimator
     std::string reliability_feature_csv_path =
         "/tmp/reliability_features_vins.csv";
 
+
+    
     long long reliability_update_id = 0;
 
     double reliability_prev_image_time = -1.0;
@@ -309,4 +319,6 @@ class Estimator
     Eigen::Matrix3d reliability_initial_ric[2];
     Eigen::Vector3d reliability_initial_tic[2];
     double reliability_initial_td = 0.0;
+    // callback owned by rosNodeTest.cpp, used to publish /vins_admission/features_json
+    std::function<void(const std::string &)> reliability_feature_json_callback;
 };

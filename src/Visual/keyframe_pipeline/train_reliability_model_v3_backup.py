@@ -344,21 +344,21 @@ class ReliabilityModelTrainer:
         dataset_dir,
         out_dir="",
         model_type="gru",
-        epochs=40,
-        batch_size=64,
-        lr=3e-4,
-        weight_decay=1e-3,
+        epochs=80,
+        batch_size=32,
+        lr=1e-3,
+        weight_decay=1e-4,
         hidden_dim=64,
         num_layers=1,
-        dropout=0.30,
+        dropout=0.10,
         seed=42,
         device=None,
         lambda_reg=1.0,
-        lambda_cls=0.1,
-        lambda_fail=0.2,
+        lambda_cls=0.5,
+        lambda_fail=1.0,
         label_smoothing=0.0,
         grad_clip_norm=1.0,
-        patience=6,
+        patience=12,
         min_delta=1e-5,
         num_workers=0,
     ):
@@ -808,23 +808,23 @@ def parse_args():
     parser.add_argument("--out_dir", type=str, default="")
     parser.add_argument("--model_type", type=str, default="gru", choices=["mlp", "gru", "tcn"])
 
-    parser.add_argument("--epochs", type=int, default=40)
-    parser.add_argument("--batch_size", type=int, default=64)
-    parser.add_argument("--lr", type=float, default=3e-4)
-    parser.add_argument("--weight_decay", type=float, default=1e-3)
+    parser.add_argument("--epochs", type=int, default=80)
+    parser.add_argument("--batch_size", type=int, default=32)
+    parser.add_argument("--lr", type=float, default=1e-3)
+    parser.add_argument("--weight_decay", type=float, default=1e-4)
     parser.add_argument("--hidden_dim", type=int, default=64)
     parser.add_argument("--num_layers", type=int, default=1)
-    parser.add_argument("--dropout", type=float, default=0.30)
+    parser.add_argument("--dropout", type=float, default=0.10)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--device", type=str, default="")
 
     parser.add_argument("--lambda_reg", type=float, default=1.0)
-    parser.add_argument("--lambda_cls", type=float, default=0.1)
-    parser.add_argument("--lambda_fail", type=float, default=0.2)
+    parser.add_argument("--lambda_cls", type=float, default=0.5)
+    parser.add_argument("--lambda_fail", type=float, default=1.0)
     parser.add_argument("--label_smoothing", type=float, default=0.0)
     parser.add_argument("--grad_clip_norm", type=float, default=1.0)
 
-    parser.add_argument("--patience", type=int, default=6)
+    parser.add_argument("--patience", type=int, default=12)
     parser.add_argument("--min_delta", type=float, default=1e-5)
     parser.add_argument("--num_workers", type=int, default=0)
 

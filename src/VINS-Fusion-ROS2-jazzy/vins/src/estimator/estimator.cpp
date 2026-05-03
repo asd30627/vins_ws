@@ -19,6 +19,8 @@
 #include <numeric>
 #include <vector>
 #include <cstdlib>
+#include <sstream>
+#include <iomanip>
 
 namespace
 {
@@ -1017,6 +1019,15 @@ void Estimator::processImage(const map<int, vector<pair<int, Eigen::Matrix<doubl
         if (SAVE_RELIABILITY_FEATURES)
         {
             computeManagerFeatureStats();
+
+            // 先 publish JSON，再寫 CSV。
+            // 原因：writeReliabilityFeatureRow() 會更新 reliability_prev_logged_P/Q，
+            // 如果先寫 CSV 再 build JSON，delta_p_norm / delta_q_deg 可能會被重置成接近 0。
+            if (reliability_feature_json_callback)
+            {
+                reliability_feature_json_callback(buildReliabilityFeatureJson(header));
+            }
+
             writeReliabilityFeatureRow(header);
         }
         ROS_INFO("[admission-debug] raw=%d mgr=%d key=%d outlier=%d inlier=%d ratio=%.4f w=%.3f gate=%d alpha=%.3f fail=%d",
@@ -1040,7 +1051,29 @@ void Estimator::processImage(const map<int, vector<pair<int, Eigen::Matrix<doubl
             ROS_WARN("system reboot!");
             return;
         }
+        // if (failure_flag)
+        // {
+        //     ROS_WARN("[SOFT_FAILURE] failure detection! keep estimator running for data collection.");
+        //     failure_occur = 1;
 
+        //     // ============================================================
+        //     // SOFT FAILURE MODE for reliability feature collection
+        //     //
+        //     // 原本 VINS-Fusion 在 failureDetection() 後會：
+        //     //   clearState();
+        //     //   setParameter();
+        //     //   return;
+        //     //
+        //     // 這會導致 estimator reset，後面資料就不是同一段連續軌跡。
+        //     // 為了收集 failure 前後的 reliability feature，
+        //     // 這裡先不 reset，只在 CSV 裡保留 failure_detected_last = 1。
+        //     // ============================================================
+
+        //     // clearState();
+        //     // setParameter();
+        //     // ROS_WARN("system reboot!");
+        //     // return;
+        // }
         slideWindow();
         f_manager.removeFailures();
         // prepare output of VINS
@@ -1441,7 +1474,7 @@ bool Estimator::failureDetection()
         ROS_INFO(" little feature %d", f_manager.last_track_num);
         //return true;
     }
-    if (Bas[WINDOW_SIZE].norm() > 3.5)
+    if (Bas[WINDOW_SIZE].norm() > 2.5)
     {
         ROS_INFO(" big IMU acc bias estimation %f", Bas[WINDOW_SIZE].norm());
         return true;
@@ -2313,7 +2346,7 @@ std::string Estimator::inferFailureReasonProxy(bool failure_flag) const
 
         if (Bas[WINDOW_SIZE].norm() > 5.0)
             return "failure_detection_acc_bias_large";
-
+        
         if (Bgs[WINDOW_SIZE].norm() > 1.0)
             return "failure_detection_gyr_bias_large";
 
@@ -2333,6 +2366,103 @@ std::string Estimator::inferFailureReasonProxy(bool failure_flag) const
         return "warning_solver_slow";
 
     return "none";
+}
+
+void Estimator::setReliabilityFeatureJsonCallback(std::function<void(const std::string &)> cb)
+{
+    reliability_feature_json_callback = cb;
+}
+
+std::string Estimator::buildReliabilityFeatureJson(double header) const
+{
+    std::ostringstream ss;
+    ss << std::fixed << std::setprecision(9);
+
+    Eigen::Quaterniond q(Rs[WINDOW_SIZE]);
+    q.normalize();
+
+    double delta_p_norm = 0.0;
+    double delta_q_deg = 0.0;
+
+    if (reliability_has_prev_logged_pose)
+    {
+        delta_p_norm = (Ps[WINDOW_SIZE] - reliability_prev_logged_P).norm();
+        delta_q_deg = quatDistanceDeg(reliability_prev_logged_Q, q);
+    }
+
+    ss << "{";
+
+    // ===== identity / timing =====
+    ss << "\"timestamp\":" << header << ",";
+
+    // ===== estimator mode =====
+    ss << "\"current_is_keyframe\":" << (current_is_keyframe ? 1 : 0) << ",";
+    ss << "\"use_imu\":" << (USE_IMU ? 1 : 0) << ",";
+    ss << "\"stereo\":" << (STEREO ? 1 : 0) << ",";
+    ss << "\"estimate_extrinsic\":" << ESTIMATE_EXTRINSIC << ",";
+    ss << "\"estimate_td\":" << ESTIMATE_TD << ",";
+    ss << "\"td_current\":" << td << ",";
+
+    // ===== frontend / tracker quality =====
+    ss << "\"feature_tracker_time_ms\":" << pending_feature_tracker_time_ms << ",";
+    ss << "\"tracked_feature_count_raw\":" << tracked_feature_count_raw << ",";
+    ss << "\"tracked_feature_count_mgr\":" << tracked_feature_count_mgr << ",";
+
+    ss << "\"mean_track_vel_px\":" << pending_mean_track_vel_px << ",";
+    ss << "\"median_track_vel_px\":" << pending_median_track_vel_px << ",";
+    ss << "\"min_track_vel_px\":" << pending_min_track_vel_px << ",";
+    ss << "\"max_track_vel_px\":" << pending_max_track_vel_px << ",";
+    ss << "\"std_track_vel_px\":" << pending_std_track_vel_px << ",";
+    ss << "\"p90_track_vel_px\":" << pending_p90_track_vel_px << ",";
+
+    ss << "\"coverage_4x4\":" << pending_coverage_4x4 << ",";
+    ss << "\"coverage_8x8\":" << pending_coverage_8x8 << ",";
+    ss << "\"occupied_cells_4x4\":" << pending_occupied_cells_4x4 << ",";
+    ss << "\"occupied_cells_8x8\":" << pending_occupied_cells_8x8 << ",";
+    ss << "\"feature_entropy_4x4\":" << pending_entropy_4x4 << ",";
+    ss << "\"feature_entropy_8x8\":" << pending_entropy_8x8 << ",";
+
+    ss << "\"img_dt_sec\":" << pending_img_dt_sec << ",";
+
+    // ===== backend health =====
+    ss << "\"solver_time_ms_last\":" << solver_time_ms_last << ",";
+    ss << "\"outlier_count_last\":" << outlier_count_last << ",";
+    ss << "\"inlier_count_last\":" << inlier_count_last << ",";
+    ss << "\"outlier_ratio_last\":" << outlier_ratio_last << ",";
+
+    // ===== current state =====
+    ss << "\"vel_norm\":" << Vs[WINDOW_SIZE].norm() << ",";
+    ss << "\"ba_norm\":" << Bas[WINDOW_SIZE].norm() << ",";
+    ss << "\"bg_norm\":" << Bgs[WINDOW_SIZE].norm() << ",";
+    ss << "\"delta_p_norm\":" << delta_p_norm << ",";
+    ss << "\"delta_q_deg\":" << delta_q_deg << ",";
+
+    // ===== IMU statistics =====
+    ss << "\"imu_sample_count\":" << pending_imu_sample_count << ",";
+    ss << "\"acc_norm_mean\":" << pending_acc_norm_mean << ",";
+    ss << "\"acc_norm_std\":" << pending_acc_norm_std << ",";
+    ss << "\"acc_norm_max\":" << pending_acc_norm_max << ",";
+    ss << "\"gyr_norm_mean\":" << pending_gyr_norm_mean << ",";
+    ss << "\"gyr_norm_std\":" << pending_gyr_norm_std << ",";
+    ss << "\"gyr_norm_max\":" << pending_gyr_norm_max << ",";
+
+    // ===== FeatureManager / geometry statistics =====
+    ss << "\"avg_track_length\":" << computeAverageTrackLength() << ",";
+    ss << "\"track_len_min\":" << pending_track_len_min << ",";
+    ss << "\"track_len_max\":" << pending_track_len_max << ",";
+    ss << "\"track_len_std\":" << pending_track_len_std << ",";
+    ss << "\"track_len_p90\":" << pending_track_len_p90 << ",";
+
+    ss << "\"good_depth_count\":" << pending_good_depth_count << ",";
+    ss << "\"bad_depth_count\":" << pending_bad_depth_count << ",";
+    ss << "\"depth_mean\":" << pending_depth_mean << ",";
+    ss << "\"depth_min\":" << pending_depth_min << ",";
+    ss << "\"depth_max\":" << pending_depth_max << ",";
+    ss << "\"depth_std\":" << pending_depth_std;
+
+    ss << "}";
+
+    return ss.str();
 }
 
 void Estimator::writeReliabilityFeatureRow(double header)

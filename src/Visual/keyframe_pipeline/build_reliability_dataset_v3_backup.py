@@ -289,7 +289,6 @@ class ReliabilityDatasetBuilder:
         base_feature_names=None,
         auto_features=False,
         split_mode="chronological",
-        split_seed=42,
         require_label_cls=False,
         debug_csv_name="feature_label_debug.csv",
     ):
@@ -324,7 +323,6 @@ class ReliabilityDatasetBuilder:
         self.debug_csv_name = str(debug_csv_name)
         self.auto_features = bool(auto_features)
         self.split_mode = str(split_mode).strip().lower()
-        self.split_seed = int(split_seed)
 
         if base_feature_names is None:
             self.base_feature_names = list(DEFAULT_BASE_FEATURE_NAMES)
@@ -344,8 +342,8 @@ class ReliabilityDatasetBuilder:
         if self.seq_len < 1:
             raise ValueError("seq_len 必須 >= 1")
 
-        if self.split_mode not in ["chronological", "sequence", "sequence_stratified"]:
-            raise ValueError("split_mode 只支援 chronological / sequence / sequence_stratified")
+        if self.split_mode not in ["chronological", "sequence"]:
+            raise ValueError("split_mode 只支援 chronological / sequence")
 
         self.out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -586,133 +584,6 @@ class ReliabilityDatasetBuilder:
         self._validate_split_lengths(train_rows, val_rows, test_rows)
         return train_rows, val_rows, test_rows, purge_gap
 
-    def _group_key(self, r: Dict[str, object]):
-        return (r["dataset_name"], r["sequence_name"], r["run_id"])
-
-    def _summarize_group_rows(self, group_rows: List[Dict[str, object]]) -> Dict[str, object]:
-        y_cls = np.array([int(r.get("label_cls", -1)) for r in group_rows], dtype=np.int64)
-        y_fail = np.array([int(r.get("y_fail", -1)) for r in group_rows], dtype=np.int64)
-        fail_valid = (y_fail == 0) | (y_fail == 1)
-        return {
-            "total": int(len(group_rows)),
-            "fail": int(np.sum(y_fail == 1)),
-            "nonfail": int(np.sum(y_fail == 0)),
-            "fail_valid": int(np.sum(fail_valid)),
-            "harmful": int(np.sum(y_cls == 0)),
-            "neutral": int(np.sum(y_cls == 1)),
-            "helpful": int(np.sum(y_cls == 2)),
-        }
-
-    def _group_vector(self, group_rows: List[Dict[str, object]]) -> np.ndarray:
-        s = self._summarize_group_rows(group_rows)
-        return np.array([
-            s["total"],
-            s["fail"],
-            s["nonfail"],
-            s["harmful"],
-            s["neutral"],
-            s["helpful"],
-        ], dtype=np.float64)
-
-    def _stratified_group_split(self, groups: Dict[tuple, List[Dict[str, object]]]):
-        keys = list(groups.keys())
-        if len(keys) < 3:
-            raise ValueError("sequence_stratified split 至少需要 3 個 sequence/run；目前不足，請改用 chronological。")
-
-        group_vec = {k: self._group_vector(groups[k]) for k in keys}
-        global_vec = np.sum(np.stack([group_vec[k] for k in keys], axis=0), axis=0)
-        target_ratios = {
-            "train": float(self.train_ratio),
-            "val": float(self.val_ratio),
-            "test": float(self.test_ratio),
-        }
-        split_keys = {"train": [], "val": [], "test": []}
-        split_vec = {"train": np.zeros_like(global_vec), "val": np.zeros_like(global_vec), "test": np.zeros_like(global_vec)}
-
-        rng = np.random.default_rng(self.split_seed)
-        shuffled = list(keys)
-        rng.shuffle(shuffled)
-
-        def rarity_score(k):
-            v = group_vec[k]
-            total = max(float(v[0]), 1.0)
-            helpful_ratio = float(v[5]) / total
-            nonfail_ratio = float(v[2]) / total
-            neutral_ratio = float(v[4]) / total
-            return (float(v[0]), helpful_ratio + nonfail_ratio + 0.3 * neutral_ratio)
-
-        ordered = sorted(shuffled, key=rarity_score, reverse=True)
-
-        # 先確保每個 split 至少有一條 sequence。
-        mandatory_order = ["test", "val", "train"]
-        for split_name, k in zip(mandatory_order, ordered[:3]):
-            split_keys[split_name].append(k)
-            split_vec[split_name] += group_vec[k]
-
-        for k in ordered[3:]:
-            best_split = None
-            best_cost = None
-            for split_name in ["train", "val", "test"]:
-                cand_vecs = {name: split_vec[name].copy() for name in split_vec}
-                cand_vecs[split_name] += group_vec[k]
-
-                cost = 0.0
-                for name, ratio in target_ratios.items():
-                    target = global_vec * ratio
-                    denom = np.maximum(target, 1.0)
-                    diff = (cand_vecs[name] - target) / denom
-                    weights = np.array([2.0, 1.2, 1.2, 1.0, 1.4, 1.8], dtype=np.float64)
-                    cost += float(np.sum(weights * diff * diff))
-
-                # val/test 太大會讓評估比例失衡；給額外懲罰，但不是硬限制。
-                row_target = max(float(global_vec[0] * target_ratios[split_name]), 1.0)
-                row_after = float(cand_vecs[split_name][0])
-                if split_name in ["val", "test"] and row_after > 1.8 * row_target:
-                    cost += 10.0 * ((row_after / row_target) - 1.8) ** 2
-
-                if best_cost is None or cost < best_cost:
-                    best_cost = cost
-                    best_split = split_name
-
-            split_keys[best_split].append(k)
-            split_vec[best_split] += group_vec[k]
-
-        return split_keys, split_vec, global_vec
-
-    def _split_raw_rows_by_sequence_stratified(
-        self,
-        rows: List[Dict[str, object]],
-    ) -> Tuple[List[Dict[str, object]], List[Dict[str, object]], List[Dict[str, object]], int]:
-        groups = {}
-        for r in rows:
-            groups.setdefault(self._group_key(r), []).append(r)
-
-        split_keys, split_vec, _ = self._stratified_group_split(groups)
-        self._last_split_group_summary = {}
-        for split_name in ["train", "val", "test"]:
-            self._last_split_group_summary[split_name] = []
-            for k in sorted(split_keys[split_name]):
-                gsum = self._summarize_group_rows(groups[k])
-                self._last_split_group_summary[split_name].append({
-                    "dataset_name": k[0],
-                    "sequence_name": k[1],
-                    "run_id": k[2],
-                    **gsum,
-                })
-
-        train_rows = [r for k in split_keys["train"] for r in groups[k]]
-        val_rows = [r for k in split_keys["val"] for r in groups[k]]
-        test_rows = [r for k in split_keys["test"] for r in groups[k]]
-
-        sort_key = lambda x: (x["dataset_name"], x["sequence_name"], x["run_id"], x["timestamp"], x["update_id"], x["pair_id"])
-        train_rows.sort(key=sort_key)
-        val_rows.sort(key=sort_key)
-        test_rows.sort(key=sort_key)
-
-        purge_gap = self._infer_purge_gap(rows)
-        self._validate_split_lengths(train_rows, val_rows, test_rows)
-        return train_rows, val_rows, test_rows, purge_gap
-
     def _validate_split_lengths(self, train_rows, val_rows, test_rows):
         if len(train_rows) < self.seq_len:
             raise ValueError(f"train split 太短，len={len(train_rows)}，seq_len={self.seq_len}")
@@ -913,10 +784,7 @@ class ReliabilityDatasetBuilder:
                 f"請確認 label_csv 是否與 feature_csv 的 pair_id 對得上。"
             )
 
-        self._last_split_group_summary = {}
-        if self.split_mode == "sequence_stratified":
-            train_rows, val_rows, test_rows, purge_gap_used = self._split_raw_rows_by_sequence_stratified(merged_rows)
-        elif self.split_mode == "sequence":
+        if self.split_mode == "sequence":
             train_rows, val_rows, test_rows, purge_gap_used = self._split_raw_rows_by_sequence(merged_rows)
         else:
             train_rows, val_rows, test_rows, purge_gap_used = self._split_raw_rows_chronological(merged_rows)
@@ -953,7 +821,6 @@ class ReliabilityDatasetBuilder:
             "out_dir": str(self.out_dir),
             "seq_len": int(self.seq_len),
             "split_mode": self.split_mode,
-            "split_seed": int(self.split_seed),
             "train_ratio": float(self.train_ratio),
             "val_ratio": float(self.val_ratio),
             "test_ratio": float(self.test_ratio),
@@ -978,23 +845,6 @@ class ReliabilityDatasetBuilder:
                 "valid_fail_labels": int(np.sum((train_seq["y_fail"] == 0) | (train_seq["y_fail"] == 1))),
                 "fail": int(np.sum(train_seq["y_fail"] == 1)),
             },
-            "class_counts_val": {
-                CLASS_ID_TO_NAME.get(int(c), str(c)): int(np.sum(val_seq["y_cls"] == int(c)))
-                for c in [-1, 0, 1, 2]
-            },
-            "class_counts_test": {
-                CLASS_ID_TO_NAME.get(int(c), str(c)): int(np.sum(test_seq["y_cls"] == int(c)))
-                for c in [-1, 0, 1, 2]
-            },
-            "fail_counts_val": {
-                "valid_fail_labels": int(np.sum((val_seq["y_fail"] == 0) | (val_seq["y_fail"] == 1))),
-                "fail": int(np.sum(val_seq["y_fail"] == 1)),
-            },
-            "fail_counts_test": {
-                "valid_fail_labels": int(np.sum((test_seq["y_fail"] == 0) | (test_seq["y_fail"] == 1))),
-                "fail": int(np.sum(test_seq["y_fail"] == 1)),
-            },
-            "split_group_summary": getattr(self, "_last_split_group_summary", {}),
             "leakage_columns_excluded": sorted(list(LEAKAGE_OR_ID_COLUMNS)),
             "note": "mean/std/fill 只使用 train split；sequence 只在各 split 內建立。",
         }
@@ -1053,8 +903,7 @@ def parse_args():
 
     parser.add_argument("--auto_features", action="store_true", help="自動使用 numeric columns，但仍會排除 leakage columns。")
     parser.add_argument("--feature_names", type=str, default="", help="逗號分隔欄位，或 JSON 檔路徑。")
-    parser.add_argument("--split_mode", type=str, default="chronological", choices=["chronological", "sequence", "sequence_stratified"])
-    parser.add_argument("--split_seed", type=int, default=42)
+    parser.add_argument("--split_mode", type=str, default="chronological", choices=["chronological", "sequence"])
     parser.add_argument("--require_label_cls", action="store_true")
     return parser.parse_args()
 
@@ -1080,7 +929,6 @@ def main():
         base_feature_names=feature_names,
         auto_features=args.auto_features,
         split_mode=args.split_mode,
-        split_seed=args.split_seed,
         require_label_cls=args.require_label_cls,
     )
     builder.build()

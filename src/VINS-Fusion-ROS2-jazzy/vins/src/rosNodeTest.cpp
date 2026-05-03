@@ -18,6 +18,8 @@
 #include <thread>
 #include <mutex>
 #include <rclcpp/rclcpp.hpp>
+#include <std_msgs/msg/string.hpp>
+#include <std_msgs/msg/float64_multi_array.hpp>
 #include <cv_bridge/cv_bridge.hpp>
 #include <opencv2/opencv.hpp>
 #include "estimator/estimator.h"
@@ -25,6 +27,8 @@
 #include "utility/visualization.h"
 
 Estimator estimator;
+
+rclcpp::Publisher<std_msgs::msg::String>::SharedPtr pub_reliability_feature_json;
 
 queue<sensor_msgs::msg::Imu::ConstPtr> imu_buf;
 queue<sensor_msgs::msg::PointCloud::ConstPtr> feature_buf;
@@ -240,6 +244,56 @@ void cam_switch_callback(const std_msgs::msg::Bool::SharedPtr switch_msg)
     return;
 }
 
+void reliability_prediction_callback(const std_msgs::msg::Float64MultiArray::SharedPtr msg)
+{
+    // reliability_infer_node.py output:
+    // data[0] stamp_sec
+    // data[1] has_prediction
+    // data[2] w_pred
+    // data[3] p_fail
+    // data[4] p_harmful
+    // data[5] p_neutral
+    // data[6] p_helpful
+    // data[7] gate_pass
+    // data[8] mode_code
+    // data[9] visual_weight
+
+    if (msg->data.size() < 10)
+    {
+        ROS_WARN("[admission] prediction msg too short");
+        return;
+    }
+
+    const double has_prediction = msg->data[1];
+
+    if (has_prediction < 0.5)
+    {
+        estimator.clearVisualAdmissionPrediction();
+        return;
+    }
+
+    // 第一版只用 w_pred，不用 p_fail / class / gate_pass
+    double w_pred = msg->data[2];
+
+    // 保守 soft weight：最多降到 0.30，不直接關掉視覺
+    if (w_pred < 0.30)
+        w_pred = 0.30;
+    if (w_pred > 1.0)
+        w_pred = 1.0;
+
+    estimator.setVisualAdmissionPrediction(w_pred);
+
+    static int cnt = 0;
+    if ((cnt++ % 100) == 0)
+    {
+        ROS_WARN("[admission] received prediction: w=%.3f p_fail=%.3f p_harmful=%.3f alpha=%.3f",
+                 w_pred,
+                 msg->data[3],
+                 msg->data[4],
+                 estimator.visual_alpha);
+    }
+}
+
 int main(int argc, char **argv)
 {
     rclcpp::init(argc, argv);
@@ -261,12 +315,33 @@ int main(int argc, char **argv)
 
     auto n = rclcpp::Node::make_shared("vins_estimator", options);
 
+    // ===== realtime reliability feature publisher =====
+    // VINS 會把 estimator 內部的 reliability feature 發到這個 topic，
+    // reliability_infer_node.py 會訂閱它。
+    pub_reliability_feature_json =
+        n->create_publisher<std_msgs::msg::String>(
+            "/vins_admission/features_json",
+            rclcpp::QoS(rclcpp::KeepLast(100)));
+
     std::string config_file = nonros_args[1];
     printf("config_file: %s\n", config_file.c_str());
 
     readParameters(config_file);
     estimator.setParameter();
-    estimator.setVisualAdmissionConfig(false, Estimator::VISUAL_ALWAYS, 0.0);
+
+    estimator.setReliabilityFeatureJsonCallback(
+        [](const std::string &json_str)
+        {
+            if (!pub_reliability_feature_json)
+                return;
+
+            std_msgs::msg::String msg;
+            msg.data = json_str;
+            pub_reliability_feature_json->publish(msg);
+        });
+
+    // estimator.setVisualAdmissionConfig(false, Estimator::VISUAL_ALWAYS, 0.0);
+    estimator.setVisualAdmissionConfig(true, Estimator::SOFT_WEIGHT, 0.0);
 
 #ifdef EIGEN_DONT_PARALLELIZE
     ROS_DEBUG("EIGEN_DONT_PARALLELIZE");
@@ -316,7 +391,12 @@ int main(int argc, char **argv)
         "/vins_cam_switch",
         rclcpp::QoS(rclcpp::KeepLast(100)),
         cam_switch_callback);
-
+    
+    auto sub_reliability_prediction =
+        n->create_subscription<std_msgs::msg::Float64MultiArray>(
+            "/vins_admission/prediction",
+            rclcpp::QoS(rclcpp::KeepLast(100)),
+            reliability_prediction_callback);
     std::thread sync_thread{sync_process};
     rclcpp::spin(n);
 

@@ -412,12 +412,10 @@ class ReliabilityLabelBuilder:
         max_gt_time_gap: float = 0.05,
         trans_threshold_m: float = 0.50,
         rot_threshold_deg: float = 5.0,
-        trans_scale_m: float = 2.0,
-        rot_scale_deg: float = 10.0,
-        risk_mode: str = "log_exp",
-        rot_weight: float = 0.35,
-        helpful_thr: float = 0.65,
-        harmful_thr: float = 0.35,
+        trans_scale_m: float = 0.50,
+        rot_scale_deg: float = 5.0,
+        helpful_thr: float = 0.70,
+        harmful_thr: float = 0.40,
     ):
         self.sequence_dir = Path(sequence_dir).expanduser().resolve()
 
@@ -444,8 +442,6 @@ class ReliabilityLabelBuilder:
         self.rot_threshold_deg = float(rot_threshold_deg)
         self.trans_scale_m = float(trans_scale_m)
         self.rot_scale_deg = float(rot_scale_deg)
-        self.risk_mode = str(risk_mode).strip().lower()
-        self.rot_weight = float(rot_weight)
 
         self.helpful_thr = float(helpful_thr)
         self.harmful_thr = float(harmful_thr)
@@ -459,10 +455,6 @@ class ReliabilityLabelBuilder:
             raise ValueError("horizon_steps 必須 >= 1，或設定 horizon_seconds > 0")
         if self.label_mode not in ["auto", "gt_future", "proxy_future"]:
             raise ValueError(f"label_mode 只支援 auto / gt_future / proxy_future，目前: {self.label_mode}")
-        if self.risk_mode not in ["weighted_exp", "log_exp"]:
-            raise ValueError("risk_mode 只支援 weighted_exp / log_exp")
-        if not (0.0 <= self.rot_weight <= 1.0):
-            raise ValueError("rot_weight 必須介於 0 到 1")
         if not (0.0 <= self.harmful_thr <= self.helpful_thr <= 1.0):
             raise ValueError("threshold 必須滿足 0 <= harmful_thr <= helpful_thr <= 1")
         self.out_dir.mkdir(parents=True, exist_ok=True)
@@ -507,20 +499,9 @@ class ReliabilityLabelBuilder:
 
         trans_err, rot_err = relative_pose_error(est0, est1, gt0, gt1)
 
-        trans_norm = float(trans_err / max(self.trans_scale_m, 1e-6))
-        rot_norm = float(rot_err / max(self.rot_scale_deg, 1e-6))
-
-        if self.risk_mode == "weighted_exp":
-            trans_good = safe_exp_good(trans_err, self.trans_scale_m)
-            rot_good = safe_exp_good(rot_err, self.rot_scale_deg)
-            reliability = clip01((1.0 - self.rot_weight) * trans_good + self.rot_weight * rot_good)
-            drift_severity = float(1.0 - reliability)
-        else:
-            # log_exp 會壓縮極端大 drift，避免大量樣本 label_reg 全部貼近 0，
-            # 對現在 fail label 偏多的情況比較穩。
-            drift_severity = float((1.0 - self.rot_weight) * math.log1p(max(trans_norm, 0.0))
-                                   + self.rot_weight * math.log1p(max(rot_norm, 0.0)))
-            reliability = clip01(math.exp(-drift_severity))
+        trans_good = safe_exp_good(trans_err, self.trans_scale_m)
+        rot_good = safe_exp_good(rot_err, self.rot_scale_deg)
+        reliability = clip01(0.65 * trans_good + 0.35 * rot_good)
 
         y_fail = int((trans_err > self.trans_threshold_m) or (rot_err > self.rot_threshold_deg))
 
@@ -530,9 +511,6 @@ class ReliabilityLabelBuilder:
             "y_fail": int(y_fail),
             "future_drift_trans_m": float(trans_err),
             "future_drift_rot_deg": float(rot_err),
-            "future_drift_trans_norm": float(trans_norm),
-            "future_drift_rot_norm": float(rot_norm),
-            "future_drift_severity": float(drift_severity),
             "future_drift_risk": float(1.0 - reliability),
             "future_proxy_risk": np.nan,
         }
@@ -598,9 +576,6 @@ class ReliabilityLabelBuilder:
             "y_fail": int(proxy_risk > (1.0 - self.harmful_thr)),
             "future_drift_trans_m": float(max_dp),
             "future_drift_rot_deg": float(max_dq),
-            "future_drift_trans_norm": np.nan,
-            "future_drift_rot_norm": np.nan,
-            "future_drift_severity": float(proxy_risk),
             "future_drift_risk": float(proxy_risk),
             "future_proxy_risk": float(proxy_risk),
             "proxy_max_delta_p_norm": float(max_dp),
@@ -795,8 +770,6 @@ class ReliabilityLabelBuilder:
             "rot_threshold_deg": float(self.rot_threshold_deg),
             "trans_scale_m": float(self.trans_scale_m),
             "rot_scale_deg": float(self.rot_scale_deg),
-            "risk_mode": str(self.risk_mode),
-            "rot_weight": float(self.rot_weight),
             "helpful_thr": float(self.helpful_thr),
             "harmful_thr": float(self.harmful_thr),
             "num_total_feature_rows": int(len(rows)),
@@ -867,15 +840,13 @@ def parse_args():
     parser.add_argument("--max_time_gap", type=float, default=0.05)
     parser.add_argument("--max_gt_time_gap", type=float, default=0.05)
 
-    parser.add_argument("--trans_threshold_m", type=float, default=2.0)
-    parser.add_argument("--rot_threshold_deg", type=float, default=10.0)
-    parser.add_argument("--trans_scale_m", type=float, default=2.0)
-    parser.add_argument("--rot_scale_deg", type=float, default=10.0)
-    parser.add_argument("--risk_mode", type=str, default="log_exp", choices=["weighted_exp", "log_exp"])
-    parser.add_argument("--rot_weight", type=float, default=0.35)
+    parser.add_argument("--trans_threshold_m", type=float, default=0.50)
+    parser.add_argument("--rot_threshold_deg", type=float, default=5.0)
+    parser.add_argument("--trans_scale_m", type=float, default=0.50)
+    parser.add_argument("--rot_scale_deg", type=float, default=5.0)
 
-    parser.add_argument("--helpful_thr", type=float, default=0.65)
-    parser.add_argument("--harmful_thr", type=float, default=0.35)
+    parser.add_argument("--helpful_thr", type=float, default=0.70)
+    parser.add_argument("--harmful_thr", type=float, default=0.40)
 
     return parser.parse_args()
 
@@ -896,8 +867,6 @@ def main():
         rot_threshold_deg=args.rot_threshold_deg,
         trans_scale_m=args.trans_scale_m,
         rot_scale_deg=args.rot_scale_deg,
-        risk_mode=args.risk_mode,
-        rot_weight=args.rot_weight,
         helpful_thr=args.helpful_thr,
         harmful_thr=args.harmful_thr,
     )

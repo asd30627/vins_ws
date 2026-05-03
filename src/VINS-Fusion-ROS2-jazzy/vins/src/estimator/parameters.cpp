@@ -91,16 +91,20 @@ static void applyImuNoiseProfile(const std::string &mode, cv::FileStorage &fsSet
 {
     if (mode == "xsens")
     {
-        ACC_N = 0.01;
-        ACC_W = 0.0008;
-        GYR_N = 0.0005;
+        // ACC_N = 0.01;
+        // ACC_W = 0.0008;
+        // GYR_N = 0.0005;
+        // GYR_W = 0.0001;
+        ACC_N = 0.1;
+        ACC_W = 0.0005;
+        GYR_N = 0.001;
         GYR_W = 0.0001;
         ROS_WARN("Use built-in IMU noise profile: xsens");
     }
     else if (mode == "fog_xsens")
     {
         ACC_N = 0.1;
-        ACC_W = 0.001;
+        ACC_W = 0.0005;
         GYR_N = 0.001;
         GYR_W = 0.00001;
         ROS_WARN("Use built-in IMU noise profile: fog_xsens");
